@@ -1,0 +1,47 @@
+name: "Install Composer Dependencies"
+description: >-
+  Installs and caches Composer dependencies, accepting arguments to configure
+  how and what to install.
+
+inputs:
+  dependency-versions:
+    description: >-
+      The version of dependencies to prefer (lowest, highest, or locked).
+    required: true
+    default: "locked"
+  composer-options:
+    description: >-
+      Additional options to pass to Composer (e.g. --ignore-platform-reqs).
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: "Get PHP environment details"
+      id: phpenv
+      shell: bash
+      run: |
+        echo "::set-output name=php-version::$(php -r 'echo phpversion();')"
+        echo "::set-output name=composer-cache-dir::$(composer config cache-files-dir)"
+
+    - name: "Cache Composer dependencies"
+      uses: "actions/cache@v2"
+      with:
+        path: "${{ steps.phpenv.outputs.composer-cache-dir }}"
+        key: "php-${{ steps.phpenv.outputs.php-version }}-${{ inputs.dependency-versions }}-${{ hashFiles('**/composer.json', '**/composer.lock') }}-${{ inputs.composer-options }}"
+        restore-keys: |
+          php-${{ steps.phpenv.outputs.php-version }}-${{ inputs.dependency-versions }}-${{ hashFiles('**/composer.json', '**/composer.lock') }}-
+          php-${{ steps.phpenv.outputs.php-version }}-${{ inputs.dependency-versions }}-
+
+    - name: "Install lowest Composer dependencies"
+      if: ${{ inputs.dependency-versions == 'lowest' }}
+      run: "composer update --prefer-lowest --no-interaction --no-progress ${{ inputs.composer-options }}"
+
+    - name: "Install highest Composer dependencies"
+      if: ${{ inputs.dependency-versions == 'highest' }}
+      run: "composer update --no-interaction --no-progress ${{ inputs.composer-options }}"
+
+    - name: "Install locked Composer dependencies"
+      if: ${{ inputs.dependency-versions == 'locked' }}
+      run: "composer install --no-interaction --no-progress ${{ inputs.composer-options }}"
