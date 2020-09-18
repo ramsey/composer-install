@@ -1,0 +1,48 @@
+name: "CI"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "main"
+
+jobs:
+
+  # Make sure build/ci work properly.
+  build:
+    name: "Build"
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v2"
+      - uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "7.4"
+          tools: "composer:v2"
+      - run: "npm install"
+      - run: "npm run all"
+      - uses: "codecov/codecov-action@v1"
+
+  # Make sure the action works on a clean machine without building.
+  test:
+    name: "Test"
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        dependency-versions:
+          - "lowest"
+          - "highest"
+          - "locked"
+          - "foobar"
+        composer-options:
+          - "--ignore-platform-reqs"
+          - ""
+    steps:
+      - uses: "actions/checkout@v2"
+      - uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "7.4"
+          tools: "composer:v2"
+      - uses: ./
+        with:
+          dependency-versions: "${{ matrix.dependency-versions }}"
+          composer-options: "${{ matrix.composer-options }}"

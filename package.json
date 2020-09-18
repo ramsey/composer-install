@@ -1,16 +1,17 @@
 {
-  "name": "composer-install",
+  "name": "@ramsey/composer-install",
   "version": "0.0.0",
   "private": false,
   "description": "A GitHub Action to install and cache Composer dependencies.",
-  "main": "lib/main.js",
+  "main": "dist/main/index.js",
   "scripts": {
     "build": "tsc",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
-    "lint": "eslint src/**/*.ts",
-    "package": "ncc build --source-map --license licenses.txt",
-    "test": "jest",
+    "lint": "eslint src/**/*.ts --cache",
+    "lint-fix": "eslint src/**/*.ts --cache --fix",
+    "package": "ncc build -o dist/main src/main.ts && ncc build -o dist/post src/post.ts",
+    "test": "tsc --noEmit && jest --coverage",
     "all": "npm run build && npm run format && npm run lint && npm run package && npm test"
   },
   "repository": {
@@ -18,9 +19,11 @@
     "url": "git+https://github.com/ramsey/composer-install.git"
   },
   "keywords": [
-    "GitHub",
-    "Actions",
-    "Composer"
+    "github",
+    "actions",
+    "composer",
+    "install",
+    "cache"
   ],
   "author": "Ben Ramsey <ben@benramsey.com>",
   "license": "MIT",
@@ -28,7 +31,8 @@
   "dependencies": {
     "@actions/cache": "^1.0.2",
     "@actions/core": "^1.2.5",
-    "@actions/exec": "^1.0.4"
+    "@actions/exec": "^1.0.4",
+    "@actions/glob": "^0.1.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",
