@@ -54576,8 +54576,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __webpack_require__(2186);
-const cache_1 = __webpack_require__(7799);
+const core = __importStar(__webpack_require__(2186));
+const cache = __importStar(__webpack_require__(7799));
 const getCacheKeys_1 = __webpack_require__(5196);
 const getComposerCacheDir_1 = __webpack_require__(8774);
 const getDependencyVersions_1 = __webpack_require__(6582);
@@ -54587,19 +54587,41 @@ function run() {
         try {
             const composerCacheKeys = yield getCacheKeys_1.getCacheKeys();
             const composerCacheDir = yield getComposerCacheDir_1.getComposerCacheDir();
-            const composerOptions = core_1.getInput('composer-options');
+            const composerOptions = core.getInput('composer-options');
             const dependencyVersions = getDependencyVersions_1.getDependencyVersions();
-            core_1.debug(`composerCacheKeys.key = ${composerCacheKeys.key}`);
-            core_1.debug(`composerCacheKeys.restoreKeys = [${composerCacheKeys.restoreKeys}]`);
-            core_1.debug(`composerCacheDir = ${composerCacheDir}`);
-            core_1.debug(`composerOptions = ${composerOptions}`);
-            core_1.debug(`dependencyVersions = ${dependencyVersions}`);
-            const cacheKey = yield cache_1.restoreCache([composerCacheDir], composerCacheKeys.key, composerCacheKeys.restoreKeys);
-            core_1.debug(`cacheKey = ${cacheKey}`);
+            core.saveState('CACHE_KEY', composerCacheKeys.key);
+            try {
+                const cacheKey = yield cache.restoreCache([composerCacheDir], composerCacheKeys.key, composerCacheKeys.restoreKeys);
+                if (!cacheKey) {
+                    core.info(`Cache not found for input keys: ${[
+                        composerCacheKeys.key,
+                        ...composerCacheKeys.restoreKeys
+                    ].join(', ')}`);
+                }
+                else {
+                    core.saveState('CACHE_RESULT', cacheKey);
+                    core.info(`Cache restored from key: ${cacheKey}`);
+                    if (composerCacheKeys.key === cacheKey) {
+                        core.setOutput('cache-hit', 'true');
+                    }
+                    else {
+                        core.setOutput('cache-hit', 'false');
+                    }
+                }
+            }
+            catch (error) {
+                if (error.name === cache.ValidationError.name) {
+                    throw error;
+                }
+                else {
+                    core.info(`[warning] ${error.message}`);
+                    core.setOutput('cache-hit', 'false');
+                }
+            }
             yield composer.install(dependencyVersions, composerOptions);
         }
         catch (error) {
-            core_1.setFailed(error.message);
+            core.setFailed(error.message);
         }
     });
 }

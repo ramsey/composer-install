@@ -1,5 +1,5 @@
-import {debug, getInput, setFailed} from '@actions/core'
-import {restoreCache} from '@actions/cache'
+import * as core from '@actions/core'
+import * as cache from '@actions/cache'
 import {getCacheKeys} from './utils/getCacheKeys'
 import {getComposerCacheDir} from './utils/getComposerCacheDir'
 import {getDependencyVersions} from './utils/getDependencyVersions'
@@ -9,26 +9,47 @@ async function run(): Promise<void> {
   try {
     const composerCacheKeys = await getCacheKeys()
     const composerCacheDir = await getComposerCacheDir()
-    const composerOptions = getInput('composer-options')
+    const composerOptions = core.getInput('composer-options')
     const dependencyVersions = getDependencyVersions()
 
-    debug(`composerCacheKeys.key = ${composerCacheKeys.key}`)
-    debug(`composerCacheKeys.restoreKeys = [${composerCacheKeys.restoreKeys}]`)
-    debug(`composerCacheDir = ${composerCacheDir}`)
-    debug(`composerOptions = ${composerOptions}`)
-    debug(`dependencyVersions = ${dependencyVersions}`)
+    core.saveState('CACHE_KEY', composerCacheKeys.key)
 
-    const cacheKey = await restoreCache(
-      [composerCacheDir],
-      composerCacheKeys.key,
-      composerCacheKeys.restoreKeys
-    )
+    try {
+      const cacheKey = await cache.restoreCache(
+        [composerCacheDir],
+        composerCacheKeys.key,
+        composerCacheKeys.restoreKeys
+      )
 
-    debug(`cacheKey = ${cacheKey}`)
+      if (!cacheKey) {
+        core.info(
+          `Cache not found for input keys: ${[
+            composerCacheKeys.key,
+            ...composerCacheKeys.restoreKeys
+          ].join(', ')}`
+        )
+      } else {
+        core.saveState('CACHE_RESULT', cacheKey)
+        core.info(`Cache restored from key: ${cacheKey}`)
+
+        if (composerCacheKeys.key === cacheKey) {
+          core.setOutput('cache-hit', 'true')
+        } else {
+          core.setOutput('cache-hit', 'false')
+        }
+      }
+    } catch (error) {
+      if (error.name === cache.ValidationError.name) {
+        throw error
+      } else {
+        core.info(`[warning] ${error.message}`)
+        core.setOutput('cache-hit', 'false')
+      }
+    }
 
     await composer.install(dependencyVersions, composerOptions)
   } catch (error) {
-    setFailed(error.message)
+    core.setFailed(error.message)
   }
 }
 

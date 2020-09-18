@@ -57,11 +57,15 @@ describe('main script', () => {
       .mockRejectedValue({
         message: 'a mocked error message'
       })
-    const composerInstallMock = jest.spyOn(composer, 'install')
+    const composerInstallMock = jest
+      .spyOn(composer, 'install')
+      .mockRejectedValue({
+        message: 'another mocked error message'
+      })
 
     await main.default()
 
     expect(restoreCacheMock).toHaveBeenCalledTimes(1)
-    expect(composerInstallMock).not.toHaveBeenCalled()
+    expect(composerInstallMock).toHaveBeenCalledTimes(1)
   })
 })
