@@ -6,9 +6,6 @@ on:
     branches:
       - "main"
 
-env:
-  ACTIONS_RUNNER_DEBUG: true
-
 jobs:
 
   # Make sure build/ci work properly.
