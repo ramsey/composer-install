@@ -1,4 +1,4 @@
-import { getCacheKeys } from "../../src/utils/getCacheKeys";
+import {getCacheKeys} from '../../src/utils'
 
 jest.mock('../../src/utils/getPhpVersion', () => {
   return {
@@ -13,11 +13,11 @@ jest.mock('../../src/utils/hashFiles', () => {
 })
 
 describe('cache keys', () => {
-  const OLD_ENV =  process.env
+  const OLD_ENV = process.env
 
   beforeEach(() => {
     jest.resetModules()
-    process.env = { ...OLD_ENV }
+    process.env = {...OLD_ENV}
   })
 
   afterAll(() => {
@@ -27,10 +27,7 @@ describe('cache keys', () => {
   test('returns cache keys WITHOUT composer-options or dependency-versions', async () => {
     await expect(getCacheKeys()).resolves.toEqual({
       key: 'php-7.99.99-locked-foobar-',
-      restoreKeys: [
-        'php-7.99.99-locked-foobar-',
-        'php-7.99.99-locked-'
-      ]
+      restoreKeys: ['php-7.99.99-locked-foobar-', 'php-7.99.99-locked-']
     })
   })
 
@@ -39,10 +36,7 @@ describe('cache keys', () => {
 
     await expect(getCacheKeys()).resolves.toEqual({
       key: 'php-7.99.99-locked-foobar---ignore-platform-reqs',
-      restoreKeys: [
-        'php-7.99.99-locked-foobar-',
-        'php-7.99.99-locked-'
-      ]
+      restoreKeys: ['php-7.99.99-locked-foobar-', 'php-7.99.99-locked-']
     })
   })
 
@@ -51,10 +45,7 @@ describe('cache keys', () => {
 
     await expect(getCacheKeys()).resolves.toEqual({
       key: 'php-7.99.99-lowest-foobar-',
-      restoreKeys: [
-        'php-7.99.99-lowest-foobar-',
-        'php-7.99.99-lowest-'
-      ]
+      restoreKeys: ['php-7.99.99-lowest-foobar-', 'php-7.99.99-lowest-']
     })
   })
 
@@ -64,10 +55,7 @@ describe('cache keys', () => {
 
     await expect(getCacheKeys()).resolves.toEqual({
       key: 'php-7.99.99-highest-foobar---some-other-option --and-another',
-      restoreKeys: [
-        'php-7.99.99-highest-foobar-',
-        'php-7.99.99-highest-'
-      ]
+      restoreKeys: ['php-7.99.99-highest-foobar-', 'php-7.99.99-highest-']
     })
   })
 })

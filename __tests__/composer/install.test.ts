@@ -1,5 +1,5 @@
 import * as exec from '@actions/exec'
-import * as composer from '../src/composer'
+import * as composer from '../../src/composer/install'
 
 jest.mock('@actions/exec')
 

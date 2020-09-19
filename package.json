@@ -29,10 +29,10 @@
   "license": "MIT",
   "homepage": "https://github.com/ramsey/composer-install#readme",
   "dependencies": {
-    "@actions/cache": "^1.0.2",
     "@actions/core": "^1.2.5",
     "@actions/exec": "^1.0.4",
-    "@actions/glob": "^0.1.0"
+    "@actions/glob": "^0.1.0",
+    "cache": "git+https://github.com/actions/cache.git"
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",

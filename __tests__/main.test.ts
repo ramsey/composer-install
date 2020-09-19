@@ -1,10 +1,18 @@
-import * as process from 'process'
-import * as main from '../src/main'
-import * as cache from '@actions/cache'
+import * as cache from '../src/cache'
 import * as composer from '../src/composer'
+import main from '../src/main'
 
-jest.mock('@actions/cache')
-jest.mock('../src/composer')
+jest.mock('../src/cache', () => {
+  return {
+    restore: jest.fn()
+  }
+})
+
+jest.mock('../src/composer', () => {
+  return {
+    install: jest.fn()
+  }
+})
 
 jest.mock('../src/utils/getCacheKeys', () => {
   return {
@@ -22,20 +30,25 @@ jest.mock('../src/utils/getComposerCacheDir', () => {
 })
 
 describe('main script', () => {
+  const OLD_ENV = process.env
+
   beforeEach(() => {
     jest.resetModules()
+    process.env = {...OLD_ENV}
+  })
+
+  afterAll(() => {
+    process.env = OLD_ENV
   })
 
   test('runs', async () => {
-    const restoreCacheMock = jest
-      .spyOn(cache, 'restoreCache')
-      .mockResolvedValue('fooCacheKey')
+    const restoreCacheMock = jest.spyOn(cache, 'restore')
     const composerInstallMock = jest.spyOn(composer, 'install')
 
     process.env['INPUT_COMPOSER-OPTIONS'] = '--ignore-platform-reqs'
     process.env['INPUT_DEPENDENCY-VERSIONS'] = 'lowest'
 
-    await main.default()
+    await main()
 
     expect(restoreCacheMock).toHaveBeenCalledTimes(1)
     expect(restoreCacheMock).toHaveBeenCalledWith(
@@ -52,20 +65,14 @@ describe('main script', () => {
   })
 
   test('sets failure state with error', async () => {
-    const restoreCacheMock = jest
-      .spyOn(cache, 'restoreCache')
-      .mockRejectedValue({
-        message: 'a mocked error message'
-      })
-    const composerInstallMock = jest
-      .spyOn(composer, 'install')
-      .mockRejectedValue({
-        message: 'another mocked error message'
-      })
+    const restoreCacheMock = jest.spyOn(cache, 'restore').mockRejectedValue({
+      message: 'a mocked error message'
+    })
+    const composerInstallMock = jest.spyOn(composer, 'install')
 
-    await main.default()
+    await main()
 
     expect(restoreCacheMock).toHaveBeenCalledTimes(1)
-    expect(composerInstallMock).toHaveBeenCalledTimes(1)
+    expect(composerInstallMock).not.toHaveBeenCalled()
   })
 })

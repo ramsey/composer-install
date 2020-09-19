@@ -1,5 +1,5 @@
 import * as exec from '@actions/exec'
-import { getComposerCacheDir } from "../../src/utils/getComposerCacheDir";
+import {getComposerCacheDir} from '../../src/utils'
 
 describe('getComposerCacheDir using SUT', () => {
   test('returns the real Composer cache directory', async () => {

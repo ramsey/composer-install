@@ -1,5 +1,5 @@
 import * as exec from '@actions/exec'
-import { getComposerCacheDir } from "../../src/utils/getComposerCacheDir";
+import {getComposerCacheDir} from '../../src/utils'
 
 jest.mock('@actions/exec')
 

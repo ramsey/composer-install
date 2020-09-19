@@ -1,10 +1,10 @@
-import { getDependencyVersions } from "../../src/utils/getDependencyVersions";
+import {getDependencyVersions} from '../../src/utils'
 
 describe('dependency versions', () => {
-  const OLD_ENV =  process.env
+  const OLD_ENV = process.env
 
   beforeEach(() => {
-    process.env = { ...OLD_ENV }
+    process.env = {...OLD_ENV}
   })
 
   afterAll(() => {
