@@ -7,7 +7,8 @@ async function run(): Promise<void> {
     const composerCacheKeys = await utils.getCacheKeys()
     const composerCacheDir = await utils.getComposerCacheDir()
 
-    await cache.save(
+    await cache.cache(
+      cache.saveFactory(),
       [composerCacheDir],
       composerCacheKeys.key,
       composerCacheKeys.restoreKeys

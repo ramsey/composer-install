@@ -1,11 +1,10 @@
 import * as cache from '../src/cache'
 import post from '../src/post'
 
-jest.mock('@actions/cache')
-
 jest.mock('../src/cache', () => {
   return {
-    save: jest.fn()
+    cache: jest.fn(),
+    saveFactory: jest.fn().mockReturnValue(jest.fn())
   }
 })
 
@@ -37,15 +36,17 @@ describe('post script', () => {
   })
 
   test('runs', async () => {
-    const saveCacheMock = jest.spyOn(cache, 'save')
+    const cacheMock = jest.spyOn(cache, 'cache')
+    const mockFactory = cache.saveFactory()
 
     process.env['INPUT_COMPOSER-OPTIONS'] = ''
     process.env['INPUT_DEPENDENCY-VERSIONS'] = 'locked'
 
     await post()
 
-    expect(saveCacheMock).toHaveBeenCalledTimes(1)
-    expect(saveCacheMock).toHaveBeenCalledWith(
+    expect(cacheMock).toHaveBeenCalledTimes(1)
+    expect(cacheMock).toHaveBeenCalledWith(
+      mockFactory,
       ['/path/to/composer/cache'],
       'cache-key-mock',
       ['cache-key-', 'cache-']
@@ -53,12 +54,12 @@ describe('post script', () => {
   })
 
   test('sets failure state with error', async () => {
-    const saveCacheMock = jest.spyOn(cache, 'save').mockRejectedValue({
+    const cacheMock = jest.spyOn(cache, 'cache').mockRejectedValue({
       message: 'a mocked error message'
     })
 
     await post()
 
-    expect(saveCacheMock).toHaveBeenCalledTimes(1)
+    expect(cacheMock).toHaveBeenCalledTimes(1)
   })
 })

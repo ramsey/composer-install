@@ -4,7 +4,8 @@ import main from '../src/main'
 
 jest.mock('../src/cache', () => {
   return {
-    restore: jest.fn()
+    cache: jest.fn(),
+    restoreFactory: jest.fn().mockReturnValue(jest.fn())
   }
 })
 
@@ -42,16 +43,18 @@ describe('main script', () => {
   })
 
   test('runs', async () => {
-    const restoreCacheMock = jest.spyOn(cache, 'restore')
+    const cacheMock = jest.spyOn(cache, 'cache')
     const composerInstallMock = jest.spyOn(composer, 'install')
+    const mockFactory = cache.restoreFactory()
 
     process.env['INPUT_COMPOSER-OPTIONS'] = '--ignore-platform-reqs'
     process.env['INPUT_DEPENDENCY-VERSIONS'] = 'lowest'
 
     await main()
 
-    expect(restoreCacheMock).toHaveBeenCalledTimes(1)
-    expect(restoreCacheMock).toHaveBeenCalledWith(
+    expect(cacheMock).toHaveBeenCalledTimes(1)
+    expect(cacheMock).toHaveBeenCalledWith(
+      mockFactory,
       ['/path/to/composer/cache'],
       'cache-key-mock',
       ['cache-key-', 'cache-']
@@ -65,14 +68,14 @@ describe('main script', () => {
   })
 
   test('sets failure state with error', async () => {
-    const restoreCacheMock = jest.spyOn(cache, 'restore').mockRejectedValue({
+    const cacheMock = jest.spyOn(cache, 'cache').mockRejectedValue({
       message: 'a mocked error message'
     })
     const composerInstallMock = jest.spyOn(composer, 'install')
 
     await main()
 
-    expect(restoreCacheMock).toHaveBeenCalledTimes(1)
+    expect(cacheMock).toHaveBeenCalledTimes(1)
     expect(composerInstallMock).not.toHaveBeenCalled()
   })
 })

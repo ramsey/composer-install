@@ -1,2 +1,2 @@
-export {restore} from './restore'
-export {save} from './save'
+export {cache} from './cache'
+export {restoreFactory, saveFactory} from './factory'

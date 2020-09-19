@@ -101631,81 +101631,78 @@ function regExpEscape (s) {
 
 /***/ }),
 
+/***/ 1295:
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.cache = void 0;
+function cache(factory, paths, key, restoreKeys) {
+    return __awaiter(this, void 0, void 0, function* () {
+        process.env['INPUT_PATH'] = paths.join(`\n`);
+        process.env['INPUT_KEY'] = key;
+        process.env['INPUT_RESTORE-KEYS'] = restoreKeys.join(`\n`);
+        yield factory();
+    });
+}
+exports.cache = cache;
+
+
+/***/ }),
+
+/***/ 9543:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+/* eslint-disable @typescript-eslint/no-require-imports */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.saveFactory = exports.restoreFactory = void 0;
+/* istanbul ignore next */
+function restoreFactory() {
+    return () => __awaiter(this, void 0, void 0, function* () { return yield __webpack_require__(7607); });
+}
+exports.restoreFactory = restoreFactory;
+/* istanbul ignore next */
+function saveFactory() {
+    return () => __awaiter(this, void 0, void 0, function* () { return yield __webpack_require__(8973); });
+}
+exports.saveFactory = saveFactory;
+
+
+/***/ }),
+
 /***/ 1251:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.save = exports.restore = void 0;
-var restore_1 = __webpack_require__(9294);
-Object.defineProperty(exports, "restore", ({ enumerable: true, get: function () { return restore_1.restore; } }));
-var save_1 = __webpack_require__(5275);
-Object.defineProperty(exports, "save", ({ enumerable: true, get: function () { return save_1.save; } }));
-
-
-/***/ }),
-
-/***/ 9294:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.restore = void 0;
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-require-imports */
-const restoreCache = __webpack_require__(7607);
-function restore(paths, key, restoreKeys) {
-    return __awaiter(this, void 0, void 0, function* () {
-        process.env['INPUT_PATH'] = paths.join(`\n`);
-        process.env['INPUT_KEY'] = key;
-        process.env['INPUT_RESTORE-KEYS'] = restoreKeys.join(`\n`);
-        yield restoreCache.run();
-    });
-}
-exports.restore = restore;
-
-
-/***/ }),
-
-/***/ 5275:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.save = void 0;
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-require-imports */
-const saveCache = __webpack_require__(8973);
-function save(paths, key, restoreKeys) {
-    return __awaiter(this, void 0, void 0, function* () {
-        process.env['INPUT_PATH'] = paths.join(`\n`);
-        process.env['INPUT_KEY'] = key;
-        process.env['INPUT_RESTORE-KEYS'] = restoreKeys.join(`\n`);
-        yield saveCache.run();
-    });
-}
-exports.save = save;
+exports.saveFactory = exports.restoreFactory = exports.cache = void 0;
+var cache_1 = __webpack_require__(1295);
+Object.defineProperty(exports, "cache", ({ enumerable: true, get: function () { return cache_1.cache; } }));
+var factory_1 = __webpack_require__(9543);
+Object.defineProperty(exports, "restoreFactory", ({ enumerable: true, get: function () { return factory_1.restoreFactory; } }));
+Object.defineProperty(exports, "saveFactory", ({ enumerable: true, get: function () { return factory_1.saveFactory; } }));
 
 
 /***/ }),
@@ -101811,7 +101808,7 @@ function run() {
             const composerCacheDir = yield utils.getComposerCacheDir();
             const composerOptions = core_1.getInput('composer-options');
             const dependencyVersions = utils.getDependencyVersions();
-            yield cache.restore([composerCacheDir], composerCacheKeys.key, composerCacheKeys.restoreKeys);
+            yield cache.cache(cache.restoreFactory(), [composerCacheDir], composerCacheKeys.key, composerCacheKeys.restoreKeys);
             yield composer.install(dependencyVersions, composerOptions);
         }
         catch (error) {

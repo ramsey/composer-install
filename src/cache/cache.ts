@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-require-imports */
-const saveCache = require('cache/dist/save')
-
-export async function save(
+export async function cache(
+  factory: Function,
   paths: string[],
   key: string,
   restoreKeys: string[]
@@ -11,5 +8,5 @@ export async function save(
   process.env['INPUT_KEY'] = key
   process.env['INPUT_RESTORE-KEYS'] = restoreKeys.join(`\n`)
 
-  await saveCache.run()
+  await factory()
 }

@@ -10,11 +10,13 @@ async function run(): Promise<void> {
     const composerOptions = getInput('composer-options')
     const dependencyVersions = utils.getDependencyVersions()
 
-    await cache.restore(
+    await cache.cache(
+      cache.restoreFactory(),
       [composerCacheDir],
       composerCacheKeys.key,
       composerCacheKeys.restoreKeys
     )
+
     await composer.install(dependencyVersions, composerOptions)
   } catch (error) {
     setFailed(error.message)
