@@ -25,9 +25,13 @@ jobs:
   # Make sure the action works on a clean machine without building.
   test:
     name: "Test"
-    runs-on: "ubuntu-latest"
+    runs-on: "${{ matrix.operating-system }}"
     strategy:
       matrix:
+        operating-system:
+          - "ubuntu-latest"
+          - "windows-latest"
+          - "macos-latest"
         dependency-versions:
           - "lowest"
           - "highest"
