@@ -43,7 +43,7 @@ describe('main script', () => {
   })
 
   test('runs', async () => {
-    const cacheMock = jest.spyOn(cache, 'cache')
+    const cacheMock = jest.spyOn(cache, 'cache').mockResolvedValue()
     const composerInstallMock = jest.spyOn(composer, 'install')
     const mockFactory = cache.restoreFactory()
 

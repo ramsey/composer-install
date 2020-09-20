@@ -101808,8 +101808,11 @@ function run() {
             const composerCacheDir = yield utils.getComposerCacheDir();
             const composerOptions = core_1.getInput('composer-options');
             const dependencyVersions = utils.getDependencyVersions();
-            yield cache.cache(cache.restoreFactory(), [composerCacheDir], composerCacheKeys.key, composerCacheKeys.restoreKeys);
-            yield composer.install(dependencyVersions, composerOptions);
+            yield cache
+                .cache(cache.restoreFactory(), [composerCacheDir], composerCacheKeys.key, composerCacheKeys.restoreKeys)
+                .then(() => __awaiter(this, void 0, void 0, function* () {
+                yield composer.install(dependencyVersions, composerOptions);
+            }));
         }
         catch (error) {
             core_1.setFailed(error.message);
