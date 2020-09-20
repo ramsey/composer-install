@@ -101755,7 +101755,7 @@ function install(dependencyPreference, composerOptions = '') {
         args.push('--no-interaction', '--no-progress');
         args.push(...options);
         const filteredArgs = args.filter(Boolean);
-        yield exec_1.exec('composer', filteredArgs, { silent: true });
+        yield exec_1.exec('composer', filteredArgs);
     });
 }
 exports.install = install;

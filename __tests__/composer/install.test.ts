@@ -1,5 +1,5 @@
 import * as exec from '@actions/exec'
-import * as composer from '../../src/composer/install'
+import * as composer from '../../src/composer'
 
 jest.mock('@actions/exec')
 
@@ -16,8 +16,7 @@ describe('composer.install with mocked exec', () => {
     expect(execMock).toHaveBeenCalledTimes(1)
     expect(execMock).toHaveBeenCalledWith(
       'composer',
-      ['install', '--no-interaction', '--no-progress'],
-      {silent: true}
+      ['install', '--no-interaction', '--no-progress']
     )
   })
 
@@ -29,8 +28,7 @@ describe('composer.install with mocked exec', () => {
     expect(execMock).toHaveBeenCalledTimes(1)
     expect(execMock).toHaveBeenCalledWith(
       'composer',
-      ['update', '--no-interaction', '--no-progress'],
-      {silent: true}
+      ['update', '--no-interaction', '--no-progress']
     )
   })
 
@@ -42,8 +40,7 @@ describe('composer.install with mocked exec', () => {
     expect(execMock).toHaveBeenCalledTimes(1)
     expect(execMock).toHaveBeenCalledWith(
       'composer',
-      ['update', '--prefer-lowest', '--no-interaction', '--no-progress'],
-      {silent: true}
+      ['update', '--prefer-lowest', '--no-interaction', '--no-progress']
     )
   })
 
@@ -55,8 +52,7 @@ describe('composer.install with mocked exec', () => {
     expect(execMock).toHaveBeenCalledTimes(1)
     expect(execMock).toHaveBeenCalledWith(
       'composer',
-      ['install', '--no-interaction', '--no-progress'],
-      {silent: true}
+      ['install', '--no-interaction', '--no-progress']
     )
   })
 
@@ -75,8 +71,7 @@ describe('composer.install with mocked exec', () => {
         '--opt1',
         '--opt2',
         '--opt3'
-      ],
-      {silent: true}
+      ]
     )
   })
 })

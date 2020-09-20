@@ -24,5 +24,5 @@ export async function install(
 
   const filteredArgs = args.filter(Boolean)
 
-  await exec('composer', filteredArgs, {silent: true})
+  await exec('composer', filteredArgs)
 }
