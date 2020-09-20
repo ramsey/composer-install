@@ -1,7 +1,12 @@
 name: "Install Composer Dependencies"
+author: "Ben Ramsey"
 description: >-
   Installs and caches Composer dependencies, accepting arguments to configure
   how and what to install.
+
+branding:
+  icon: download
+  color: purple
 
 inputs:
   dependency-versions:
