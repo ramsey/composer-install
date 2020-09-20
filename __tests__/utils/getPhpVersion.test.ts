@@ -1,6 +1,7 @@
 import * as exec from '@actions/exec'
-import { getPhpVersion } from "../../src/utils/getPhpVersion";
+import {getPhpVersion} from '../../src/utils'
 
+jest.mock('@actions/core')
 jest.mock('@actions/exec')
 
 describe('getPhpVersion with mocked exec', () => {

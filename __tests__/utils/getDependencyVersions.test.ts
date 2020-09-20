@@ -1,49 +1,34 @@
-import { getDependencyVersions } from "../../src/utils/getDependencyVersions";
+import {getDependencyVersions} from '../../src/utils'
+
+jest.mock('@actions/core')
 
 describe('dependency versions', () => {
-  const OLD_ENV =  process.env
-
-  beforeEach(() => {
-    process.env = { ...OLD_ENV }
-  })
-
-  afterAll(() => {
-    process.env = OLD_ENV
-  })
-
   test('with "HIGHEST" as input', () => {
-    process.env['INPUT_DEPENDENCY-VERSIONS'] = 'HIGHEST'
-    expect(getDependencyVersions()).toEqual('highest')
+    expect(getDependencyVersions('HIGHEST')).toEqual('highest')
   })
 
   test('with "highest" as input', () => {
-    process.env['INPUT_DEPENDENCY-VERSIONS'] = 'highest'
-    expect(getDependencyVersions()).toEqual('highest')
+    expect(getDependencyVersions('highest')).toEqual('highest')
   })
 
   test('with "LOWEST" as input', () => {
-    process.env['INPUT_DEPENDENCY-VERSIONS'] = 'LOWEST'
-    expect(getDependencyVersions()).toEqual('lowest')
+    expect(getDependencyVersions('LOWEST')).toEqual('lowest')
   })
 
   test('with "lowest" as input', () => {
-    process.env['INPUT_DEPENDENCY-VERSIONS'] = 'lowest'
-    expect(getDependencyVersions()).toEqual('lowest')
+    expect(getDependencyVersions('lowest')).toEqual('lowest')
   })
 
   test('with "LOCKED" as input', () => {
-    process.env['INPUT_DEPENDENCY-VERSIONS'] = 'LOCKED'
-    expect(getDependencyVersions()).toEqual('locked')
+    expect(getDependencyVersions('locked')).toEqual('locked')
   })
 
   test('with "locked" as input', () => {
-    process.env['INPUT_DEPENDENCY-VERSIONS'] = 'locked'
-    expect(getDependencyVersions()).toEqual('locked')
+    expect(getDependencyVersions('locked')).toEqual('locked')
   })
 
   test('with "foobar" as input', () => {
-    process.env['INPUT_DEPENDENCY-VERSIONS'] = 'foobar'
-    expect(getDependencyVersions()).toEqual('locked')
+    expect(getDependencyVersions('foobar')).toEqual('locked')
   })
 
   test('with nothing (undefined) as input', () => {

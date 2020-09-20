@@ -7,13 +7,11 @@ this project and its community, you are expected to uphold this code.
 
 [code of conduct]: CODE_OF_CONDUCT.md
 
-
 ## Communication Channels
 
 You can find help and discussion in the following places:
 
 * GitHub Issues: <https://github.com/ramsey/composer-install/issues>
-
 
 ## Reporting Bugs
 
@@ -31,7 +29,6 @@ bug. A good bug report includes the following sections:
 **Please do not include passwords or any personally identifiable information in
 your bug report and sample code.**
 
-
 ## Fixing Bugs
 
 This project welcomes pull requests to fix bugs!
@@ -39,7 +36,6 @@ This project welcomes pull requests to fix bugs!
 If you see a bug report that you'd like to fix, please feel free to do so.
 Following the directions and guidelines described in the "Adding New Features"
 section below, you may create bugfix branches and send pull requests.
-
 
 ## Adding New Features
 
@@ -56,8 +52,6 @@ When you do begin working on your feature, here are some guidelines to consider:
   We will use this description to update the CHANGELOG. If there is no
   description or it does not adequately describe your feature, we may ask you
   to update the description.
-* ramsey/composer-install follows the **[PSR-12 coding standard][psr-12]**. Please
-  ensure your code does, too.
 * Please **write tests** for any new features you add.
 * Please **ensure that tests pass** before submitting your pull request.
   ramsey/composer-install has GitHub Actions automatically running tests for
@@ -72,24 +66,21 @@ When you do begin working on your feature, here are some guidelines to consider:
   developing, please squash them before submitting.
   * For more information, see "[How to Write a Git Commit Message][git-commit]."
 
-
 ## Running Tests
 
 The following must pass before we will accept a pull request. If this does not
 pass, it will result in a complete build failure. Before you can run this, be
-sure to `composer install`.
+sure to `npm install`.
 
 To run all the tests and coding standards checks, execute the following from the
 command line, while in the project root directory:
 
 ```
-composer test
+npm run all
 ```
-
 
 [github]: https://github.com/ramsey/composer-install
 [issues]: https://github.com/ramsey/composer-install/issues
 [pull requests]: https://github.com/ramsey/composer-install/pulls
-[psr-12]: https://www.php-fig.org/psr/psr-12/
 [gh-flow]: https://guides.github.com/introduction/flow/
 [git-commit]: https://chris.beams.io/posts/git-commit/

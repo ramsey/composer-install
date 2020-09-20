@@ -1,9 +1,8 @@
-import {debug} from '@actions/core'
 import {exec} from '@actions/exec'
 
 export async function install(
   dependencyPreference: string,
-  composerOptions: string = ''
+  composerOptions = ''
 ): Promise<void> {
   const args: string[] = []
   const options: string[] = composerOptions.split(' ')
@@ -25,7 +24,5 @@ export async function install(
 
   const filteredArgs = args.filter(Boolean)
 
-  debug(`Composer command args = [${filteredArgs}]`)
-
-  await exec('composer', filteredArgs, {silent: true})
+  await exec('composer', filteredArgs)
 }

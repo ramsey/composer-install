@@ -1,4 +1,5 @@
 import {exec} from '@actions/exec'
+import {info} from '@actions/core'
 
 export async function getComposerCacheDir(): Promise<string> {
   let composerCacheDir = ''
@@ -9,7 +10,10 @@ export async function getComposerCacheDir(): Promise<string> {
     }
   }
 
-  await exec('composer', ['config', 'cache-files-dir'], composerExecOptions)
+  await exec('composer', ['config', 'cache-dir'], composerExecOptions)
 
-  return composerCacheDir.trim()
+  composerCacheDir = composerCacheDir.trim()
+  info(`Composer cache directory found at ${composerCacheDir}`)
+
+  return composerCacheDir
 }

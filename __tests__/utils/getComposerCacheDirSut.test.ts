@@ -1,5 +1,7 @@
 import * as exec from '@actions/exec'
-import { getComposerCacheDir } from "../../src/utils/getComposerCacheDir";
+import {getComposerCacheDir} from '../../src/utils'
+
+jest.mock('@actions/core')
 
 describe('getComposerCacheDir using SUT', () => {
   test('returns the real Composer cache directory', async () => {
@@ -12,11 +14,7 @@ describe('getComposerCacheDir using SUT', () => {
       }
     }
 
-    await exec.exec(
-      'composer',
-      ['config', 'cache-files-dir'],
-      composerExecOptions
-    )
+    await exec.exec('composer', ['config', 'cache-dir'], composerExecOptions)
 
     expect(await getComposerCacheDir()).toEqual(localComposerCacheDir.trim())
   })

@@ -1,7 +1,9 @@
 import * as fs from 'fs'
 import * as os from 'os'
 import * as path from 'path'
-import {hashFiles} from '../../src/utils/hashFiles'
+import {hashFiles} from '../../src/utils'
+
+jest.mock('@actions/core')
 
 describe('hashing files for cache identification', () => {
   const sep = path.sep
@@ -23,8 +25,8 @@ describe('hashing files for cache identification', () => {
     fs.writeFile(
       `${createdTmpDir}${sep}mockFile4.txt`,
       'created from test',
-      err => {
-        if (err) throw err
+      cbErr => {
+        if (cbErr) throw cbErr
       }
     )
   })

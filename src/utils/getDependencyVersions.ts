@@ -1,14 +1,22 @@
-import {getInput} from '@actions/core'
+import {info} from '@actions/core'
 
-export function getDependencyVersions(): string {
-  const dependencyVersions = getInput('dependency-versions')
+export function getDependencyVersions(
+  dependencyVersions?: string | undefined
+): string {
+  let versionsDetermined = 'locked'
+
+  if (dependencyVersions === undefined) {
+    return versionsDetermined
+  }
 
   switch (dependencyVersions.toLowerCase()) {
     case 'highest':
     case 'lowest':
     case 'locked':
-      return dependencyVersions.toLowerCase()
-    default:
-      return 'locked'
+      versionsDetermined = dependencyVersions.toLowerCase()
   }
+
+  info(`Using ${versionsDetermined} versions of dependencies`)
+
+  return versionsDetermined
 }

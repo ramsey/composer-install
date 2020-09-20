@@ -1,22 +1,27 @@
 import {hashFiles} from './hashFiles'
-import {getInput} from '@actions/core'
-import {getDependencyVersions} from './getDependencyVersions'
+import {info} from '@actions/core'
 import {getPhpVersion} from './getPhpVersion'
 
-export async function getCacheKeys(): Promise<{
+export async function getCacheKeys(
+  dependencyVersions = 'locked',
+  composerOptions = ''
+): Promise<{
   key: string
   restoreKeys: string[]
 }> {
   const composerHash = await hashFiles('composer.json\ncomposer.lock')
-  const composerOptions = getInput('composer-options')
-  const dependencyVersions = getDependencyVersions()
   const phpVersion = await getPhpVersion()
 
-  return {
+  const keys = {
     key: `php-${phpVersion}-${dependencyVersions}-${composerHash}-${composerOptions}`,
     restoreKeys: [
       `php-${phpVersion}-${dependencyVersions}-${composerHash}-`,
       `php-${phpVersion}-${dependencyVersions}-`
     ]
   }
+
+  info(`Cache primary key is ${keys.key}`)
+  info(`Cache restore keys are: ${keys.restoreKeys.join(', ')}`)
+
+  return keys
 }
