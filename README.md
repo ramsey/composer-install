@@ -15,7 +15,8 @@
 ## About
 
 ramsey/composer-install is a GitHub Action to streamline installation of
-Composer dependencies in workflows.
+Composer dependencies in workflows. It installs your Composer dependencies and
+caches them for improved build times.
 
 This project adheres to a [code of conduct](CODE_OF_CONDUCT.md).
 By participating in this project and its community, you are expected to
@@ -41,6 +42,9 @@ the [Setup PHP](https://github.com/shivammathur/setup-php) action as a step.
     php-version: "7.4"
 - uses: "ramsey/composer-install@v1"
 ```
+
+There is no need to set up a separate caching step since ramsey/composer-install
+handles this for you.
 
 ### Input Parameters
 
