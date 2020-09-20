@@ -101879,17 +101879,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getComposerCacheDir = void 0;
 const exec_1 = __webpack_require__(1514);
+const core_1 = __webpack_require__(2186);
 function getComposerCacheDir() {
     return __awaiter(this, void 0, void 0, function* () {
         let composerCacheDir = '';
         const composerExecOptions = {
-            silent: true,
             listeners: {
                 stdout: (data) => (composerCacheDir += data.toString())
             }
         };
-        yield exec_1.exec('composer', ['config', 'cache-files-dir'], composerExecOptions);
-        return composerCacheDir.trim();
+        yield exec_1.exec('composer', ['config', 'cache-dir'], composerExecOptions);
+        composerCacheDir = composerCacheDir.trim();
+        core_1.info(`Composer cache directory found at ${composerCacheDir}`);
+        return composerCacheDir;
     });
 }
 exports.getComposerCacheDir = getComposerCacheDir;
