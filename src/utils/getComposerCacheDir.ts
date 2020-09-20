@@ -4,6 +4,7 @@ import {info} from '@actions/core'
 export async function getComposerCacheDir(): Promise<string> {
   let composerCacheDir = ''
   const composerExecOptions = {
+    silent: true,
     listeners: {
       stdout: (data: Buffer) => (composerCacheDir += data.toString())
     }

@@ -1,14 +1,14 @@
-import * as cache from '../src/cache'
-import post from '../src/post'
+import * as cache from '../../src/cache'
+import {postAction} from '../../src/actions'
 
-jest.mock('../src/cache', () => {
+jest.mock('../../src/cache', () => {
   return {
     cache: jest.fn(),
     saveFactory: jest.fn().mockReturnValue(jest.fn())
   }
 })
 
-jest.mock('../src/utils/getCacheKeys', () => {
+jest.mock('../../src/utils/getCacheKeys', () => {
   return {
     getCacheKeys: jest.fn().mockResolvedValue({
       key: 'cache-key-mock',
@@ -17,13 +17,13 @@ jest.mock('../src/utils/getCacheKeys', () => {
   }
 })
 
-jest.mock('../src/utils/getComposerCacheDir', () => {
+jest.mock('../../src/utils/getComposerCacheDir', () => {
   return {
     getComposerCacheDir: jest.fn().mockResolvedValue('/path/to/composer/cache')
   }
 })
 
-describe('post script', () => {
+describe('post action', () => {
   const OLD_ENV = process.env
 
   beforeEach(() => {
@@ -40,9 +40,9 @@ describe('post script', () => {
     const mockFactory = cache.saveFactory()
 
     process.env['INPUT_COMPOSER-OPTIONS'] = ''
-    process.env['INPUT_DEPENDENCY-VERSIONS'] = 'locked'
+    process.env['INPUT_DEPENDENCY-VERSIONS'] = 'highest'
 
-    await post()
+    await postAction()
 
     expect(cacheMock).toHaveBeenCalledTimes(1)
     expect(cacheMock).toHaveBeenCalledWith(
@@ -58,7 +58,7 @@ describe('post script', () => {
       message: 'a mocked error message'
     })
 
-    await post()
+    await postAction()
 
     expect(cacheMock).toHaveBeenCalledTimes(1)
   })

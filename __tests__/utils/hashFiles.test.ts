@@ -3,6 +3,8 @@ import * as os from 'os'
 import * as path from 'path'
 import {hashFiles} from '../../src/utils'
 
+jest.mock('@actions/core')
+
 describe('hashing files for cache identification', () => {
   const sep = path.sep
   const testsDir = '__tests__'

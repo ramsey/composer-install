@@ -1,6 +1,8 @@
 import * as exec from '@actions/exec'
 import {getPhpVersion} from '../../src/utils'
 
+jest.mock('@actions/core')
+
 describe('getPhpVersion using SUT', () => {
   test('returns the real PHP version', async () => {
     let localPhpVersion = ''

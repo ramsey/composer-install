@@ -1,6 +1,7 @@
 import * as exec from '@actions/exec'
 import {getComposerCacheDir} from '../../src/utils'
 
+jest.mock('@actions/core')
 jest.mock('@actions/exec')
 
 describe('getComposerCacheDir with mocked exec', () => {
@@ -14,6 +15,7 @@ describe('getComposerCacheDir with mocked exec', () => {
       'composer',
       ['config', 'cache-dir'],
       expect.objectContaining({
+        silent: true,
         listeners: {
           stdout: expect.any(Function)
         }

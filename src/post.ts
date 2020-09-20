@@ -1,21 +1,8 @@
-import * as cache from './cache'
-import * as utils from './utils'
-import {info} from '@actions/core'
+/* istanbul ignore next */
+import {postAction} from './actions'
 
 async function run(): Promise<void> {
-  try {
-    const composerCacheKeys = await utils.getCacheKeys()
-    const composerCacheDir = await utils.getComposerCacheDir()
-
-    await cache.cache(
-      cache.saveFactory(),
-      [composerCacheDir],
-      composerCacheKeys.key,
-      composerCacheKeys.restoreKeys
-    )
-  } catch (error) {
-    info(`[warning] ${error.message}`)
-  }
+  await postAction()
 }
 
 run()

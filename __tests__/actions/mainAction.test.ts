@@ -1,21 +1,21 @@
-import * as cache from '../src/cache'
-import * as composer from '../src/composer'
-import main from '../src/main'
+import * as cache from '../../src/cache'
+import * as composer from '../../src/composer'
+import {mainAction} from '../../src/actions'
 
-jest.mock('../src/cache', () => {
+jest.mock('../../src/cache', () => {
   return {
     cache: jest.fn(),
     restoreFactory: jest.fn().mockReturnValue(jest.fn())
   }
 })
 
-jest.mock('../src/composer', () => {
+jest.mock('../../src/composer', () => {
   return {
     install: jest.fn()
   }
 })
 
-jest.mock('../src/utils/getCacheKeys', () => {
+jest.mock('../../src/utils/getCacheKeys', () => {
   return {
     getCacheKeys: jest.fn().mockResolvedValue({
       key: 'cache-key-mock',
@@ -24,13 +24,13 @@ jest.mock('../src/utils/getCacheKeys', () => {
   }
 })
 
-jest.mock('../src/utils/getComposerCacheDir', () => {
+jest.mock('../../src/utils/getComposerCacheDir', () => {
   return {
     getComposerCacheDir: jest.fn().mockResolvedValue('/path/to/composer/cache')
   }
 })
 
-describe('main script', () => {
+describe('main action', () => {
   const OLD_ENV = process.env
 
   beforeEach(() => {
@@ -43,14 +43,14 @@ describe('main script', () => {
   })
 
   test('runs', async () => {
-    const cacheMock = jest.spyOn(cache, 'cache').mockResolvedValue()
+    const cacheMock = jest.spyOn(cache, 'cache')
     const composerInstallMock = jest.spyOn(composer, 'install')
     const mockFactory = cache.restoreFactory()
 
     process.env['INPUT_COMPOSER-OPTIONS'] = '--ignore-platform-reqs'
     process.env['INPUT_DEPENDENCY-VERSIONS'] = 'lowest'
 
-    await main()
+    await mainAction()
 
     expect(cacheMock).toHaveBeenCalledTimes(1)
     expect(cacheMock).toHaveBeenCalledWith(
@@ -73,7 +73,7 @@ describe('main script', () => {
     })
     const composerInstallMock = jest.spyOn(composer, 'install')
 
-    await main()
+    await mainAction()
 
     expect(cacheMock).toHaveBeenCalledTimes(1)
     expect(composerInstallMock).not.toHaveBeenCalled()

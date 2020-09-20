@@ -101631,6 +101631,139 @@ function regExpEscape (s) {
 
 /***/ }),
 
+/***/ 6535:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.postAction = exports.mainAction = void 0;
+var mainAction_1 = __webpack_require__(1615);
+Object.defineProperty(exports, "mainAction", ({ enumerable: true, get: function () { return mainAction_1.mainAction; } }));
+var postAction_1 = __webpack_require__(2028);
+Object.defineProperty(exports, "postAction", ({ enumerable: true, get: function () { return postAction_1.postAction; } }));
+
+
+/***/ }),
+
+/***/ 1615:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.mainAction = void 0;
+const cache = __importStar(__webpack_require__(1251));
+const composer = __importStar(__webpack_require__(6444));
+const utils = __importStar(__webpack_require__(6252));
+const core_1 = __webpack_require__(2186);
+function mainAction() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const composerOptions = core_1.getInput('composer-options');
+            const inputDependencyVersions = core_1.getInput('dependency-versions');
+            const composerCacheDir = yield utils.getComposerCacheDir();
+            const cleanedDependencyVersions = utils.getDependencyVersions(inputDependencyVersions);
+            const composerCacheKeys = yield utils.getCacheKeys(cleanedDependencyVersions, composerOptions);
+            yield cache.cache(cache.restoreFactory(), [composerCacheDir], composerCacheKeys.key, composerCacheKeys.restoreKeys);
+            yield composer.install(cleanedDependencyVersions, composerOptions);
+        }
+        catch (error) {
+            core_1.setFailed(error.message);
+        }
+    });
+}
+exports.mainAction = mainAction;
+
+
+/***/ }),
+
+/***/ 2028:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.postAction = void 0;
+const cache = __importStar(__webpack_require__(1251));
+const utils = __importStar(__webpack_require__(6252));
+const core_1 = __webpack_require__(2186);
+function postAction() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const composerOptions = core_1.getInput('composer-options');
+            const inputDependencyVersions = core_1.getInput('dependency-versions');
+            const composerCacheDir = yield utils.getComposerCacheDir();
+            const cleanedDependencyVersions = utils.getDependencyVersions(inputDependencyVersions);
+            const composerCacheKeys = yield utils.getCacheKeys(cleanedDependencyVersions, composerOptions);
+            yield cache.cache(cache.saveFactory(), [composerCacheDir], composerCacheKeys.key, composerCacheKeys.restoreKeys);
+        }
+        catch (error) {
+            core_1.info(`[warning] ${error.message}`);
+        }
+    });
+}
+exports.postAction = postAction;
+
+
+/***/ }),
+
 /***/ 1295:
 /***/ (function(__unused_webpack_module, exports) {
 
@@ -101768,25 +101901,6 @@ exports.install = install;
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -101797,26 +101911,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const cache = __importStar(__webpack_require__(1251));
-const composer = __importStar(__webpack_require__(6444));
-const utils = __importStar(__webpack_require__(6252));
-const core_1 = __webpack_require__(2186);
+/* istanbul ignore next */
+const actions_1 = __webpack_require__(6535);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const composerCacheKeys = yield utils.getCacheKeys();
-            const composerCacheDir = yield utils.getComposerCacheDir();
-            const composerOptions = core_1.getInput('composer-options');
-            const dependencyVersions = utils.getDependencyVersions();
-            yield cache
-                .cache(cache.restoreFactory(), [composerCacheDir], composerCacheKeys.key, composerCacheKeys.restoreKeys)
-                .then(() => __awaiter(this, void 0, void 0, function* () {
-                yield composer.install(dependencyVersions, composerOptions);
-            }));
-        }
-        catch (error) {
-            core_1.setFailed(error.message);
-        }
+        yield actions_1.mainAction();
     });
 }
 run();
@@ -101843,21 +101942,21 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getCacheKeys = void 0;
 const hashFiles_1 = __webpack_require__(6997);
 const core_1 = __webpack_require__(2186);
-const getDependencyVersions_1 = __webpack_require__(6582);
 const getPhpVersion_1 = __webpack_require__(4589);
-function getCacheKeys() {
+function getCacheKeys(dependencyVersions = 'locked', composerOptions = '') {
     return __awaiter(this, void 0, void 0, function* () {
         const composerHash = yield hashFiles_1.hashFiles('composer.json\ncomposer.lock');
-        const composerOptions = core_1.getInput('composer-options');
-        const dependencyVersions = getDependencyVersions_1.getDependencyVersions();
         const phpVersion = yield getPhpVersion_1.getPhpVersion();
-        return {
+        const keys = {
             key: `php-${phpVersion}-${dependencyVersions}-${composerHash}-${composerOptions}`,
             restoreKeys: [
                 `php-${phpVersion}-${dependencyVersions}-${composerHash}-`,
                 `php-${phpVersion}-${dependencyVersions}-`
             ]
         };
+        core_1.info(`Cache primary key is ${keys.key}`);
+        core_1.info(`Cache restore keys are: ${keys.restoreKeys.join(', ')}`);
+        return keys;
     });
 }
 exports.getCacheKeys = getCacheKeys;
@@ -101887,6 +101986,7 @@ function getComposerCacheDir() {
     return __awaiter(this, void 0, void 0, function* () {
         let composerCacheDir = '';
         const composerExecOptions = {
+            silent: true,
             listeners: {
                 stdout: (data) => (composerCacheDir += data.toString())
             }
@@ -101910,16 +102010,19 @@ exports.getComposerCacheDir = getComposerCacheDir;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getDependencyVersions = void 0;
 const core_1 = __webpack_require__(2186);
-function getDependencyVersions() {
-    const dependencyVersions = core_1.getInput('dependency-versions');
+function getDependencyVersions(dependencyVersions) {
+    let versionsDetermined = 'locked';
+    if (dependencyVersions === undefined) {
+        return versionsDetermined;
+    }
     switch (dependencyVersions.toLowerCase()) {
         case 'highest':
         case 'lowest':
         case 'locked':
-            return dependencyVersions.toLowerCase();
-        default:
-            return 'locked';
+            versionsDetermined = dependencyVersions.toLowerCase();
     }
+    core_1.info(`Using ${versionsDetermined} versions of dependencies`);
+    return versionsDetermined;
 }
 exports.getDependencyVersions = getDependencyVersions;
 
@@ -101943,6 +102046,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getPhpVersion = void 0;
 const exec_1 = __webpack_require__(1514);
+const core_1 = __webpack_require__(2186);
 function getPhpVersion() {
     return __awaiter(this, void 0, void 0, function* () {
         let phpVersion = '';
@@ -101953,6 +102057,8 @@ function getPhpVersion() {
             }
         };
         yield exec_1.exec('php', ['-r', 'echo phpversion();'], phpExecOptions);
+        phpVersion = phpVersion.trim();
+        core_1.info(`PHP version is ${phpVersion}`);
         return phpVersion;
     });
 }

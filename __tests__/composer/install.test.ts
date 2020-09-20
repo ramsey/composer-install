@@ -14,10 +14,11 @@ describe('composer.install with mocked exec', () => {
     await composer.install('locked')
 
     expect(execMock).toHaveBeenCalledTimes(1)
-    expect(execMock).toHaveBeenCalledWith(
-      'composer',
-      ['install', '--no-interaction', '--no-progress']
-    )
+    expect(execMock).toHaveBeenCalledWith('composer', [
+      'install',
+      '--no-interaction',
+      '--no-progress'
+    ])
   })
 
   test('executes command to install composer with highest dependencies', async () => {
@@ -26,10 +27,11 @@ describe('composer.install with mocked exec', () => {
     await composer.install('highest')
 
     expect(execMock).toHaveBeenCalledTimes(1)
-    expect(execMock).toHaveBeenCalledWith(
-      'composer',
-      ['update', '--no-interaction', '--no-progress']
-    )
+    expect(execMock).toHaveBeenCalledWith('composer', [
+      'update',
+      '--no-interaction',
+      '--no-progress'
+    ])
   })
 
   test('executes command to install composer with lowest dependencies', async () => {
@@ -38,10 +40,12 @@ describe('composer.install with mocked exec', () => {
     await composer.install('lowest')
 
     expect(execMock).toHaveBeenCalledTimes(1)
-    expect(execMock).toHaveBeenCalledWith(
-      'composer',
-      ['update', '--prefer-lowest', '--no-interaction', '--no-progress']
-    )
+    expect(execMock).toHaveBeenCalledWith('composer', [
+      'update',
+      '--prefer-lowest',
+      '--no-interaction',
+      '--no-progress'
+    ])
   })
 
   test('executes command to install composer with locked dependencies when provided invalid dependencyPreference', async () => {
@@ -50,10 +54,11 @@ describe('composer.install with mocked exec', () => {
     await composer.install('foobar')
 
     expect(execMock).toHaveBeenCalledTimes(1)
-    expect(execMock).toHaveBeenCalledWith(
-      'composer',
-      ['install', '--no-interaction', '--no-progress']
-    )
+    expect(execMock).toHaveBeenCalledWith('composer', [
+      'install',
+      '--no-interaction',
+      '--no-progress'
+    ])
   })
 
   test('executes command to install composer with locked dependencies and options', async () => {
@@ -62,16 +67,13 @@ describe('composer.install with mocked exec', () => {
     await composer.install('locked', '--opt1 --opt2 --opt3')
 
     expect(execMock).toHaveBeenCalledTimes(1)
-    expect(execMock).toHaveBeenCalledWith(
-      'composer',
-      [
-        'install',
-        '--no-interaction',
-        '--no-progress',
-        '--opt1',
-        '--opt2',
-        '--opt3'
-      ]
-    )
+    expect(execMock).toHaveBeenCalledWith('composer', [
+      'install',
+      '--no-interaction',
+      '--no-progress',
+      '--opt1',
+      '--opt2',
+      '--opt3'
+    ])
   })
 })
