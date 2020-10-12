@@ -42,7 +42,7 @@
     "eslint": "^7.10.0",
     "eslint-plugin-github": "^4.1.1",
     "eslint-plugin-jest": "^24.1.0",
-    "jest": "^26.5.2",
+    "jest": "^26.5.3",
     "jest-circus": "^26.4.2",
     "js-yaml": "^3.14.0",
     "prettier": "^2.1.2",
