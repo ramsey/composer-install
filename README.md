@@ -43,7 +43,7 @@ the [Setup PHP](https://github.com/shivammathur/setup-php) action as a step.
 - uses: "ramsey/composer-install@v1"
 ```
 
-There is no need to set up a separate caching step since ramsey/composer-install
+:bulb: There is no need to set up a separate caching step since ramsey/composer-install
 handles this for you.
 
 ### Input Parameters
