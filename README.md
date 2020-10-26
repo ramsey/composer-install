@@ -74,9 +74,9 @@ For example:
 
 #### composer-options
 
-ramsey/composer-install always passes the `--no-interaction` and `--no-progress`
-options to the `composer` command. If you'd like to pass additional options, you
-may use the `composer-options` input parameter.
+ramsey/composer-install always passes the `--no-interaction`, `--no-progress`,
+and `--ansi` options to the `composer` command. If you'd like to pass additional
+options, you may use the `composer-options` input parameter.
 
 For example:
 

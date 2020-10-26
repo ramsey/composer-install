@@ -101885,7 +101885,7 @@ function install(dependencyPreference, composerOptions = '') {
             default:
                 args.push('install');
         }
-        args.push('--no-interaction', '--no-progress');
+        args.push('--no-interaction', '--no-progress', '--ansi');
         args.push(...options);
         const filteredArgs = args.filter(Boolean);
         yield exec_1.exec('composer', filteredArgs);
