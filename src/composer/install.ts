@@ -19,7 +19,7 @@ export async function install(
       args.push('install')
   }
 
-  args.push('--no-interaction', '--no-progress')
+  args.push('--no-interaction', '--no-progress', '--ansi')
   args.push(...options)
 
   const filteredArgs = args.filter(Boolean)

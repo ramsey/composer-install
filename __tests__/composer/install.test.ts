@@ -17,7 +17,8 @@ describe('composer.install with mocked exec', () => {
     expect(execMock).toHaveBeenCalledWith('composer', [
       'install',
       '--no-interaction',
-      '--no-progress'
+      '--no-progress',
+      '--ansi'
     ])
   })
 
@@ -30,7 +31,8 @@ describe('composer.install with mocked exec', () => {
     expect(execMock).toHaveBeenCalledWith('composer', [
       'update',
       '--no-interaction',
-      '--no-progress'
+      '--no-progress',
+      '--ansi'
     ])
   })
 
@@ -44,7 +46,8 @@ describe('composer.install with mocked exec', () => {
       'update',
       '--prefer-lowest',
       '--no-interaction',
-      '--no-progress'
+      '--no-progress',
+      '--ansi'
     ])
   })
 
@@ -57,7 +60,8 @@ describe('composer.install with mocked exec', () => {
     expect(execMock).toHaveBeenCalledWith('composer', [
       'install',
       '--no-interaction',
-      '--no-progress'
+      '--no-progress',
+      '--ansi'
     ])
   })
 
@@ -71,6 +75,7 @@ describe('composer.install with mocked exec', () => {
       'install',
       '--no-interaction',
       '--no-progress',
+      '--ansi',
       '--opt1',
       '--opt2',
       '--opt3'
