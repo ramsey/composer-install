@@ -37,9 +37,9 @@ Use ramsey/composer-install as step within a job. This example also shows use of
 the [Setup PHP](https://github.com/shivammathur/setup-php) action as a step.
 
 ```yaml
-- uses: shivammathur/setup-php@v2
+- uses: "shivammathur/setup-php@v2"
   with:
-    php-version: "7.4"
+    php-version: "8.0"
 - uses: "ramsey/composer-install@v1"
 ```
 
@@ -109,23 +109,15 @@ Here's an example of how you might use the `dependency-versions` and
 `composer-options` input parameters as part of a job matrix.
 
 ```yaml
-continue-on-error: ${{ matrix.experimental }}
-
 strategy:
   matrix:
     php:
       - "7.3"
       - "7.4"
+      - "8.0"
     dependencies:
       - "lowest"
       - "highest"
-    experimental:
-      - false
-    include:
-      - php: "8.0"
-        dependencies: "highest"
-        composer-options: "--ignore-platform-reqs"
-        experimental: true
 
 steps:
   - uses: "actions/checkout@v2"
@@ -135,7 +127,6 @@ steps:
   - uses: "ramsey/composer-install@v1"
     with:
       dependency-versions: "${{ matrix.dependencies }}"
-      composer-options: "${{ matrix.composer-options }}"
 ```
 
 ## Contributing
