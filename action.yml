@@ -18,6 +18,10 @@ inputs:
     description: >-
       Additional options to pass to Composer (e.g. --ignore-platform-reqs).
     required: false
+  working-directory:
+    description: >-
+      Where the composer.json is located
+    required: false
 
 runs:
   using: "node12"

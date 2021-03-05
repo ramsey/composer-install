@@ -86,6 +86,19 @@ For example:
     composer-options: "--ignore-platform-reqs"
 ```
 
+#### working-directory
+
+If your `composer.json` is located in a sub-folder (e.g.: `packages/api`), 
+you must use `working-directory` input to get the action working properly. 
+
+For example:
+
+```yaml
+- uses: "ramsey/composer-install@v1"
+  with:
+    working-directory: "packages/api"
+```
+
 ### Matrix Example
 
 GitHub Workflows allow you to set up a [job matrix](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstrategymatrix),

@@ -65,10 +65,10 @@ describe('composer.install with mocked exec', () => {
     ])
   })
 
-  test('executes command to install composer with locked dependencies and options', async () => {
+  test('executes command to install composer with locked dependencies and working directory', async () => {
     const execMock = jest.spyOn(exec, 'exec')
 
-    await composer.install('locked', '--opt1 --opt2 --opt3')
+    await composer.install('locked', '', 'subdirectory')
 
     expect(execMock).toHaveBeenCalledTimes(1)
     expect(execMock).toHaveBeenCalledWith('composer', [
@@ -76,6 +76,22 @@ describe('composer.install with mocked exec', () => {
       '--no-interaction',
       '--no-progress',
       '--ansi',
+      '--working-dir=subdirectory'
+    ])
+  })
+
+  test('executes command to install composer with locked dependencies, working directory and options', async () => {
+    const execMock = jest.spyOn(exec, 'exec')
+
+    await composer.install('locked', '--opt1 --opt2 --opt3', 'subdirectory')
+
+    expect(execMock).toHaveBeenCalledTimes(1)
+    expect(execMock).toHaveBeenCalledWith('composer', [
+      'install',
+      '--no-interaction',
+      '--no-progress',
+      '--ansi',
+      '--working-dir=subdirectory',
       '--opt1',
       '--opt2',
       '--opt3'

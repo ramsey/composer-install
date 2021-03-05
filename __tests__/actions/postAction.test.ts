@@ -53,6 +53,25 @@ describe('post action', () => {
     )
   })
 
+  test('runs with a custom working-directory', async () => {
+    const cacheMock = jest.spyOn(cache, 'cache')
+    const mockFactory = cache.saveFactory()
+
+    process.env['INPUT_COMPOSER-OPTIONS'] = ''
+    process.env['INPUT_DEPENDENCY-VERSIONS'] = 'highest'
+    process.env['INPUT_WORKING-DIRECTORY'] = 'subdirectory'
+
+    await postAction()
+
+    expect(cacheMock).toHaveBeenCalledTimes(1)
+    expect(cacheMock).toHaveBeenCalledWith(
+      mockFactory,
+      ['/path/to/composer/cache'],
+      'cache-key-mock',
+      ['cache-key-', 'cache-']
+    )
+  })
+
   test('sets failure state with error', async () => {
     const cacheMock = jest.spyOn(cache, 'cache').mockRejectedValue({
       message: 'a mocked error message'

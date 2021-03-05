@@ -1,0 +1,14 @@
+{
+  "name": "ramsey/composer-install",
+  "description": "A GitHub Action to install and cache Composer dependencies.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ben Ramsey",
+      "email": "ben@benramsey.com"
+    }
+  ],
+  "require-dev": {
+    "phpspec/phpspec": "^7.0"
+  }
+}

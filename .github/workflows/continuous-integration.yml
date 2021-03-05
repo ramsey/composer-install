@@ -39,6 +39,9 @@ jobs:
         composer-options:
           - "--ignore-platform-reqs"
           - ""
+        working-directory:
+          - "subdirectory"
+          - ""
     steps:
       - uses: "actions/checkout@v2"
       - uses: "shivammathur/setup-php@v2"
@@ -49,3 +52,4 @@ jobs:
         with:
           dependency-versions: "${{ matrix.dependency-versions }}"
           composer-options: "${{ matrix.composer-options }}"
+          working-directory: "${{ matrix.working-directory }}"

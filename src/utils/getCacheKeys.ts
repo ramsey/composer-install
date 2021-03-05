@@ -4,7 +4,8 @@ import {getPhpVersion} from './getPhpVersion'
 
 export async function getCacheKeys(
   dependencyVersions = 'locked',
-  composerOptions = ''
+  composerOptions = '',
+  workingDirectory = ''
 ): Promise<{
   key: string
   restoreKeys: string[]
@@ -12,11 +13,12 @@ export async function getCacheKeys(
   const composerHash = await hashFiles('composer.json\ncomposer.lock')
   const phpVersion = await getPhpVersion()
 
+  const keyWorkingDirectory = workingDirectory ? `-${workingDirectory}` : ''
   const keys = {
-    key: `php-${phpVersion}-${dependencyVersions}-${composerHash}-${composerOptions}`,
+    key: `php-${phpVersion}${keyWorkingDirectory}-${dependencyVersions}-${composerHash}-${composerOptions}`,
     restoreKeys: [
-      `php-${phpVersion}-${dependencyVersions}-${composerHash}-`,
-      `php-${phpVersion}-${dependencyVersions}-`
+      `php-${phpVersion}${keyWorkingDirectory}-${dependencyVersions}-${composerHash}-`,
+      `php-${phpVersion}${keyWorkingDirectory}-${dependencyVersions}-`
     ]
   }
 

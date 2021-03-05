@@ -2,7 +2,8 @@ import {exec} from '@actions/exec'
 
 export async function install(
   dependencyPreference: string,
-  composerOptions = ''
+  composerOptions = '',
+  workingDirectory = ''
 ): Promise<void> {
   const args: string[] = []
   const options: string[] = composerOptions.split(' ')
@@ -19,7 +20,12 @@ export async function install(
       args.push('install')
   }
 
-  args.push('--no-interaction', '--no-progress', '--ansi')
+  args.push(
+    '--no-interaction',
+    '--no-progress',
+    '--ansi',
+    workingDirectory ? `--working-dir=${workingDirectory}` : ''
+  )
   args.push(...options)
 
   const filteredArgs = args.filter(Boolean)

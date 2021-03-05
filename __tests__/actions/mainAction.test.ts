@@ -63,7 +63,36 @@ describe('main action', () => {
     expect(composerInstallMock).toHaveBeenCalledTimes(1)
     expect(composerInstallMock).toHaveBeenCalledWith(
       'lowest',
-      '--ignore-platform-reqs'
+      '--ignore-platform-reqs',
+      ''
+    )
+  })
+
+
+  test('runs with a different working directory', async () => {
+    const cacheMock = jest.spyOn(cache, 'cache')
+    const composerInstallMock = jest.spyOn(composer, 'install')
+    const mockFactory = cache.restoreFactory()
+
+    process.env['INPUT_COMPOSER-OPTIONS'] = '--ignore-platform-reqs'
+    process.env['INPUT_DEPENDENCY-VERSIONS'] = 'lowest'
+    process.env['INPUT_WORKING-DIRECTORY'] = 'subdirectory'
+
+    await mainAction()
+
+    expect(cacheMock).toHaveBeenCalledTimes(1)
+    expect(cacheMock).toHaveBeenCalledWith(
+      mockFactory,
+      ['/path/to/composer/cache'],
+      'cache-key-mock',
+      ['cache-key-', 'cache-']
+    )
+
+    expect(composerInstallMock).toHaveBeenCalledTimes(1)
+    expect(composerInstallMock).toHaveBeenCalledWith(
+      'lowest',
+      '--ignore-platform-reqs',
+      'subdirectory'
     )
   })
 
