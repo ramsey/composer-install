@@ -8,6 +8,12 @@ jest.mock('../../src/utils/getPhpVersion', () => {
   }
 })
 
+jest.mock('../../src/utils/getOperatingSystem', () => {
+  return {
+    getOperatingSystem: jest.fn().mockReturnValue('fooplatform')
+  }
+})
+
 jest.mock('../../src/utils/hashFiles', () => {
   return {
     hashFiles: jest.fn().mockResolvedValue('foobar')
@@ -21,15 +27,15 @@ describe('cache keys', () => {
 
   test('returns cache keys WITHOUT dependency-versions or composer-options or working-directory', async () => {
     await expect(getCacheKeys()).resolves.toEqual({
-      key: 'php-7.99.99-locked-foobar-',
-      restoreKeys: ['php-7.99.99-locked-foobar-', 'php-7.99.99-locked-']
+      key: 'fooplatform-php-7.99.99-locked-foobar-',
+      restoreKeys: ['fooplatform-php-7.99.99-locked-foobar-', 'fooplatform-php-7.99.99-locked-']
     })
   })
 
   test('returns cache keys WITH dependency-versions but WITHOUT composer-options and working-directory', async () => {
     await expect(getCacheKeys('lowest')).resolves.toEqual({
-      key: 'php-7.99.99-lowest-foobar-',
-      restoreKeys: ['php-7.99.99-lowest-foobar-', 'php-7.99.99-lowest-']
+      key: 'fooplatform-php-7.99.99-lowest-foobar-',
+      restoreKeys: ['fooplatform-php-7.99.99-lowest-foobar-', 'fooplatform-php-7.99.99-lowest-']
     })
   })
 
@@ -37,8 +43,8 @@ describe('cache keys', () => {
     await expect(
       getCacheKeys('highest', '--some-other-option --and-another')
     ).resolves.toEqual({
-      key: 'php-7.99.99-highest-foobar---some-other-option --and-another',
-      restoreKeys: ['php-7.99.99-highest-foobar-', 'php-7.99.99-highest-']
+      key: 'fooplatform-php-7.99.99-highest-foobar---some-other-option --and-another',
+      restoreKeys: ['fooplatform-php-7.99.99-highest-foobar-', 'fooplatform-php-7.99.99-highest-']
     })
   })
 
@@ -46,8 +52,8 @@ describe('cache keys', () => {
     await expect(
       getCacheKeys('highest', '--some-other-option --and-another', 'subdirectory')
     ).resolves.toEqual({
-      key: 'php-7.99.99-subdirectory-highest-foobar---some-other-option --and-another',
-      restoreKeys: ['php-7.99.99-subdirectory-highest-foobar-', 'php-7.99.99-subdirectory-highest-']
+      key: 'fooplatform-php-7.99.99-subdirectory-highest-foobar---some-other-option --and-another',
+      restoreKeys: ['fooplatform-php-7.99.99-subdirectory-highest-foobar-', 'fooplatform-php-7.99.99-subdirectory-highest-']
     })
   })
 })

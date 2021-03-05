@@ -1,5 +1,6 @@
 import {hashFiles} from './hashFiles'
 import {info} from '@actions/core'
+import {getOperatingSystem} from './getOperatingSystem'
 import {getPhpVersion} from './getPhpVersion'
 
 export async function getCacheKeys(
@@ -12,13 +13,14 @@ export async function getCacheKeys(
 }> {
   const composerHash = await hashFiles('composer.json\ncomposer.lock')
   const phpVersion = await getPhpVersion()
-
+  const keyOs = getOperatingSystem()
   const keyWorkingDirectory = workingDirectory ? `-${workingDirectory}` : ''
+
   const keys = {
-    key: `php-${phpVersion}${keyWorkingDirectory}-${dependencyVersions}-${composerHash}-${composerOptions}`,
+    key: `${keyOs}-php-${phpVersion}${keyWorkingDirectory}-${dependencyVersions}-${composerHash}-${composerOptions}`,
     restoreKeys: [
-      `php-${phpVersion}${keyWorkingDirectory}-${dependencyVersions}-${composerHash}-`,
-      `php-${phpVersion}${keyWorkingDirectory}-${dependencyVersions}-`
+      `${keyOs}-php-${phpVersion}${keyWorkingDirectory}-${dependencyVersions}-${composerHash}-`,
+      `${keyOs}-php-${phpVersion}${keyWorkingDirectory}-${dependencyVersions}-`
     ]
   }
 

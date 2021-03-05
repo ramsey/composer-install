@@ -1,5 +1,6 @@
 export {getCacheKeys} from './getCacheKeys'
 export {getComposerCacheDir} from './getComposerCacheDir'
 export {getDependencyVersions} from './getDependencyVersions'
+export {getOperatingSystem} from './getOperatingSystem'
 export {getPhpVersion} from './getPhpVersion'
 export {hashFiles} from './hashFiles'
