@@ -1,7 +1,7 @@
 import {exec} from '@actions/exec'
 import {info} from '@actions/core'
 
-export async function getComposerCacheDir(workingDir = ''): Promise<string> {
+export async function getComposerCacheDir(): Promise<string> {
   let composerCacheDir = ''
   const composerExecOptions = {
     silent: true,
@@ -10,10 +10,11 @@ export async function getComposerCacheDir(workingDir = ''): Promise<string> {
     }
   }
 
-  const args = ['config', 'cache-dir']
-  if (workingDir !== '') args.push(`--working-dir=${workingDir}`)
-
-  await exec('composer', args, composerExecOptions)
+  await exec(
+    'composer',
+    ['--global', 'config', 'cache-dir'],
+    composerExecOptions
+  )
 
   composerCacheDir = composerCacheDir.trim()
   info(`Composer cache directory found at ${composerCacheDir}`)

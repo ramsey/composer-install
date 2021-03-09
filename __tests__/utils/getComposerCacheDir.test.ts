@@ -13,25 +13,7 @@ describe('getComposerCacheDir with mocked exec', () => {
     expect(execMock).toHaveBeenCalledTimes(1)
     expect(execMock).toHaveBeenCalledWith(
       'composer',
-      ['config', 'cache-dir'],
-      expect.objectContaining({
-        silent: true,
-        listeners: {
-          stdout: expect.any(Function)
-        }
-      })
-    )
-  })
-
-  test('executes command to get Composer cache directory with a working directory', async () => {
-    const execMock = jest.spyOn(exec, 'exec')
-
-    await getComposerCacheDir('subdirectory')
-
-    expect(execMock).toHaveBeenCalledTimes(1)
-    expect(execMock).toHaveBeenCalledWith(
-      'composer',
-      ['config', 'cache-dir', '--working-dir=subdirectory'],
+      ['--global', 'config', 'cache-dir'],
       expect.objectContaining({
         silent: true,
         listeners: {

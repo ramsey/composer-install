@@ -119253,7 +119253,7 @@ function mainAction() {
             const composerOptions = core_1.getInput('composer-options');
             const inputDependencyVersions = core_1.getInput('dependency-versions');
             const workingDirectory = core_1.getInput('working-directory');
-            const composerCacheDir = yield utils.getComposerCacheDir(workingDirectory);
+            const composerCacheDir = yield utils.getComposerCacheDir();
             const cleanedDependencyVersions = utils.getDependencyVersions(inputDependencyVersions);
             const composerCacheKeys = yield utils.getCacheKeys(cleanedDependencyVersions, composerOptions, workingDirectory);
             yield cache.cache(cache.restoreFactory(), [composerCacheDir], composerCacheKeys.key, composerCacheKeys.restoreKeys);
@@ -119549,7 +119549,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getComposerCacheDir = void 0;
 const exec_1 = __nccwpck_require__(1514);
 const core_1 = __nccwpck_require__(2186);
-function getComposerCacheDir(workingDir = '') {
+function getComposerCacheDir() {
     return __awaiter(this, void 0, void 0, function* () {
         let composerCacheDir = '';
         const composerExecOptions = {
@@ -119558,10 +119558,7 @@ function getComposerCacheDir(workingDir = '') {
                 stdout: (data) => (composerCacheDir += data.toString())
             }
         };
-        const args = ['config', 'cache-dir'];
-        if (workingDir !== '')
-            args.push(`--working-dir=${workingDir}`);
-        yield exec_1.exec('composer', args, composerExecOptions);
+        yield exec_1.exec('composer', ['--global', 'config', 'cache-dir'], composerExecOptions);
         composerCacheDir = composerCacheDir.trim();
         core_1.info(`Composer cache directory found at ${composerCacheDir}`);
         return composerCacheDir;
