@@ -9,7 +9,7 @@ export async function mainAction(): Promise<void> {
     const inputDependencyVersions = getInput('dependency-versions')
     const workingDirectory = getInput('working-directory')
 
-    const composerCacheDir = await utils.getComposerCacheDir()
+    const composerCacheDir = await utils.getComposerCacheDir(workingDirectory)
     const cleanedDependencyVersions = utils.getDependencyVersions(
       inputDependencyVersions
     )

@@ -18,4 +18,19 @@ describe('getComposerCacheDir using SUT', () => {
 
     expect(await getComposerCacheDir()).toEqual(localComposerCacheDir.trim())
   })
+
+  test('returns the real Composer cache directory with a working directory', async () => {
+    let localComposerCacheDir = ''
+
+    const composerExecOptions = {
+      silent: true,
+      listeners: {
+        stdout: (data: Buffer) => (localComposerCacheDir += data.toString())
+      }
+    }
+
+    await exec.exec('composer', ['config', 'cache-dir', '--working-dir=subdirectory'], composerExecOptions)
+
+    expect(await getComposerCacheDir('subdirectory')).toEqual(localComposerCacheDir.trim())
+  })
 })
