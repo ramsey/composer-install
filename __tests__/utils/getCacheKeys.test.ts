@@ -1,4 +1,5 @@
 import {getCacheKeys} from '../../src/utils'
+import * as utils from '../../src/utils'
 
 jest.mock('@actions/core')
 
@@ -30,6 +31,7 @@ describe('cache keys', () => {
       key: 'fooplatform-php-7.99.99-locked-foobar-',
       restoreKeys: ['fooplatform-php-7.99.99-locked-foobar-', 'fooplatform-php-7.99.99-locked-']
     })
+    expect(utils.hashFiles).toHaveBeenCalledWith('composer.json\ncomposer.lock');
   })
 
   test('returns cache keys WITH dependency-versions but WITHOUT composer-options and working-directory', async () => {
@@ -37,6 +39,7 @@ describe('cache keys', () => {
       key: 'fooplatform-php-7.99.99-lowest-foobar-',
       restoreKeys: ['fooplatform-php-7.99.99-lowest-foobar-', 'fooplatform-php-7.99.99-lowest-']
     })
+    expect(utils.hashFiles).toHaveBeenCalledWith('composer.json\ncomposer.lock');
   })
 
   test('returns cache keys WITH dependency-versions and composer-options but WITHOUT working-directory', async () => {
@@ -46,6 +49,7 @@ describe('cache keys', () => {
       key: 'fooplatform-php-7.99.99-highest-foobar---some-other-option --and-another',
       restoreKeys: ['fooplatform-php-7.99.99-highest-foobar-', 'fooplatform-php-7.99.99-highest-']
     })
+    expect(utils.hashFiles).toHaveBeenCalledWith('composer.json\ncomposer.lock');
   })
 
   test('returns cache keys WITH dependency-versions and composer-options and working-directory', async () => {
@@ -55,5 +59,6 @@ describe('cache keys', () => {
       key: 'fooplatform-php-7.99.99-subdirectory-highest-foobar---some-other-option --and-another',
       restoreKeys: ['fooplatform-php-7.99.99-subdirectory-highest-foobar-', 'fooplatform-php-7.99.99-subdirectory-highest-']
     })
+    expect(utils.hashFiles).toHaveBeenCalledWith('subdirectory/composer.json\nsubdirectory/composer.lock');
   })
 })

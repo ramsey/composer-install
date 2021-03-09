@@ -119510,7 +119510,10 @@ const getOperatingSystem_1 = __nccwpck_require__(7652);
 const getPhpVersion_1 = __nccwpck_require__(4589);
 function getCacheKeys(dependencyVersions = 'locked', composerOptions = '', workingDirectory = '') {
     return __awaiter(this, void 0, void 0, function* () {
-        const composerHash = yield hashFiles_1.hashFiles('composer.json\ncomposer.lock');
+        const composerHash = yield hashFiles_1.hashFiles([
+            `${workingDirectory ? `${workingDirectory}/` : ''}composer.json`,
+            `${workingDirectory ? `${workingDirectory}/` : ''}composer.lock`
+        ].join('\n'));
         const phpVersion = yield getPhpVersion_1.getPhpVersion();
         const keyOs = getOperatingSystem_1.getOperatingSystem();
         const keyWorkingDirectory = workingDirectory ? `-${workingDirectory}` : '';

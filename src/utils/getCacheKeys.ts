@@ -11,7 +11,12 @@ export async function getCacheKeys(
   key: string
   restoreKeys: string[]
 }> {
-  const composerHash = await hashFiles('composer.json\ncomposer.lock')
+  const composerHash = await hashFiles(
+    [
+      `${workingDirectory ? `${workingDirectory}/` : ''}composer.json`,
+      `${workingDirectory ? `${workingDirectory}/` : ''}composer.lock`
+    ].join('\n')
+  )
   const phpVersion = await getPhpVersion()
   const keyOs = getOperatingSystem()
   const keyWorkingDirectory = workingDirectory ? `-${workingDirectory}` : ''
