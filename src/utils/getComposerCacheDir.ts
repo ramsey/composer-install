@@ -10,7 +10,11 @@ export async function getComposerCacheDir(): Promise<string> {
     }
   }
 
-  await exec('composer', ['config', 'cache-dir'], composerExecOptions)
+  await exec(
+    'composer',
+    ['--global', 'config', 'cache-dir'],
+    composerExecOptions
+  )
 
   composerCacheDir = composerCacheDir.trim()
   info(`Composer cache directory found at ${composerCacheDir}`)

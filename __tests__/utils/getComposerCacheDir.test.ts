@@ -13,7 +13,7 @@ describe('getComposerCacheDir with mocked exec', () => {
     expect(execMock).toHaveBeenCalledTimes(1)
     expect(execMock).toHaveBeenCalledWith(
       'composer',
-      ['config', 'cache-dir'],
+      ['--global', 'config', 'cache-dir'],
       expect.objectContaining({
         silent: true,
         listeners: {

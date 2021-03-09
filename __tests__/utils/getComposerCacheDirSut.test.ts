@@ -14,7 +14,7 @@ describe('getComposerCacheDir using SUT', () => {
       }
     }
 
-    await exec.exec('composer', ['config', 'cache-dir'], composerExecOptions)
+    await exec.exec('composer', ['--global', 'config', 'cache-dir'], composerExecOptions)
 
     expect(await getComposerCacheDir()).toEqual(localComposerCacheDir.trim())
   })
