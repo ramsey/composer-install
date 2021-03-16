@@ -129,6 +129,9 @@ strategy:
     dependencies:
       - "lowest"
       - "highest"
+    include:
+      - php-version: "8.1"
+        composer-options: "--ignore-platform-reqs"
 
 steps:
   - uses: "actions/checkout@v2"
@@ -138,6 +141,7 @@ steps:
   - uses: "ramsey/composer-install@v1"
     with:
       dependency-versions: "${{ matrix.dependencies }}"
+      composer-options: "${{ matrix.composer-options }}"
 ```
 
 ## Contributing
