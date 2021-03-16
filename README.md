@@ -86,6 +86,30 @@ For example:
     composer-options: "--ignore-platform-reqs --working-dir backend"
 ```
 
+### Alternate `composer.json` Locations
+
+If `composer.json` is not located in your repository root, or if you have
+multiple `composer.json` files located in various parts of your project, you may
+specify the `--working-dir` option as part of `composer-options`. You may use
+this step as many times as needed, if you have multiple `composer.json` files.
+
+For example:
+
+```yaml
+# Install dependencies using composer.json in the root.
+- uses: "ramsey/composer-install@v1"
+
+# Install dependencies using composer.json in src/Component/Config/
+- uses: "ramsey/composer-install@v1"
+  with:
+    composer-options: "--working-dir src/Component/Config"
+
+# Install dependencies using composer.json in src/Component/Validator/
+- uses: "ramsey/composer-install@v1"
+  with:
+    composer-options: "--working-dir src/Component/Validator"
+```
+
 ### Matrix Example
 
 GitHub Workflows allow you to set up a [job matrix](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstrategymatrix),
