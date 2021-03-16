@@ -56,8 +56,8 @@ describe('cache keys', () => {
     await expect(
       getCacheKeys('highest', '--some-other-option --and-another', 'subdirectory')
     ).resolves.toEqual({
-      key: 'fooplatform-php-7.99.99-subdirectory-highest-foobar---some-other-option --and-another',
-      restoreKeys: ['fooplatform-php-7.99.99-subdirectory-highest-foobar-', 'fooplatform-php-7.99.99-subdirectory-highest-']
+      key: 'fooplatform-php-7.99.99-highest-foobar---some-other-option --and-another',
+      restoreKeys: ['fooplatform-php-7.99.99-highest-foobar-', 'fooplatform-php-7.99.99-highest-']
     })
     expect(utils.hashFiles).toHaveBeenCalledWith('subdirectory/composer.json\nsubdirectory/composer.lock');
   })

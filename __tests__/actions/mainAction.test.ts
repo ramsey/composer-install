@@ -64,7 +64,6 @@ describe('main action', () => {
     expect(composerInstallMock).toHaveBeenCalledWith(
       'lowest',
       '--ignore-platform-reqs',
-      ''
     )
   })
 
@@ -74,9 +73,8 @@ describe('main action', () => {
     const composerInstallMock = jest.spyOn(composer, 'install')
     const mockFactory = cache.restoreFactory()
 
-    process.env['INPUT_COMPOSER-OPTIONS'] = '--ignore-platform-reqs'
+    process.env['INPUT_COMPOSER-OPTIONS'] = '--ignore-platform-reqs --working-dir subdirectory'
     process.env['INPUT_DEPENDENCY-VERSIONS'] = 'lowest'
-    process.env['INPUT_WORKING-DIRECTORY'] = 'subdirectory'
 
     await mainAction()
 
@@ -91,8 +89,7 @@ describe('main action', () => {
     expect(composerInstallMock).toHaveBeenCalledTimes(1)
     expect(composerInstallMock).toHaveBeenCalledWith(
       'lowest',
-      '--ignore-platform-reqs',
-      'subdirectory'
+      '--ignore-platform-reqs --working-dir subdirectory',
     )
   })
 

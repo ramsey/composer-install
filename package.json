@@ -32,7 +32,8 @@
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.4",
     "@actions/glob": "^0.1.0",
-    "cache": "git+https://github.com/actions/cache.git#semver:^2.1.2"
+    "cache": "git+https://github.com/actions/cache.git#semver:^2.1.2",
+    "yargs-parser": "^20.2.6"
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",

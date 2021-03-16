@@ -57,9 +57,8 @@ describe('post action', () => {
     const cacheMock = jest.spyOn(cache, 'cache')
     const mockFactory = cache.saveFactory()
 
-    process.env['INPUT_COMPOSER-OPTIONS'] = ''
+    process.env['INPUT_COMPOSER-OPTIONS'] = ' --working-dir subdirectory'
     process.env['INPUT_DEPENDENCY-VERSIONS'] = 'highest'
-    process.env['INPUT_WORKING-DIRECTORY'] = 'subdirectory'
 
     await postAction()
 

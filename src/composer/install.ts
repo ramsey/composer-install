@@ -2,11 +2,9 @@ import {exec} from '@actions/exec'
 
 export async function install(
   dependencyPreference: string,
-  composerOptions = '',
-  workingDirectory = ''
+  composerOptions = ''
 ): Promise<void> {
   const args: string[] = []
-  const options: string[] = composerOptions.split(' ')
 
   switch (dependencyPreference) {
     case 'highest':
@@ -20,15 +18,7 @@ export async function install(
       args.push('install')
   }
 
-  args.push(
-    '--no-interaction',
-    '--no-progress',
-    '--ansi',
-    workingDirectory ? `--working-dir=${workingDirectory}` : ''
-  )
-  args.push(...options)
+  args.push('--no-interaction', '--no-progress', '--ansi')
 
-  const filteredArgs = args.filter(Boolean)
-
-  await exec('composer', filteredArgs)
+  await exec(`composer ${args.join(' ')} ${composerOptions}`.trim())
 }

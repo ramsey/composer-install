@@ -7,16 +7,16 @@ export async function mainAction(): Promise<void> {
   try {
     const composerOptions = getInput('composer-options')
     const inputDependencyVersions = getInput('dependency-versions')
-    const workingDirectory = getInput('working-directory')
 
     const composerCacheDir = await utils.getComposerCacheDir()
+    const composerWorkingDir = utils.getComposerWorkingDir(composerOptions)
     const cleanedDependencyVersions = utils.getDependencyVersions(
       inputDependencyVersions
     )
     const composerCacheKeys = await utils.getCacheKeys(
       cleanedDependencyVersions,
       composerOptions,
-      workingDirectory
+      composerWorkingDir
     )
 
     await cache.cache(
@@ -25,11 +25,7 @@ export async function mainAction(): Promise<void> {
       composerCacheKeys.key,
       composerCacheKeys.restoreKeys
     )
-    await composer.install(
-      cleanedDependencyVersions,
-      composerOptions,
-      workingDirectory
-    )
+    await composer.install(cleanedDependencyVersions, composerOptions)
   } catch (error) {
     setFailed(error.message)
   }

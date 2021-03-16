@@ -19,13 +19,12 @@ export async function getCacheKeys(
   )
   const phpVersion = await getPhpVersion()
   const keyOs = getOperatingSystem()
-  const keyWorkingDirectory = workingDirectory ? `-${workingDirectory}` : ''
 
   const keys = {
-    key: `${keyOs}-php-${phpVersion}${keyWorkingDirectory}-${dependencyVersions}-${composerHash}-${composerOptions}`,
+    key: `${keyOs}-php-${phpVersion}-${dependencyVersions}-${composerHash}-${composerOptions}`,
     restoreKeys: [
-      `${keyOs}-php-${phpVersion}${keyWorkingDirectory}-${dependencyVersions}-${composerHash}-`,
-      `${keyOs}-php-${phpVersion}${keyWorkingDirectory}-${dependencyVersions}-`
+      `${keyOs}-php-${phpVersion}-${dependencyVersions}-${composerHash}-`,
+      `${keyOs}-php-${phpVersion}-${dependencyVersions}-`
     ]
   }
 
