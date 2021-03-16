@@ -36,7 +36,6 @@ jobs:
           - "highest"
           - "locked"
         composer-options:
-          - "--ignore-platform-reqs"
           - "--working-dir subdirectory"
           - ""
     steps:
