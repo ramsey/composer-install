@@ -83,7 +83,7 @@ For example:
 ```yaml
 - uses: "ramsey/composer-install@v1"
   with:
-    composer-options: "--ignore-platform-reqs --working-dir backend"
+    composer-options: "--ignore-platform-reqs --working-dir=backend"
 ```
 
 ### Alternate `composer.json` Locations
@@ -102,12 +102,12 @@ For example:
 # Install dependencies using composer.json in src/Component/Config/
 - uses: "ramsey/composer-install@v1"
   with:
-    composer-options: "--working-dir src/Component/Config"
+    composer-options: "--working-dir=src/Component/Config"
 
 # Install dependencies using composer.json in src/Component/Validator/
 - uses: "ramsey/composer-install@v1"
   with:
-    composer-options: "--working-dir src/Component/Validator"
+    composer-options: "--working-dir=src/Component/Validator"
 ```
 
 ### Matrix Example
