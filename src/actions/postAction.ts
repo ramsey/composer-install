@@ -18,11 +18,10 @@ export async function postAction(): Promise<void> {
       composerWorkingDir
     )
 
-    await cache.cache(
+    await cache.save(
       cache.saveFactory(),
       [composerCacheDir],
-      composerCacheKeys.key,
-      composerCacheKeys.restoreKeys
+      composerCacheKeys.key
     )
   } catch (error) {
     info(`[warning] ${error.message}`)

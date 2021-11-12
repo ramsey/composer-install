@@ -1,11 +1,18 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
+import {restoreCache, saveCache} from '@actions/cache'
 
 /* istanbul ignore next */
-export function restoreFactory(): Function {
-  return async () => await require('cache/dist/restore.js')
+export function restoreFactory(): (
+  paths: string[],
+  primaryKey: string,
+  restoreKeys: string[]
+) => Promise<string | undefined> {
+  return restoreCache
 }
 
 /* istanbul ignore next */
-export function saveFactory(): Function {
-  return async () => await require('cache/dist/save.js')
+export function saveFactory(): (
+  paths: string[],
+  key: string
+) => Promise<number> {
+  return saveCache
 }

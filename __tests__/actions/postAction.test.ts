@@ -3,7 +3,7 @@ import {postAction} from '../../src/actions'
 
 jest.mock('../../src/cache', () => {
   return {
-    cache: jest.fn(),
+    save: jest.fn(),
     saveFactory: jest.fn().mockReturnValue(jest.fn())
   }
 })
@@ -36,7 +36,7 @@ describe('post action', () => {
   })
 
   test('runs', async () => {
-    const cacheMock = jest.spyOn(cache, 'cache')
+    const cacheMock = jest.spyOn(cache, 'save')
     const mockFactory = cache.saveFactory()
 
     process.env['INPUT_COMPOSER-OPTIONS'] = ''
@@ -49,12 +49,11 @@ describe('post action', () => {
       mockFactory,
       ['/path/to/composer/cache'],
       'cache-key-mock',
-      ['cache-key-', 'cache-']
     )
   })
 
   test('runs with a custom working-directory', async () => {
-    const cacheMock = jest.spyOn(cache, 'cache')
+    const cacheMock = jest.spyOn(cache, 'save')
     const mockFactory = cache.saveFactory()
 
     process.env['INPUT_COMPOSER-OPTIONS'] = ' --working-dir subdirectory'
@@ -67,12 +66,11 @@ describe('post action', () => {
       mockFactory,
       ['/path/to/composer/cache'],
       'cache-key-mock',
-      ['cache-key-', 'cache-']
     )
   })
 
   test('sets failure state with error', async () => {
-    const cacheMock = jest.spyOn(cache, 'cache').mockRejectedValue({
+    const cacheMock = jest.spyOn(cache, 'save').mockRejectedValue({
       message: 'a mocked error message'
     })
 

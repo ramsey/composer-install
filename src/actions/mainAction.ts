@@ -19,7 +19,7 @@ export async function mainAction(): Promise<void> {
       composerWorkingDir
     )
 
-    await cache.cache(
+    await cache.restore(
       cache.restoreFactory(),
       [composerCacheDir],
       composerCacheKeys.key,

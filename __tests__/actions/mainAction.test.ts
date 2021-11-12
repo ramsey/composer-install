@@ -4,7 +4,7 @@ import {mainAction} from '../../src/actions'
 
 jest.mock('../../src/cache', () => {
   return {
-    cache: jest.fn(),
+    restore: jest.fn(),
     restoreFactory: jest.fn().mockReturnValue(jest.fn())
   }
 })
@@ -43,7 +43,7 @@ describe('main action', () => {
   })
 
   test('runs', async () => {
-    const cacheMock = jest.spyOn(cache, 'cache')
+    const cacheMock = jest.spyOn(cache, 'restore')
     const composerInstallMock = jest.spyOn(composer, 'install')
     const mockFactory = cache.restoreFactory()
 
@@ -69,7 +69,7 @@ describe('main action', () => {
 
 
   test('runs with a different working directory', async () => {
-    const cacheMock = jest.spyOn(cache, 'cache')
+    const cacheMock = jest.spyOn(cache, 'restore')
     const composerInstallMock = jest.spyOn(composer, 'install')
     const mockFactory = cache.restoreFactory()
 
@@ -94,7 +94,7 @@ describe('main action', () => {
   })
 
   test('sets failure state with error', async () => {
-    const cacheMock = jest.spyOn(cache, 'cache').mockRejectedValue({
+    const cacheMock = jest.spyOn(cache, 'restore').mockRejectedValue({
       message: 'a mocked error message'
     })
     const composerInstallMock = jest.spyOn(composer, 'install')
