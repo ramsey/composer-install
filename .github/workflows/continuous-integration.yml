@@ -16,7 +16,7 @@ jobs:
       - uses: "actions/checkout@v2"
       - uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "8.0"
+          php-version: "latest"
       - run: "npm install"
       - run: "npm run all"
       - uses: "codecov/codecov-action@v1"
@@ -30,7 +30,6 @@ jobs:
         operating-system:
           - "ubuntu-latest"
           - "windows-latest"
-          - "macos-latest"
         dependency-versions:
           - "lowest"
           - "highest"
@@ -42,7 +41,7 @@ jobs:
       - uses: "actions/checkout@v2"
       - uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "8.0"
+          php-version: "latest"
       - uses: ./
         with:
           dependency-versions: "${{ matrix.dependency-versions }}"
