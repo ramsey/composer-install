@@ -8,6 +8,11 @@ jobs:
   test:
     name: "Expect Tests"
     runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        composer-version:
+          - "v1"
+          - "v2"
     steps:
       - name: "Checkout repository"
         uses: "actions/checkout@v2"
@@ -19,7 +24,7 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "latest"
-          tools: "composer:v2"
+          tools: "composer:${{ matrix.composer-version }}"
           coverage: "none"
       - name: "Run expect tests"
         run: "composer test"
@@ -36,6 +41,9 @@ jobs:
           - "lowest"
           - "highest"
           - "locked"
+        composer-version:
+          - "v1"
+          - "v2"
         composer-options:
           - "--ignore-platform-reqs"
           - ""
@@ -55,7 +63,7 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "latest"
-          tools: "composer:v2"
+          tools: "composer:${{ matrix.composer-version }}"
           coverage: "none"
       - name: "Run composer-install action"
         uses: ./
