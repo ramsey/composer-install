@@ -21,7 +21,11 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "captainhook/plugin-composer": true,
+            "ergebnis/composer-normalize": true
+        }
     },
     "extra": {
         "captainhook": {
