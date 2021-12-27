@@ -2,13 +2,11 @@
 /.gitattributes             export-ignore
 /.github/                   export-ignore
 /.gitignore                 export-ignore
-/captainhook.json           export-ignore
 /CHANGELOG.md               export-ignore
 /CODE_OF_CONDUCT.md         export-ignore
 /composer.json              export-ignore
 /composer.lock              export-ignore
 /CONTRIBUTING.md            export-ignore
-/conventional-commits.json  export-ignore
 /docs/                      export-ignore
 /SECURITY.md                export-ignore
 /tests/                     export-ignore

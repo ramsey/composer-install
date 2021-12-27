@@ -88,24 +88,9 @@ When you do begin working on your feature, here are some guidelines to consider:
 
 ## Developing
 
-To develop this project, you will need [PHP](https://www.php.net) 7.4 or greater,
+To develop this project, you will need [PHP](https://www.php.net),
 [Composer](https://getcomposer.org), [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)),
 and [Expect](https://en.wikipedia.org/wiki/Expect).
-
-After cloning this repository locally, execute the following commands:
-
-``` bash
-cd /path/to/composer-install
-composer install
-```
-
-Now, you are ready to develop!
-
-### Tooling
-
-This project uses [CaptainHook](https://github.com/CaptainHookPhp/captainhook)
-to install and run Git hooks. Please be sure to run `composer install` prior to
-making any changes, as these hooks will help with development.
 
 ### Running Tests
 
@@ -136,9 +121,6 @@ language, so it may be helpful to learn a little about Tcl as you write tests.
 
 When done, `cd ../..` and run `composer test`.
 Your new test should run along with the other tests.
-
-CaptainHook will automatically run all tests before pushing to the remote
-repository.
 
 [github]: https://github.com/ramsey/composer-install
 [issues]: https://github.com/ramsey/composer-install/issues
