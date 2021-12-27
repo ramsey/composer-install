@@ -12,7 +12,6 @@ function validate_composer {
     "${php_path}" "${composer_path}" \
         validate \
         --no-check-publish \
-        --no-check-version \
         --working-dir "${working_directory}" \
         > /dev/null 2>&1
 }
