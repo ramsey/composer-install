@@ -46,16 +46,16 @@ if ! validate_composer; then
 fi
 
 if [ ! -f "${composer_lock}" ]; then
-    echo "::notice title=composer.lock Not Found::Unable to find composer.lock at '${composer_lock}'"
+    echo "::debug::Unable to find composer.lock at '${composer_lock}'"
     composer_lock=""
 fi
 
 cache_dir="$($composer_path config cache-dir)"
 
-echo "::notice title=Composer Path::Composer path is '${composer_path}'"
-echo "::notice title=Composer Cache::Composer cache directory found at '${cache_dir}'"
-echo "::notice title=composer.json::File composer.json found at '${composer_json}'"
-echo "::notice title=composer.lock::File composer.lock path computed as '${composer_lock}'"
+echo "::debug::Composer path is '${composer_path}'"
+echo "::debug::Composer cache directory found at '${cache_dir}'"
+echo "::debug::File composer.json found at '${composer_json}'"
+echo "::debug::File composer.lock path computed as '${composer_lock}'"
 echo "::set-output name=command::${composer_path}"
 echo "::set-output name=cache-dir::${cache_dir}"
 echo "::set-output name=json::${composer_json}"

@@ -8,8 +8,8 @@ set timeout 3
 spawn ../../bin/cache_key.sh "Linux" "8.1.1" "locked" "" "long-files-hash" "my-custom-key"
 match_max 100000
 
-expect -exact "::notice title=Primary Cache Key::Cache primary key is 'my-custom-key'"
-expect -exact "::notice title=Restore Cache Keys::Cache restore keys are ''"
+expect -exact "::debug::Cache primary key is 'my-custom-key'"
+expect -exact "::debug::Cache restore keys are ''"
 expect -exact "::set-output name=key::my-custom-key"
 expect eof
 

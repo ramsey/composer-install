@@ -50,8 +50,8 @@ uniq_restore_key=($(tr ' ' '\n' <<<"${restore_key[@]}" | awk '!u[$0]++' | tr '\n
 cache_key="$(join_by - ${key[@]/#/})"
 cache_restore_key="$(join_by $'\n' ${uniq_restore_key[@]/#/})"
 
-echo "::notice title=Primary Cache Key::Cache primary key is '${cache_key}'"
-echo "::notice title=Restore Cache Keys::Cache restore keys are '$(join_by ', ' ${uniq_restore_key[@]/#/})'"
+echo "::debug::Cache primary key is '${cache_key}'"
+echo "::debug::Cache restore keys are '$(join_by ', ' ${uniq_restore_key[@]/#/})'"
 
 echo "::set-output name=key::${cache_key}"
 

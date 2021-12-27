@@ -4,7 +4,7 @@ set timeout 3
 spawn ../../bin/composer_install.sh "highest" "--ignore-platform-reqs --optimize-autoloader" "../fixtures/with-lock-file"
 match_max 100000
 
-expect -exact "::notice title=Composer::Using the following Composer command: 'composer update --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader --working-dir ../fixtures/with-lock-file'"
+expect -exact "::debug::Using the following Composer command: 'composer update --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader --working-dir ../fixtures/with-lock-file'"
 expect "Updating dependencies"
 expect "Installing dependencies from lock file (including require-dev)"
 expect "Generating optimized autoload files"

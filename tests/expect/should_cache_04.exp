@@ -4,6 +4,6 @@ set timeout 3
 spawn ../../bin/should_cache.sh "true"
 match_max 100000
 
-expect -exact "::notice title=Should We Cache?::We will NOT cache the dependencies because ignore-cache is set to 'true'"
+expect -exact "::debug::We will NOT cache the dependencies because ignore-cache is set to 'true'"
 expect -exact "::set-output name=do-cache::0"
 expect eof

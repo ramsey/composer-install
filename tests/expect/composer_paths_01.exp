@@ -4,10 +4,10 @@ set timeout 3
 spawn ../../bin/composer_paths.sh
 match_max 100000
 
-expect "::notice title=Composer Path::Composer path is '*'\r
-::notice title=Composer Cache::Composer cache directory found at '*'\r
-::notice title=composer.json::File composer.json found at './composer.json'\r
-::notice title=composer.lock::File composer.lock path computed as './composer.lock'\r
+expect "::debug::Composer path is '*'\r
+::debug::Composer cache directory found at '*'\r
+::debug::File composer.json found at './composer.json'\r
+::debug::File composer.lock path computed as './composer.lock'\r
 ::set-output name=command::*\r
 ::set-output name=cache-dir::*\r
 ::set-output name=json::./composer.json\r

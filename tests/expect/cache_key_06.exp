@@ -8,8 +8,8 @@ set timeout 3
 spawn ../../bin/cache_key.sh "Linux" "8.1.1" "" "" "long-files-hash" "" "path/to/working/dir"
 match_max 100000
 
-expect -exact "::notice title=Primary Cache Key::Cache primary key is 'Linux-php-8.1.1-composer-locked-path/to/working/dir-long-files-hash'"
-expect -exact "::notice title=Restore Cache Keys::Cache restore keys are 'Linux-php-8.1.1-composer-locked-path/to/working/dir-'"
+expect -exact "::debug::Cache primary key is 'Linux-php-8.1.1-composer-locked-path/to/working/dir-long-files-hash'"
+expect -exact "::debug::Cache restore keys are 'Linux-php-8.1.1-composer-locked-path/to/working/dir-'"
 expect -exact "::set-output name=key::Linux-php-8.1.1-composer-locked-path/to/working/dir-long-files-hash"
 expect eof
 

@@ -8,8 +8,8 @@ set timeout 3
 spawn ../../bin/cache_key.sh "Windows" "8.0.2" "foobar" "" "some-other-hash"
 match_max 100000
 
-expect -exact "::notice title=Primary Cache Key::Cache primary key is 'Windows-php-8.0.2-composer-locked-some-other-hash'"
-expect -exact "::notice title=Restore Cache Keys::Cache restore keys are 'Windows-php-8.0.2-composer-locked-'"
+expect -exact "::debug::Cache primary key is 'Windows-php-8.0.2-composer-locked-some-other-hash'"
+expect -exact "::debug::Cache restore keys are 'Windows-php-8.0.2-composer-locked-'"
 expect -exact "::set-output name=key::Windows-php-8.0.2-composer-locked-some-other-hash"
 expect eof
 

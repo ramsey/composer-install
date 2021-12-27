@@ -14,7 +14,7 @@ fi
 
 php_version=$($php_path -r 'echo phpversion();')
 
-echo "::notice title=PHP Path::PHP path is '${php_path}'"
-echo "::notice title=PHP Version::PHP version is '${php_version}'"
+echo "::debug::PHP path is '${php_path}'"
+echo "::debug::PHP version is '${php_version}'"
 echo "::set-output name=path::${php_path}"
 echo "::set-output name=version::${php_version}"

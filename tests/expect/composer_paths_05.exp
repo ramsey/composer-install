@@ -4,11 +4,11 @@ set timeout 3
 spawn ../../bin/composer_paths.sh "" "../fixtures/no-lock-file"
 match_max 100000
 
-expect "::notice title=composer.lock Not Found::Unable to find composer.lock at '../fixtures/no-lock-file/composer.lock'\r
-::notice title=Composer Path::Composer path is '*'\r
-::notice title=Composer Cache::Composer cache directory found at '*'\r
-::notice title=composer.json::File composer.json found at '../fixtures/no-lock-file/composer.json'\r
-::notice title=composer.lock::File composer.lock path computed as ''\r
+expect "::debug::Unable to find composer.lock at '../fixtures/no-lock-file/composer.lock'\r
+::debug::Composer path is '*'\r
+::debug::Composer cache directory found at '*'\r
+::debug::File composer.json found at '../fixtures/no-lock-file/composer.json'\r
+::debug::File composer.lock path computed as ''\r
 ::set-output name=command::*\r
 ::set-output name=cache-dir::*\r
 ::set-output name=json::../fixtures/no-lock-file/composer.json\r

@@ -4,7 +4,7 @@ set timeout 3
 spawn ../../bin/composer_install.sh "lowest" "" "../fixtures/with-lock-file"
 match_max 100000
 
-expect -exact "::notice title=Composer::Using the following Composer command: 'composer update --no-interaction --no-progress --ansi --prefer-lowest --prefer-stable  --working-dir ../fixtures/with-lock-file'"
+expect -exact "::debug::Using the following Composer command: 'composer update --no-interaction --no-progress --ansi --prefer-lowest --prefer-stable  --working-dir ../fixtures/with-lock-file'"
 expect "Updating dependencies"
 expect "Installing dependencies from lock file (including require-dev)"
 expect "Generating autoload files"

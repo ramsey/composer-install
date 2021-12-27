@@ -30,5 +30,5 @@ if [ -n "${working_directory}" ]; then
     composer_options+=("${working_directory}")
 fi
 
-echo "::notice title=Composer::Using the following Composer command: 'composer ${composer_command} ${composer_options[*]}'"
+echo "::debug::Using the following Composer command: 'composer ${composer_command} ${composer_options[*]}'"
 "${php_path}" "${composer_path}" "${composer_command}" ${composer_options[*]}

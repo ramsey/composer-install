@@ -8,8 +8,8 @@ set timeout 3
 spawn ../../bin/cache_key.sh
 match_max 100000
 
-expect -exact "::notice title=Primary Cache Key::Cache primary key is 'php-composer-locked'"
-expect -exact "::notice title=Restore Cache Keys::Cache restore keys are 'php-composer-locked-'"
+expect -exact "::debug::Cache primary key is 'php-composer-locked'"
+expect -exact "::debug::Cache restore keys are 'php-composer-locked-'"
 expect -exact "::set-output name=key::php-composer-locked"
 expect eof
 

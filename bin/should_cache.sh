@@ -14,5 +14,5 @@ if [ $should_cache -eq 0 ]; then
     will_cache="will NOT cache"
 fi
 
-echo "::notice title=Should We Cache?::We ${will_cache} the dependencies because ignore-cache is set to '${ignore_cache}'"
+echo "::debug::We ${will_cache} the dependencies because ignore-cache is set to '${ignore_cache}'"
 echo "::set-output name=do-cache::${should_cache}"

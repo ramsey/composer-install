@@ -4,8 +4,8 @@ set timeout 3
 spawn ../../bin/php_version.sh
 match_max 100000
 
-expect "::notice title=PHP Path::PHP path is '*'\r
-::notice title=PHP Version::PHP version is '*.*.*'\r
+expect "::debug::PHP path is '*'\r
+::debug::PHP version is '*.*.*'\r
 ::set-output name=path::*\r
 ::set-output name=version::*.*.*\r
 "

@@ -4,7 +4,7 @@ set timeout 3
 spawn ../../bin/composer_install.sh "" "--ignore-platform-reqs --optimize-autoloader"
 match_max 100000
 
-expect -exact "::notice title=Composer::Using the following Composer command: 'composer install --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader'"
+expect -exact "::debug::Using the following Composer command: 'composer install --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader'"
 expect "Installing dependencies from lock file (including require-dev)"
 expect "Generating optimized autoload files"
 expect eof
