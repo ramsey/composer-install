@@ -2,12 +2,16 @@
     "name": "ramsey/composer-install-test-expect",
     "description": "This exists within the test/expect directory to help expect tests.",
     "license": "MIT",
+    "type": "project",
     "authors": [
         {
             "name": "Ben Ramsey",
             "email": "ben@benramsey.com"
         }
     ],
+    "require": {
+        "ehime/hello-world": "1.0.5"
+    },
     "config": {
         "allow-plugins": false
     }
