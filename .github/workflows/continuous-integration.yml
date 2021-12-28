@@ -81,7 +81,7 @@ jobs:
       - name: "Publish coverage report to Codecov"
         uses: "codecov/codecov-action@v2"
         with:
-          directory: "./coverage/"
+          files: "./bin/coverage/codecov-result.json"
 
   run:
     needs: test
