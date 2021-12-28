@@ -65,7 +65,7 @@ jobs:
       - name: "Checkout repository"
         uses: "actions/checkout@v2"
       - name: "Run shellcheck"
-        run: "find bin/ tests/ -type f -name '*.sh' -exec shellcheck '{}' ';'"
+        run: "shellcheck bin/*.sh tests/*.sh"
 
   run:
     name: "Run action"
