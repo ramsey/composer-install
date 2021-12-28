@@ -29,15 +29,7 @@ esac
 if [ -n "${custom_cache_key}" ]; then
     key+=("${custom_cache_key}")
 else
-    key+=(
-        "${runner_os}"
-        "php"
-        "${php_version}"
-        "composer"
-        "${composer_options}"
-        "${dependency_versions}"
-        "${working_directory}"
-    )
+    key+=("${runner_os}" "php" "${php_version}" "composer" "${composer_options}" "${dependency_versions}" "${working_directory}")
 
     restore_key=("$(join_by - ${key[@]/#/})-")
 

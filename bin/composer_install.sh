@@ -7,11 +7,7 @@ php_path="${4:-$(which php)}"
 composer_path="${5:-$(which composer)}"
 
 composer_command="update"
-composer_options=(
-    "--no-interaction"
-    "--no-progress"
-    "--ansi"
-)
+composer_options=("--no-interaction" "--no-progress" "--ansi")
 
 case "${dependency_versions}" in
     highest) ;;
