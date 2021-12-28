@@ -9,7 +9,7 @@ function join_by {
 }
 
 function make_key {
-    tr --squeeze-repeats '\t ' '-' <<<"${@[*]}"
+    tr --squeeze-repeats '\t ' '-' <<<"${*}"
 }
 
 runner_os="${1}"
