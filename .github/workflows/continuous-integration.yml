@@ -37,6 +37,7 @@ jobs:
 
   code-coverage:
     needs: test
+    if: github.repository == 'ramsey/composer-install'
     name: "Code coverage"
     runs-on: "ubuntu-latest"
     steps:
