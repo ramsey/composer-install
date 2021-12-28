@@ -19,9 +19,8 @@ case "${dependency_versions}" in
     *) composer_command="install" ;;
 esac
 
-while read -r -d " " option; do
-    composer_options+=("${option}")
-done <<<"${additional_composer_options}"
+read -r -a additional_options <<<"${additional_composer_options}"
+composer_options+=("${additional_options[@]}")
 
 if [ -n "${working_directory}" ]; then
     composer_options+=("--working-dir" "${working_directory}")

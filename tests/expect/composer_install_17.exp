@@ -7,7 +7,7 @@ set timeout 3
 spawn ../../bin/composer_install.sh "foobar"
 match_max 100000
 
-expect -exact "::debug::Using the following Composer command: 'composer install --no-interaction --no-progress --ansi '"
+expect -exact "::debug::Using the following Composer command: 'composer install --no-interaction --no-progress --ansi'"
 expect "Installing dependencies"
 expect "Generating autoload files"
 expect eof
