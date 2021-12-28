@@ -11,7 +11,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  test:
+    name: "Expect tests"
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        composer-version:
+          - "v1"
+          - "v2"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v2"
+      - name: "Install expect"
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install expect
+      - name: "Set up PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "latest"
+          tools: "composer:${{ matrix.composer-version }}"
+          coverage: "none"
+      - name: "Run expect tests"
+        run: "composer test"
+
   code-coverage:
+    needs: test
     name: "Code coverage"
     runs-on: "ubuntu-latest"
     steps:
@@ -39,30 +64,6 @@ jobs:
         run: "bashcov --root ./bin -- ./tests/bash-test.sh tests/tests.sh"
       - name: "Publish coverage report to Codecov"
         uses: "codecov/codecov-action@v1"
-
-  test:
-    name: "Expect tests"
-    runs-on: "ubuntu-latest"
-    strategy:
-      matrix:
-        composer-version:
-          - "v1"
-          - "v2"
-    steps:
-      - name: "Checkout repository"
-        uses: "actions/checkout@v2"
-      - name: "Install expect"
-        run: |
-          sudo apt-get update
-          sudo apt-get -y install expect
-      - name: "Set up PHP"
-        uses: "shivammathur/setup-php@v2"
-        with:
-          php-version: "latest"
-          tools: "composer:${{ matrix.composer-version }}"
-          coverage: "none"
-      - name: "Run expect tests"
-        run: "composer test"
 
   run:
     name: "Run action"
