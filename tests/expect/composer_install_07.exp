@@ -1,11 +1,13 @@
 #!/usr/bin/env -S expect -f
 
+# Clean up
+file delete -force vendor
+
 set timeout 3
 spawn ../../bin/composer_install.sh "highest" "--ignore-platform-reqs --optimize-autoloader"
 match_max 100000
 
 expect -exact "::debug::Using the following Composer command: 'composer update --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader'"
 expect "Updating dependencies"
-expect "Installing dependencies from lock file (including require-dev)"
 expect "Generating optimized autoload files"
 expect eof
