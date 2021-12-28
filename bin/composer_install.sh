@@ -31,4 +31,4 @@ if [ -n "${working_directory}" ]; then
 fi
 
 echo "::debug::Using the following Composer command: 'composer ${composer_command} ${composer_options[*]}'"
-"${php_path}" "${composer_path}" "${composer_command}" ${composer_options[*]}
+"${php_path}" "${composer_path}" "${composer_command}" "${composer_options[@]}"

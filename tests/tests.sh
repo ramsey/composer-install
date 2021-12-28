@@ -11,7 +11,7 @@ test_output="$(mktemp)"
 # a nicer display of test names printed to the screen.
 args=""
 for f in "${__DIR__}/expect/"*.exp; do
-    args+="$(basename -s .exp $f)"
+    args+="$(basename -s .exp "$f")"
     args+=$'\n'
 done
 

@@ -141,6 +141,7 @@ time {
     fi
 
     PATH=$original_path
+    # shellcheck disable=SC2086
     unset -f $test_names
     unset -v SOURCE
 

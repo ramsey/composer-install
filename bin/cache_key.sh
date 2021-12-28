@@ -39,7 +39,7 @@ else
         "${working_directory}"
     )
 
-    restore_key=("$(join_by - ${key[@]/#/})-" "${restore_key[@]}")
+    restore_key=("$(join_by - "${key[@]/#/}")-" "${restore_key[@]}")
 
     key+=("${files_hash}")
 fi
@@ -47,16 +47,18 @@ fi
 # Remove duplicates.
 uniq_restore_key=($(tr ' ' '\n' <<<"${restore_key[@]}" | awk '!u[$0]++' | tr '\n' ' '))
 
-cache_key="$(join_by - ${key[@]/#/})"
-cache_restore_key="$(join_by $'\n' ${uniq_restore_key[@]/#/})"
+cache_key="$(join_by - "${key[@]/#/}")"
+cache_restore_key="$(join_by $'\n' "${uniq_restore_key[@]/#/}")"
 
 echo "::debug::Cache primary key is '${cache_key}'"
-echo "::debug::Cache restore keys are '$(join_by ', ' ${uniq_restore_key[@]/#/})'"
+echo "::debug::Cache restore keys are '$(join_by ', ' "${uniq_restore_key[@]/#/}")'"
 
 echo "::set-output name=key::${cache_key}"
 
 # Use an environment variable to capture the multiline restore key.
 # See: https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions#multiline-strings
-echo "CACHE_RESTORE_KEY<<EOF" >> "$GITHUB_ENV"
-echo "${cache_restore_key}" >> "$GITHUB_ENV"
-echo "EOF" >> "$GITHUB_ENV"
+{
+    echo "CACHE_RESTORE_KEY<<EOF"
+    echo "${cache_restore_key}"
+    echo "EOF"
+} >> "${GITHUB_ENV}"
