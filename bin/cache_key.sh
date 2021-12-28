@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+function join_by {
+    local delimiter="${1-}"
+    local first="${2-}"
+    if shift 2; then
+        printf "%s" "${first}" "${@/#/$delimiter}"
+    fi
+}
+
+function make_key {
+    tr --squeeze-repeats '\t ' '-' <<<"${@[*]}"
+}
+
 runner_os="${1}"
 php_version="${2}"
 dependency_versions="${3:-locked}"
@@ -10,13 +22,6 @@ working_directory="${7}"
 
 key=()
 restore_key=()
-
-function join_by {
-    local d=${1-} f=${2-}
-    if shift 2; then
-        printf %s "$f" "${@/#/$d}"
-    fi
-}
 
 # Ensure "highest", "lowest", and "locked" are the only values
 # allowed for dependency_versions.
@@ -39,7 +44,7 @@ else
         "${working_directory}"
     )
 
-    restore_key=("$(join_by - "${key[@]/#/}")-" "${restore_key[@]}")
+    restore_key=("$(make_key "${key[@]}")")
 
     key+=("${files_hash}")
 fi
@@ -48,11 +53,10 @@ fi
 # shellcheck disable=SC2207
 uniq_restore_key=($(tr ' ' '\n' <<<"${restore_key[@]}" | awk '!u[$0]++' | tr '\n' ' '))
 
-cache_key="$(join_by - "${key[@]/#/}")"
-cache_restore_key="$(join_by $'\n' "${uniq_restore_key[@]/#/}")"
+cache_key="$(make_key "${key[@]/#/}")"
 
 echo "::debug::Cache primary key is '${cache_key}'"
-echo "::debug::Cache restore keys are '$(join_by ', ' "${uniq_restore_key[@]/#/}")'"
+echo "::debug::Cache restore keys are '$(join_by ", " "${uniq_restore_key[@]/#/}")'"
 
 echo "::set-output name=key::${cache_key}"
 
@@ -60,6 +64,6 @@ echo "::set-output name=key::${cache_key}"
 # See: https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions#multiline-strings
 {
     echo "CACHE_RESTORE_KEY<<EOF"
-    echo "${cache_restore_key}"
+    printf '%s\n' "${uniq_restore_key[@]}"
     echo "EOF"
 } >> "${GITHUB_ENV}"
