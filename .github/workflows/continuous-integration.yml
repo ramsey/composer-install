@@ -80,6 +80,8 @@ jobs:
         run: "bashcov --root ./bin -- ./tests/bash-test.sh tests/tests.sh"
       - name: "Publish coverage report to Codecov"
         uses: "codecov/codecov-action@v2"
+        with:
+          directory: "./coverage/"
 
   run:
     needs: test
