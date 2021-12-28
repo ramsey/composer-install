@@ -11,6 +11,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  composer:
+    name: "Check Composer"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v2"
+      - name: "Set up PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: 7.4
+          tools: composer-normalize
+          coverage: none
+      - name: "Run Composer normalize"
+        run: "composer-normalize --dry-run"
+
   test:
     name: "Expect tests"
     runs-on: "ubuntu-latest"
