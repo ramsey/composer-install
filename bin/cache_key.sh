@@ -45,6 +45,7 @@ else
 fi
 
 # Remove duplicates.
+# shellcheck disable=SC2207
 uniq_restore_key=($(tr ' ' '\n' <<<"${restore_key[@]}" | awk '!u[$0]++' | tr '\n' ' '))
 
 cache_key="$(join_by - "${key[@]/#/}")"
