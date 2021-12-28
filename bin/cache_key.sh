@@ -39,7 +39,7 @@ else
         "${working_directory}"
     )
 
-    restore_key=("$(join_by - ${key[@]/#/})-" "${restore_key[@]}")
+    restore_key=("$(join_by - ${key[@]/#/})-")
 
     key+=("${files_hash}")
 fi
