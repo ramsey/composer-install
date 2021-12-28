@@ -51,7 +51,7 @@ else
         "${working_directory}"
     )
 
-    restore_key=("$(make_key "${key[@]}")")
+    restore_key=("$(make_key "${key[@]}")-")
 
     key+=("${files_hash}")
 fi

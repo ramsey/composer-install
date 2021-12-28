@@ -2,37 +2,29 @@
 
 name: "build"
 
-on: ["pull_request", "push"]
+on: ["pull_request", "push", "workflow_dispatch"]
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  code-coverage:
-    name: "Code coverage"
+  composer:
+    name: "Check Composer"
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout repository"
         uses: "actions/checkout@v2"
-      - name: "Install expect"
-        run: |
-          sudo apt-get update
-          sudo apt-get -y install expect
-      - name: "Set up Ruby"
-        uses: "actions/setup-ruby@v1"
-        with:
-          ruby-version: "2.7"
-      - name: "Install Ruby dependencies"
-        run: |
-          gem install bashcov
-          gem install codecov
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "latest"
-          tools: "composer:v2"
-          coverage: "none"
-      - name: "Run expect tests"
-        run: "bashcov --root ./bin -- ./tests/bash-test.sh tests/tests.sh"
-      - name: "Publish coverage report to Codecov"
-        uses: "codecov/codecov-action@v1"
+          php-version: 7.4
+          tools: composer-normalize
+          coverage: none
+      - name: "Run Composer normalize"
+        run: "composer-normalize --dry-run"
 
   test:
     name: "Expect tests"
@@ -58,6 +50,37 @@ jobs:
       - name: "Run expect tests"
         run: "composer test"
 
+  code-coverage:
+    needs: test
+    if: github.repository == 'ramsey/composer-install'
+    name: "Code coverage"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v2"
+      - name: "Install expect"
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install expect
+      - name: "Set up Ruby"
+        uses: "ruby/setup-ruby@v1"
+        with:
+          ruby-version: "2.7"
+      - name: "Install Ruby dependencies"
+        run: |
+          gem install bashcov
+          gem install codecov
+      - name: "Set up PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "latest"
+          tools: "composer:v2"
+          coverage: "none"
+      - name: "Run expect tests"
+        run: "bashcov --root ./bin -- ./tests/bash-test.sh tests/tests.sh"
+      - name: "Publish coverage report to Codecov"
+        uses: "codecov/codecov-action@v2"
+
   static-analysis:
     name: "Static analysis"
     runs-on: "ubuntu-latest"
@@ -68,6 +91,7 @@ jobs:
         run: "shellcheck --exclude=SC2230 bin/*.sh tests/*.sh"
 
   run:
+    needs: test
     name: "Run action"
     runs-on: "${{ matrix.operating-system }}"
     strategy:
