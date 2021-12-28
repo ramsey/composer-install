@@ -16,7 +16,7 @@ function make_key {
             non_empties+=("${element}")
         fi
     done
-    tr --squeeze-repeats "[:blank:]" "-" <<<"${non_empties[*]}"
+    tr "[:blank:]" "-" <<<"${non_empties[*]}"
 }
 
 runner_os="${1}"
