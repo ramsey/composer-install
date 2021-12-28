@@ -9,7 +9,14 @@ function join_by {
 }
 
 function make_key {
-    tr --squeeze-repeats '\t ' '-' <<<"${*}"
+    local -a non_empties
+    local element
+    for element; do
+        if [ -n "${element}" ]; then
+            non_empties+=("${element}")
+        fi
+    done
+    tr --squeeze-repeats "[:blank:]" "-" <<<"${non_empties[*]}"
 }
 
 runner_os="${1}"
@@ -53,10 +60,10 @@ fi
 # shellcheck disable=SC2207
 uniq_restore_key=($(tr ' ' '\n' <<<"${restore_key[@]}" | awk '!u[$0]++' | tr '\n' ' '))
 
-cache_key="$(make_key "${key[@]/#/}")"
+cache_key="$(make_key "${key[@]}")"
 
 echo "::debug::Cache primary key is '${cache_key}'"
-echo "::debug::Cache restore keys are '$(join_by ", " "${uniq_restore_key[@]/#/}")'"
+echo "::debug::Cache restore keys are '$(join_by ", " "${uniq_restore_key[@]}")'"
 
 echo "::set-output name=key::${cache_key}"
 
