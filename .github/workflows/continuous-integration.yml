@@ -217,3 +217,38 @@ jobs:
           working-directory: "${{ matrix.working-directory }}"
           dependency-versions: "${{ matrix.dependency-versions }}"
           custom-cache-key: 'my-super-custom-cache-key'
+
+  run-no-cleanup:
+    needs: test
+    name: "Run unclean"
+    runs-on: "${{ matrix.operating-system }}"
+    strategy:
+      matrix:
+        operating-system:
+          - "ubuntu-latest"
+          - "windows-latest"
+        composer-version:
+          - "v1"
+          - "v2"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v2"
+      - name: "Set up PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "latest"
+          tools: "composer:${{ matrix.composer-version }}"
+          coverage: "none"
+
+      - name: "Test: plain install"
+        uses: ./
+
+      - name: "Test: switch to lowest dependencies"
+        uses: ./
+        with:
+          dependency-versions: 'lowest'
+
+      - name: "Test: switch to highest dependencies"
+        uses: ./
+        with:
+          dependency-versions: 'highest'
