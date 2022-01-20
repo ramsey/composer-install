@@ -110,6 +110,8 @@ jobs:
           - "v2"
         working-directory:
           - "tests/fixtures/with-lock-file"
+          - "tests/fixtures/no-lock-file"
+          - "tests/fixtures/out-of-sync-lock"
           - ""
     steps:
       - name: "Checkout repository"
