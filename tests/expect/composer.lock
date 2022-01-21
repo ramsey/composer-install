@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e037e746895f35129420cbf41acc8908",
+    "content-hash": "6da8813786f5c3143608266fa0cf0a17",
     "packages": [
         {
             "name": "ehime/hello-world",

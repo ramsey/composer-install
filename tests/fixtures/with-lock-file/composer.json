@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "ehime/hello-world": "1.0.5"
+        "ehime/hello-world": "^1.0.0"
     },
     "config": {
         "allow-plugins": false

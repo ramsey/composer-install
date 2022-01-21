@@ -242,13 +242,17 @@ jobs:
 
       - name: "Test: plain install"
         uses: ./
+        with:
+          working-directory: 'tests/fixtures/with-lock-file'
 
       - name: "Test: switch to lowest dependencies"
         uses: ./
         with:
+          working-directory: 'tests/fixtures/with-lock-file'
           dependency-versions: 'lowest'
 
       - name: "Test: switch to highest dependencies"
         uses: ./
         with:
+          working-directory: 'tests/fixtures/with-lock-file'
           dependency-versions: 'highest'
