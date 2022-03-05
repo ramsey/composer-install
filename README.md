@@ -172,7 +172,7 @@ strategy:
         composer-options: "--ignore-platform-reqs"
 
 steps:
-  - uses: "actions/checkout@v2"
+  - uses: "actions/checkout@v3"
   - uses: "shivammathur/setup-php@v2"
     with:
       php-version: "${{ matrix.php }}"
