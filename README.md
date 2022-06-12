@@ -172,10 +172,10 @@ strategy:
         composer-options: "--ignore-platform-reqs"
 
 steps:
-  - uses: "actions/checkout@v3"
   - uses: "shivammathur/setup-php@v2"
     with:
       php-version: "${{ matrix.php }}"
+  - uses: "actions/checkout@v3"
   - uses: "ramsey/composer-install@v2"
     with:
       dependency-versions: "${{ matrix.dependencies }}"
