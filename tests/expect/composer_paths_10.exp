@@ -1,0 +1,18 @@
+#!/usr/bin/env -S expect -f
+
+set timeout 3
+cd .. # So we don't find a composer.lock in current dir
+spawn ../bin/composer_paths.sh "" "fixtures/with-lock-file"
+match_max 100000
+
+expect "::debug::Composer path is '*'\r
+::debug::Composer version *\r
+::debug::Composer cache directory found at '*composer*'\r
+::debug::File composer.json found at 'fixtures/with-lock-file/composer.json'\r
+::debug::File composer.lock path computed as 'fixtures/with-lock-file/composer.lock'\r
+::set-output name=command::*\r
+::set-output name=cache-dir::*\r
+::set-output name=json::fixtures/with-lock-file/composer.json\r
+::set-output name=lock::fixtures/with-lock-file/composer.lock\r
+"
+expect eof

@@ -46,7 +46,7 @@ if [ ! -f "${composer_lock}" ]; then
 fi
 
 composer_version="$($composer_path --version)"
-cache_dir="$($composer_path config cache-dir)"
+cache_dir="$($composer_path --working-dir "${working_directory}" config cache-dir)"
 
 echo "::debug::Composer path is '${composer_path}'"
 echo "::debug::${composer_version}"
