@@ -1,7 +1,8 @@
 #!/usr/bin/env -S expect -f
 
 set timeout 3
-cd .. # So we don't find a composer.lock in current dir
+# So we don't find a composer.lock in current dir
+cd ..
 spawn ../bin/composer_paths.sh "" "fixtures/with-lock-file"
 match_max 100000
 
