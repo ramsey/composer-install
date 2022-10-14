@@ -15,4 +15,4 @@ if [ $should_cache -eq 0 ]; then
 fi
 
 echo "::debug::We ${will_cache} the dependencies because ignore-cache is set to '${ignore_cache}'"
-echo "::set-output name=do-cache::${should_cache}"
+echo "do-cache=${should_cache}" >> "${GITHUB_OUTPUT}"

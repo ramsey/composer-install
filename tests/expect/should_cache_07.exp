@@ -1,9 +1,26 @@
 #!/usr/bin/env -S expect -f
 
+set gitHubOutputFile should_cache_07.txt
+set ::env(GITHUB_OUTPUT) $gitHubOutputFile
+
 set timeout 3
 spawn ../../bin/should_cache.sh "0"
 match_max 100000
 
 expect -exact "::debug::We will cache the dependencies because ignore-cache is set to '0'"
-expect -exact "::set-output name=do-cache::1"
 expect eof
+
+set fp [open $gitHubOutputFile r]
+set fileData [read $fp]
+close $fp
+
+set expectedValue "do-cache=1\n"
+
+if { $expectedValue != $fileData } {
+    puts "\nExpected output variable does not match. Received:\n"
+    puts $fileData
+    exit 1
+}
+
+# Clean up
+file delete $gitHubOutputFile

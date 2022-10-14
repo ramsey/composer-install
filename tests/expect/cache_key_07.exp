@@ -2,6 +2,8 @@
 
 set gitHubEnvFile cache_key_07.txt
 set ::env(GITHUB_ENV) $gitHubEnvFile
+set gitHubOutputFile cache_key_output_07.txt
+set ::env(GITHUB_OUTPUT) $gitHubOutputFile
 
 set timeout 3
 spawn ../../bin/cache_key.sh "Windows" "8.0.2" "foobar" "" "some-other-hash"
@@ -9,7 +11,6 @@ match_max 100000
 
 expect -exact "::debug::Cache primary key is 'Windows-php-8.0.2-composer-locked-some-other-hash'"
 expect -exact "::debug::Cache restore keys are 'Windows-php-8.0.2-composer-locked-'"
-expect -exact "::set-output name=key::Windows-php-8.0.2-composer-locked-some-other-hash"
 expect eof
 
 set fp [open $gitHubEnvFile r]
@@ -27,5 +28,18 @@ if { $expectedValue != $fileData } {
     exit 1
 }
 
+set fp [open $gitHubOutputFile r]
+set fileData [read $fp]
+close $fp
+
+set expectedValue "key=Windows-php-8.0.2-composer-locked-some-other-hash\n"
+
+if { $expectedValue != $fileData } {
+    puts "\nExpected output variable does not match. Received:\n"
+    puts $fileData
+    exit 1
+}
+
 # Clean up
 file delete $gitHubEnvFile
+file delete $gitHubOutputFile

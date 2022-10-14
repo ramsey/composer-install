@@ -2,6 +2,8 @@
 
 set gitHubEnvFile cache_key_01.txt
 set ::env(GITHUB_ENV) $gitHubEnvFile
+set gitHubOutputFile cache_key_output_01.txt
+set ::env(GITHUB_OUTPUT) $gitHubOutputFile
 
 set timeout 3
 spawn ../../bin/cache_key.sh
@@ -9,7 +11,7 @@ match_max 100000
 
 expect -exact "::debug::Cache primary key is 'php-composer-locked'"
 expect -exact "::debug::Cache restore keys are 'php-composer-locked-'"
-expect -exact "::set-output name=key::php-composer-locked"
+
 expect eof
 
 set fp [open $gitHubEnvFile r]
@@ -27,5 +29,18 @@ if { $expectedValue != $fileData } {
     exit 1
 }
 
+set fp [open $gitHubOutputFile r]
+set fileData [read $fp]
+close $fp
+
+set expectedValue "key=php-composer-locked\n"
+
+if { $expectedValue != $fileData } {
+    puts "\nExpected output variable does not match. Received:\n"
+    puts $fileData
+    exit 1
+}
+
 # Clean up
 file delete $gitHubEnvFile
+file delete $gitHubOutputFile

@@ -57,7 +57,7 @@ cache_key="$(make_key "${key[@]}")"
 echo "::debug::Cache primary key is '${cache_key}'"
 echo "::debug::Cache restore keys are '$(join_by ", " "${uniq_restore_key[@]}")'"
 
-echo "::set-output name=key::${cache_key}"
+echo "key=${cache_key}" >> "${GITHUB_OUTPUT}"
 
 # Use an environment variable to capture the multiline restore key.
 # See: https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions#multiline-strings

@@ -16,5 +16,5 @@ php_version=$($php_path -r 'echo phpversion();')
 
 echo "::debug::PHP path is '${php_path}'"
 echo "::debug::PHP version is '${php_version}'"
-echo "::set-output name=path::${php_path}"
-echo "::set-output name=version::${php_version}"
+echo "path=${php_path}" >> "${GITHUB_OUTPUT}"
+echo "version=${php_version}" >> "${GITHUB_OUTPUT}"

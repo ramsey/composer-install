@@ -1,5 +1,8 @@
 #!/usr/bin/env -S expect -f
 
+set gitHubOutputFile composer_paths_01.txt
+set ::env(GITHUB_OUTPUT) $gitHubOutputFile
+
 set timeout 3
 spawn ../../bin/composer_paths.sh
 match_max 100000
@@ -9,9 +12,24 @@ expect "::debug::Composer path is '*'\r
 ::debug::Composer cache directory found at '*'\r
 ::debug::File composer.json found at './composer.json'\r
 ::debug::File composer.lock path computed as './composer.lock'\r
-::set-output name=command::*\r
-::set-output name=cache-dir::*\r
-::set-output name=json::./composer.json\r
-::set-output name=lock::./composer.lock\r
 "
 expect eof
+
+set fp [open $gitHubOutputFile r]
+set fileData [read $fp]
+close $fp
+
+set expectedValue "command=*\r
+cache-dir=*\r
+json=./composer.json\r
+lock=./composer.lock\n
+"
+
+if { $expectedValue != $fileData } {
+    puts "\nExpected output variable does not match. Received:\n"
+    puts $fileData
+    exit 1
+}
+
+# Clean up
+file delete $gitHubOutputFile

@@ -1,7 +1,9 @@
 #!/usr/bin/env -S expect -f
 
 set gitHubEnvFile cache_key_05.txt
+set gitHubOutputFile cache_key_output_05.txt
 set ::env(GITHUB_ENV) $gitHubEnvFile
+set ::env(GITHUB_OUTPUT) $gitHubOutputFile
 
 set timeout 3
 spawn ../../bin/cache_key.sh "Linux" "8.1.1" "locked" "" "long-files-hash" "my-custom-key"
@@ -9,7 +11,6 @@ match_max 100000
 
 expect -exact "::debug::Cache primary key is 'my-custom-key'"
 expect -exact "::debug::Cache restore keys are ''"
-expect -exact "::set-output name=key::my-custom-key"
 expect eof
 
 set fp [open $gitHubEnvFile r]
@@ -27,5 +28,18 @@ if { $expectedValue != $fileData } {
     exit 1
 }
 
+set fp [open $gitHubOutputFile r]
+set fileData [read $fp]
+close $fp
+
+set expectedValue "key=my-custom-key\n"
+
+if { $expectedValue != $fileData } {
+    puts "\nExpected output variable does not match. Received:\n"
+    puts $fileData
+    exit 1
+}
+
 # Clean up
 file delete $gitHubEnvFile
+file delete $gitHubOutputFile

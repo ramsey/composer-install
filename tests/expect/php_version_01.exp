@@ -1,12 +1,31 @@
 #!/usr/bin/env -S expect -f
 
+set gitHubOutputFile php_version_01.txt
+set ::env(GITHUB_OUTPUT) $gitHubOutputFile
+
 set timeout 3
 spawn ../../bin/php_version.sh
 match_max 100000
 
 expect "::debug::PHP path is '*'\r
 ::debug::PHP version is '*.*.*'\r
-::set-output name=path::*\r
-::set-output name=version::*.*.*\r
 "
 expect eof
+
+set fp [open $gitHubOutputFile r]
+set fileData [read $fp]
+close $fp
+
+set expectedValue "path=*\r
+version=*.*.*\r
+\n
+"
+
+if { $expectedValue != $fileData } {
+    puts "\nExpected output variable does not match. Received:\n"
+    puts $fileData
+    exit 1
+}
+
+# Clean up
+file delete $gitHubOutputFile
