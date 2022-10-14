@@ -85,5 +85,5 @@ runs:
           "${{ inputs.composer-options }}" \
           "${{ inputs.working-directory }}" \
           "${{ steps.php.outputs.path }}" \
-          "${{ steps.composer.outputs.command }}" \
+          "${{ steps.composer.outputs.composer_command }}" \
           "${{ steps.composer.outputs.lock }}"

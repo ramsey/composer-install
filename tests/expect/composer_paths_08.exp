@@ -19,7 +19,7 @@ set fp [open $gitHubOutputFile r]
 set fileData [read $fp]
 close $fp
 
-set expectedValue "command=*\r
+set expectedValue "composer_command=*\r
 cache-dir=*\r
 json=../fixtures/out-of-sync-lock/composer.json\r
 lock=../fixtures/out-of-sync-lock/composer.lock\n
