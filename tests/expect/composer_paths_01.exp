@@ -15,6 +15,7 @@ expect "::debug::Composer path is '*'\r
 "
 expect eof
 
+# Confirm environment variables.
 set fp [open $gitHubOutputFile r]
 set fileData [read $fp]
 close $fp

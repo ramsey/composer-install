@@ -1,5 +1,6 @@
 #!/usr/bin/env -S expect -f
 
+# For testing outputs variables written to GITHUB_OUTPUT
 set gitHubOutputFile php_version_01.txt
 set ::env(GITHUB_OUTPUT) $gitHubOutputFile
 
@@ -12,6 +13,7 @@ expect "::debug::PHP path is '*'\r
 "
 expect eof
 
+# Confirm environment variables.
 set fp [open $gitHubOutputFile r]
 set fileData [read $fp]
 close $fp

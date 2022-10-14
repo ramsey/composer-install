@@ -1,7 +1,10 @@
 #!/usr/bin/env -S expect -f
 
+# For testing environment variables written to GITHUB_ENV
 set gitHubEnvFile cache_key_03.txt
 set ::env(GITHUB_ENV) $gitHubEnvFile
+
+# For testing outputs variables written to GITHUB_OUTPUT
 set gitHubOutputFile cache_key_output_03.txt
 set ::env(GITHUB_OUTPUT) $gitHubOutputFile
 
@@ -13,6 +16,7 @@ expect -exact "::debug::Cache primary key is 'Linux-php-8.1.1-composer-locked-lo
 expect -exact "::debug::Cache restore keys are 'Linux-php-8.1.1-composer-locked-'"
 expect eof
 
+# Confirm environment variables.
 set fp [open $gitHubEnvFile r]
 set fileData [read $fp]
 close $fp
@@ -28,6 +32,7 @@ if { $expectedValue != $fileData } {
     exit 1
 }
 
+# Confirm environment variables.
 set fp [open $gitHubOutputFile r]
 set fileData [read $fp]
 close $fp

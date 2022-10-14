@@ -1,5 +1,6 @@
 #!/usr/bin/env -S expect -f
 
+# For testing outputs variables written to GITHUB_OUTPUT
 set gitHubOutputFile composer_paths_05.txt
 set ::env(GITHUB_OUTPUT) $gitHubOutputFile
 
@@ -16,6 +17,7 @@ expect "::debug::Unable to find composer.lock at '../fixtures/no-lock-file/compo
 "
 expect eof
 
+# Confirm environment variables.
 set fp [open $gitHubOutputFile r]
 set fileData [read $fp]
 close $fp
