@@ -148,6 +148,32 @@ wish to update the cache.
     custom-cache-key: "my-custom-cache-key"
 ```
 
+#### custom-cache-suffix
+
+`ramsey/composer-install` will auto-generate a cache key which is composed of
+the following elements:
+* The OS image name, like `ubuntu-latest`.
+* The exact PHP version, like `8.1.11`.
+* The options passed via `composer-options`.
+* The dependency version setting as per `dependency-versions`.
+* The working directory as per `working-directory`.
+* A hash of the `composer.json` and/or `composer.lock` files.
+
+If you don't want to generate your own cache key, but do want to make the cache key
+even more specific, you can specify a suffix to be added to the cache key via the
+`custom-cache-suffix` parameter.
+
+```yaml
+# Adds a suffix to the cache key which is equivalent to the full date-time
+# of "last Monday 00:00", which means that the cache will be force refreshed
+# via the first workflow which is run every Monday.
+- uses: "ramsey/composer-install@v2"
+  with:
+    custom-cache-suffix: $(/bin/date -u --date='last Mon' "+%F")
+```
+
+:warning: Note: specifying a `custom-cache-key` will take precedence over the `custom-cache-suffix`.
+
 ### Matrix Example
 
 GitHub Workflows allow you to set up a [job matrix](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstrategymatrix),

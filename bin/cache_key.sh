@@ -25,7 +25,8 @@ dependency_versions="${3:-locked}"
 composer_options="${4}"
 files_hash="${5}"
 custom_cache_key="${6}"
-working_directory="${7}"
+custom_cache_suffix="${7}"
+working_directory="${8}"
 
 key=()
 restore_key=()
@@ -41,7 +42,7 @@ esac
 if [ -n "${custom_cache_key}" ]; then
     key+=("${custom_cache_key}")
 else
-    key+=("${runner_os}" "php" "${php_version}" "composer" "${composer_options}" "${dependency_versions}" "${working_directory}")
+    key+=("${runner_os}" "php" "${php_version}" "composer" "${composer_options}" "${dependency_versions}" "${working_directory}" "${custom_cache_suffix}")
 
     restore_key=("$(make_key "${key[@]}")-")
 

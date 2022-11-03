@@ -30,6 +30,10 @@ inputs:
     description: >-
       A custom cache key to use instead of an auto-generated cache key.
     required: false
+  custom-cache-suffix:
+    description: >-
+      A custom suffix to add to the auto-generated cache key.
+    required: false
 
 runs:
   using: "composite"
@@ -66,6 +70,7 @@ runs:
           "${{ inputs.composer-options }}" \
           "${{ hashFiles('**/composer.json', '**/composer.lock') }}" \
           "${{ inputs.custom-cache-key }}" \
+          "${{ inputs.custom-cache-suffix }}" \
           "${{ inputs.working-directory }}"
 
     - name: "Cache Composer dependencies"

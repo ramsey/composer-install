@@ -218,6 +218,18 @@ jobs:
           dependency-versions: "${{ matrix.dependency-versions }}"
           custom-cache-key: 'my-super-custom-cache-key'
 
+      - name: Clean up between tests
+        run: |
+          git clean -ffdx && git reset --hard HEAD
+          composer clear-cache
+
+      - name: "Test: custom cache suffix"
+        uses: ./
+        with:
+          working-directory: "${{ matrix.working-directory }}"
+          dependency-versions: "${{ matrix.dependency-versions }}"
+          custom-cache-suffix: $(/bin/date -u --date='last Mon' "+%F")
+
   run-no-cleanup:
     needs: test
     name: "Run unclean"
