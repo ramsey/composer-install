@@ -33,7 +33,7 @@ if { $expectedValue != $fileData } {
     exit 1
 }
 
-# Confirm environment variables.
+# Verify output variables have been set correctly.
 set fp [open $gitHubOutputFile r]
 set fileData [read $fp]
 close $fp

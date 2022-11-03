@@ -17,7 +17,7 @@ expect "::debug::Unable to find composer.lock at '../fixtures/no-lock-file/compo
 "
 expect eof
 
-# Confirm environment variables.
+# Verify output variables have been set correctly.
 set fp [open $gitHubOutputFile r]
 set fileData [read $fp]
 close $fp

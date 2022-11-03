@@ -13,7 +13,7 @@ expect "::debug::PHP path is '*'\r
 "
 expect eof
 
-# Confirm environment variables.
+# Verify output variables have been set correctly.
 set fp [open $gitHubOutputFile r]
 set fileData [read $fp]
 close $fp
