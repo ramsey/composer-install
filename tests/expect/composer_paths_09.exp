@@ -9,7 +9,7 @@ spawn ../../bin/composer_paths.sh "../fixtures/composer.phar"
 match_max 100000
 
 expect "::debug::Composer path is '../fixtures/composer.phar'\r
-::debug::Composer version 2.2.2 2021-12-29 14:15:27\r
+::debug::Composer version 2.2.18 2022-08-20 11:33:38\r
 ::debug::Composer cache directory found at '*'\r
 ::debug::File composer.json found at './composer.json'\r
 ::debug::File composer.lock path computed as './composer.lock'\r
