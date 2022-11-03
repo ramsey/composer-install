@@ -18,12 +18,7 @@ set fp [open $gitHubOutputFile r]
 set fileData [read $fp]
 close $fp
 
-set expectedValue "path=*\r
-version=*.*.*\r
-\n
-"
-
-if { $expectedValue != $fileData } {
+if {[regexp {^path=\S*\s*version=\d*\.\d*\.\d*\s*$} $fileData] == 0} {
     puts "\nExpected output variable does not match. Received:\n"
     puts $fileData
     exit 1

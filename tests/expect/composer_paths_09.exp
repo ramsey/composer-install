@@ -21,13 +21,7 @@ set fp [open $gitHubOutputFile r]
 set fileData [read $fp]
 close $fp
 
-set expectedValue "composer_command=../fixtures/composer.phar\r
-cache-dir=*\r
-json=./composer.json\r
-lock=./composer.lock\r
-"
-
-if { $expectedValue != $fileData } {
+if {[regexp {^composer_command=\.\./fixtures/composer\.phar\s*cache-dir=\S*\s*json=\./composer\.json\s*lock=\./composer\.lock\s*$} $fileData] == 0} {
     puts "\nExpected output variable does not match. Received:\n"
     puts $fileData
     exit 1
