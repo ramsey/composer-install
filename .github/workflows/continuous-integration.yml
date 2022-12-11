@@ -47,6 +47,8 @@ jobs:
           php-version: "latest"
           tools: "composer:${{ matrix.composer-version }}"
           coverage: "none"
+        env:
+          fail-fast: true
       - name: "Run expect tests"
         run: "composer test"
 
@@ -122,6 +124,8 @@ jobs:
           php-version: "latest"
           tools: "composer:${{ matrix.composer-version }}"
           coverage: "none"
+        env:
+          fail-fast: true
 
       - name: "Test: plain install"
         uses: ./
@@ -251,6 +255,8 @@ jobs:
           php-version: "latest"
           tools: "composer:${{ matrix.composer-version }}"
           coverage: "none"
+        env:
+          fail-fast: true
 
       - name: "Test: plain install"
         uses: ./
