@@ -20,7 +20,7 @@ jobs:
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: 7.4
+          php-version: 8.1
           tools: composer-normalize
           coverage: none
       - name: "Run Composer normalize"
