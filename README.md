@@ -175,6 +175,7 @@ even more specific, you can specify a suffix to be added to the cache key via th
 :warning: Note: specifying a `custom-cache-key` will take precedence over the `custom-cache-suffix`.
 
 ### Fork and private repositories
+
 Sometimes it's needed to use the `repositories` key in your `composer.json` to pull in forks, PRs with patches or private repositories. In this case, your GitHub Action may start failing with a `Could not authenticate against github.com` error message. To solve this, you need to add a GitHub Personal Access token, and this bit to your Action configuration:
 ```yaml
 env:

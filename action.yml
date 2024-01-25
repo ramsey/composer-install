@@ -34,6 +34,11 @@ inputs:
     description: >-
       A custom suffix to add to the auto-generated cache key.
     required: false
+  require-lock-file:
+    description: >-
+      Require lock file for install command.
+    required: false
+    default: "false"
 
 runs:
   using: "composite"
@@ -91,4 +96,5 @@ runs:
           "${{ inputs.working-directory }}" \
           "${{ steps.php.outputs.path }}" \
           "${{ steps.composer.outputs.composer_command }}" \
-          "${{ steps.composer.outputs.lock }}"
+          "${{ steps.composer.outputs.lock }}" \
+          "${{ inputs.require-lock-file }}"
