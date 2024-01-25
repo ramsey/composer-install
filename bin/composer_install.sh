@@ -19,7 +19,7 @@ esac
 
 # If there is no composer.lock file, then use the `update` command.
 if [ -z "${composer_lock}" ]; then
-    if [ "${dependency_versions}" == locked ] && [ "${require_lock_file}" == true ]; then
+    if [ "${composer_command}" == install ] && [ "${require_lock_file}" == true ]; then
         echo "::error title=Composer Lock File Not Found::Unable to find 'composer.lock'"
         exit 1
     fi
