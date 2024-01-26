@@ -75,7 +75,7 @@ runs:
 
     - name: "Cache Composer dependencies"
       if: steps.should-cache.outputs.do-cache == 1
-      uses: "actions/cache@v3"
+      uses: "actions/cache@v4"
       with:
         path: "${{ steps.composer.outputs.cache-dir }}"
         key: "${{ steps.cache-key.outputs.key }}"
