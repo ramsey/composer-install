@@ -201,15 +201,16 @@ strategy:
       - "7.4"
       - "8.0"
       - "8.1"
+      - "8.2"
     dependencies:
       - "lowest"
       - "highest"
     include:
-      - php-version: "8.2"
+      - php-version: "8.3"
         composer-options: "--ignore-platform-reqs"
 
 steps:
-  - uses: "actions/checkout@v3"
+  - uses: "actions/checkout@v4"
   - uses: "shivammathur/setup-php@v2"
     with:
       php-version: "${{ matrix.php }}"
