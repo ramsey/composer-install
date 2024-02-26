@@ -81,7 +81,7 @@ jobs:
       - name: "Run expect tests"
         run: "bashcov --root ./bin -- ./tests/bash-test.sh tests/tests.sh"
       - name: "Publish coverage report to Codecov"
-        uses: "codecov/codecov-action@v3"
+        uses: "codecov/codecov-action@v4"
         with:
           files: "./bin/coverage/codecov-result.json"
 
