@@ -101,7 +101,7 @@ For example:
 ```yaml
 - uses: "ramsey/composer-install@v3"
   with:
-    custom-composer-filename: "composer-gh-actions"
+    composer-filename: "composer-gh-actions"
 ```
 
 #### working-directory
