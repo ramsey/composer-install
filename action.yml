@@ -39,6 +39,13 @@ inputs:
       Require lock file for install command.
     required: false
     default: "false"
+  composer-filename:
+    description: >-
+      The Composer filename to use, without the extension (e.g. `composer`,
+      `composer-gh-actions`, `composer-staging`). Please note: this is not a
+      path. If you need to specify a different path, use `working-directory`.
+    required: false
+    default: "composer"
 
 runs:
   using: "composite"
@@ -51,7 +58,7 @@ runs:
     - name: "Determine whether we should ignore caching"
       id: "should-cache"
       shell: "bash"
-      run: "${GITHUB_ACTION_PATH}/bin/should_cache.sh \"${{ inputs.ignore-cache }}\""
+      run: '${GITHUB_ACTION_PATH}/bin/should_cache.sh "${{ inputs.ignore-cache }}"'
 
     - name: "Determine Composer paths"
       id: "composer"
@@ -60,7 +67,8 @@ runs:
         ${GITHUB_ACTION_PATH}/bin/composer_paths.sh \
           "" \
           "${{ inputs.working-directory }}" \
-          "${{ steps.php.outputs.path }}"
+          "${{ steps.php.outputs.path }}" \
+          "${{ inputs.composer-filename }}"
 
     - name: "Determine cache key"
       id: "cache-key"
@@ -72,7 +80,7 @@ runs:
           "${{ steps.php.outputs.version }}" \
           "${{ inputs.dependency-versions }}" \
           "${{ inputs.composer-options }}" \
-          "${{ hashFiles('**/composer.json', '**/composer.lock') }}" \
+          "${{ hashFiles('**/${{ inputs.composer-filename }}.json', '**/${{ inputs.composer-filename }}.lock') }}" \
           "${{ inputs.custom-cache-key }}" \
           "${{ inputs.custom-cache-suffix }}" \
           "${{ inputs.working-directory }}"
@@ -96,4 +104,5 @@ runs:
           "${{ steps.php.outputs.path }}" \
           "${{ steps.composer.outputs.composer_command }}" \
           "${{ steps.composer.outputs.lock }}" \
-          "${{ inputs.require-lock-file }}"
+          "${{ inputs.require-lock-file }}" \
+          "${{ inputs.composer-filename }}" \

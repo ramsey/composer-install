@@ -1,0 +1,14 @@
+{
+    "name": "ramsey/composer-install-test-out-of-sync-lock-custom-composer",
+    "description": "Tests composer-install when custom-composer.lock file is out of sync.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ben Ramsey",
+            "email": "ben@benramsey.com"
+        }
+    ],
+    "config": {
+        "platform": {}
+    }
+}

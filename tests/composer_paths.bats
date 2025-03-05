@@ -31,6 +31,7 @@ test_composer_paths() {
     assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
     assert_line "::debug::File composer.json found at './composer.json'"
     assert_line "::debug::File composer.lock path computed as './composer.lock'"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --regexp "^composer_command=.*/composer$"
     assert_line --regexp "^cache-dir=.*$"
     assert_line 'json=./composer.json'
@@ -71,6 +72,7 @@ test_composer_paths() {
     assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
     assert_line --regexp "^::debug::File composer.json found at '.*/fixtures/no-lock-file/composer\.json'$"
     assert_line --regexp "^::debug::File composer\.lock path computed as ''$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --regexp '^composer_command=.*/composer$'
     assert_line --regexp '^cache-dir=.*$'
     assert_line --regexp '^json=.*/fixtures/no-lock-file/composer\.json$'
@@ -87,6 +89,7 @@ test_composer_paths() {
     assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
     assert_line --regexp "^::debug::File composer.json found at '.*/fixtures/with-lock-file/composer\.json'$"
     assert_line --regexp "^::debug::File composer.lock path computed as '.*/fixtures/with-lock-file/composer\.lock'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --regexp "^composer_command=.*/composer$"
     assert_line --regexp "^cache-dir=.*$"
     assert_line --regexp '^json=.*/fixtures/with-lock-file/composer\.json$'
@@ -111,6 +114,7 @@ test_composer_paths() {
     assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
     assert_line --regexp "^::debug::File composer.json found at '.*/fixtures/out-of-sync-lock/composer\.json'$"
     assert_line --regexp "^::debug::File composer.lock path computed as '.*/fixtures/out-of-sync-lock/composer\.lock'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --regexp "^composer_command=.*/composer$"
     assert_line --regexp "^cache-dir=.*$"
     assert_line --regexp '^json=.*/fixtures/out-of-sync-lock/composer\.json$'
@@ -126,8 +130,76 @@ test_composer_paths() {
     assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
     assert_line "::debug::File composer.json found at './composer.json'"
     assert_line "::debug::File composer.lock path computed as './composer.lock'"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --regexp "^composer_command=.*/fixtures/composer\.phar$"
     assert_line --regexp "^cache-dir=.*$"
     assert_line 'json=./composer.json'
     assert_line 'lock=./composer.lock'
+}
+
+@test 'generates composer paths for custom composer file' {
+    run -0 test_composer_paths \
+        '' \
+        "${PROJECT_ROOT}/tests/fixtures/custom-composer" \
+        '' \
+        'composer-gh-actions'
+
+    assert_line --regexp "^::debug::Composer path is '.*/composer'$"
+    assert_line --regexp "^::debug::Composer version .*$"
+    assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
+    assert_line --regexp "^::debug::File composer.json found at '.*/fixtures/custom-composer/composer-gh-actions\.json'$"
+    assert_line --regexp "^::debug::File composer.lock path computed as '.*/fixtures/custom-composer/composer-gh-actions\.lock'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer-gh-actions.json'"
+    assert_line --regexp "^composer_command=.*/composer$"
+    assert_line --regexp "^cache-dir=.*$"
+    assert_line --regexp '^json=.*/fixtures/custom-composer/composer-gh-actions\.json$'
+    assert_line --regexp '^lock=.*/fixtures/custom-composer/composer-gh-actions\.lock$'
+}
+
+@test 'prints error when custom composer file is not valid' {
+    run ! test_composer_paths \
+        '' \
+        "${PROJECT_ROOT}/tests/fixtures/invalid-custom-composer" \
+        '' \
+        'composer-gh-actions'
+
+    assert_line --regexp "^::error title=Invalid composer\.json::The composer\.json file at '.*/fixtures/invalid-custom-composer/composer-gh-actions\.json' does not validate; run 'composer validate' to check for errors$"
+}
+
+@test 'generates composer paths for custom composer file without a lock file' {
+    run -0 test_composer_paths \
+        '' \
+        "${PROJECT_ROOT}/tests/fixtures/no-lock-file-custom-composer" \
+        '' \
+        'composer-gh-actions'
+
+    assert_line --regexp "^::debug::Composer path is '.*/composer'$"
+    assert_line --regexp "^::debug::Composer version .*$"
+    assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
+    assert_line --regexp "^::debug::File composer.json found at '.*/fixtures/no-lock-file-custom-composer/composer-gh-actions\.json'$"
+    assert_line --regexp "^::debug::File composer.lock path computed as ''$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer-gh-actions.json'"
+    assert_line --regexp "^composer_command=.*/composer$"
+    assert_line --regexp "^cache-dir=.*$"
+    assert_line --regexp '^json=.*/fixtures/no-lock-file-custom-composer/composer-gh-actions\.json$'
+    assert_line 'lock='
+}
+
+@test 'generates composer paths for custom composer file with out-of-sync lock file' {
+    run -0 test_composer_paths \
+        '' \
+        "${PROJECT_ROOT}/tests/fixtures/out-of-sync-lock-custom-composer" \
+        '' \
+        'composer-gh-actions'
+
+    assert_line --regexp "^::debug::Composer path is '.*/composer'$"
+    assert_line --regexp "^::debug::Composer version .*$"
+    assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
+    assert_line --regexp "^::debug::File composer.json found at '.*/fixtures/out-of-sync-lock-custom-composer/composer-gh-actions\.json'$"
+    assert_line --regexp "^::debug::File composer.lock path computed as '.*/fixtures/out-of-sync-lock-custom-composer/composer-gh-actions\.lock'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer-gh-actions.json'"
+    assert_line --regexp "^composer_command=.*/composer$"
+    assert_line --regexp "^cache-dir=.*$"
+    assert_line --regexp '^json=.*/fixtures/out-of-sync-lock-custom-composer/composer-gh-actions\.json$'
+    assert_line --regexp '^lock=.*/fixtures/out-of-sync-lock-custom-composer/composer-gh-actions\.lock$'
 }
