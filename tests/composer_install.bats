@@ -24,9 +24,11 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Verifying lock file contents can be installed on current platform'
     assert_line --partial 'Generating autoload files'
@@ -43,9 +45,11 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --prefer-lowest --prefer-stable'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --partial 'Updating dependencies'
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Generating autoload files'
@@ -62,9 +66,11 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --partial 'Updating dependencies'
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Generating autoload files'
@@ -81,9 +87,11 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Verifying lock file contents can be installed on current platform'
     assert_line --partial 'Generating autoload files'
@@ -100,9 +108,11 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Verifying lock file contents can be installed on current platform'
     assert_line --partial 'Generating autoload files'
@@ -119,9 +129,11 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Verifying lock file contents can be installed on current platform'
     assert_line --partial 'Generating optimized autoload files'
@@ -138,9 +150,11 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --prefer-lowest --prefer-stable --ignore-platform-reqs --optimize-autoloader'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --partial 'Updating dependencies'
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Generating optimized autoload files'
@@ -157,9 +171,11 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --partial 'Updating dependencies'
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Generating optimized autoload files'
@@ -176,9 +192,11 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Verifying lock file contents can be installed on current platform'
     assert_line --partial 'Generating optimized autoload files'
@@ -195,9 +213,11 @@ teardown() {
         '' \
         '' \
         "$PROJECT_ROOT/tests/fixtures/composer.phar" \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer\.phar install --no-interaction --no-progress --ansi'$"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Verifying lock file contents can be installed on current platform'
     assert_line --partial 'Generating autoload files'

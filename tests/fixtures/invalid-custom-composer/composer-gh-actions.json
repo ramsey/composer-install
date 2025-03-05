@@ -1,0 +1,4 @@
+{
+    "name": "invalid-custom-composer.json",
+    "description": "Tests composer-install when custom-composer.json is invalid"
+}

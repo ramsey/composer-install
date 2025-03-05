@@ -1,0 +1,68 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "091919c4ac368d87445398fc8c8c2696",
+    "packages": [
+        {
+            "name": "ehime/hello-world",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ehime/hello-world.git",
+                "reference": "b1c8cdd2c11272d8c5deec7816e51fa5374217c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ehime/hello-world/zipball/b1c8cdd2c11272d8c5deec7816e51fa5374217c1",
+                "reference": "b1c8cdd2c11272d8c5deec7816e51fa5374217c1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.8.*",
+                "phpunit/phpunit": "4.3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HelloWorld": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jd Daniel",
+                    "email": "dodomeki@gmail.com"
+                }
+            ],
+            "description": "Sample Composer project",
+            "keywords": [
+                "helloworld",
+                "sample",
+                "test"
+            ],
+            "support": {
+                "issues": "https://github.com/ehime/hello-world/issues",
+                "source": "https://github.com/ehime/hello-world/tree/1.0.5"
+            },
+            "time": "2015-07-31T17:53:36+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
+}

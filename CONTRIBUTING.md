@@ -81,7 +81,7 @@ When you do begin working on your feature, here are some guidelines to consider:
 * **Submit one feature per pull request.** If you have multiple features you
   wish to submit, please break them into separate pull requests.
 * **Write good commit messages.** This project follows the
-  [Conventional Commits][] specification and uses Git hooks to ensure all
+  [Conventional Commits][conv-commit] specification and uses Git hooks to ensure all
   commits follow this standard. Running `composer install` will set up the Git
   hooks, so when you run `git commit`, you'll be prompted to create a commit
   using the Conventional Commits rules.
@@ -117,3 +117,4 @@ composer test
 [issues]: https://github.com/ramsey/composer-install/issues
 [pull requests]: https://github.com/ramsey/composer-install/pulls
 [gh-flow]: https://guides.github.com/introduction/flow/
+[conv-commit]: https://www.conventionalcommits.org/
