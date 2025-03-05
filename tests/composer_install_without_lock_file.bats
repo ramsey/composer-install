@@ -26,7 +26,7 @@ teardown() {
         ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --working-dir .*/fixtures/no-lock-file'$"
-    assert_line "::debug::The COMPOSER environment variable is ''"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --partial 'Updating dependencies'
     assert_line --partial 'Writing lock file'
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'

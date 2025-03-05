@@ -7,7 +7,7 @@ php_path="${4:-$(which php)}"
 composer_path="${5:-$(which composer)}"
 composer_lock="${6:-}"
 require_lock_file="${7:-}"
-custom_composer_filename="${8:-}"
+composer_filename="${8:-composer}"
 
 composer_command="update"
 composer_options=("--no-interaction" "--no-progress" "--ansi")
@@ -34,9 +34,8 @@ if [ -n "${working_directory}" ]; then
     composer_options+=("--working-dir" "${working_directory}")
 fi
 
-if [ -n "${custom_composer_filename}" ]; then
-    export COMPOSER="${custom_composer_filename}.json"
-fi
+COMPOSER="${composer_filename}.json"
+export COMPOSER
 
 full_command="${php_path} ${composer_path} ${composer_command} ${composer_options[*]}"
 echo "::debug::Using the following Composer command: '${full_command}'"

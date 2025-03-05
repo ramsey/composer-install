@@ -85,10 +85,16 @@ For example:
     composer-options: "--ignore-platform-reqs --optimize-autoloader"
 ```
 
-#### custom-composer-filename
+#### composer-filename
 
-If you have a custom `composer` filename, you may use the `custom-composer-filename`. For example, your `composer` file could be `composer-gh-actions.json` or `composer-staging.json` instead of the default `composer.json`.
-You should specify the filename without the extension.
+If you have a custom Composer filename, you may use `composer-filename` to change
+the filename Composer uses. For example, your Composer file could be
+`composer-gh-actions.json` or `composer-staging.json` instead of the default
+`composer.json`.
+
+You should specify the filename without the extension, since it will determine
+both the JSON and lock filenames to use. The default value is `"composer"`,
+which will use `composer.json` and `composer.lock` as the filenames.
 
 For example:
 
@@ -193,7 +199,7 @@ even more specific, you can specify a suffix to be added to the cache key via th
 
 #### require-lock-file
 
-By default, if no composer.lock file is found in the working directory 
+By default, if no composer.lock file is found in the working directory
 ramsey/composer-install will invoke `composer update` regardless of the value of
 `dependency-versions`.
 

@@ -3,17 +3,13 @@
 composer_path="${1:-$(which composer)}"
 working_directory="${2:-.}"
 php_path="${3:-$(which php)}"
-custom_composer_filename="${4:-}"
+composer_filename="${4:-composer}"
 
 function test_composer {
     "${php_path}" "${composer_path}" --version > /dev/null 2>&1
 }
 
 function validate_composer {
-    if [ -n "${custom_composer_filename}" ]; then
-        export COMPOSER="${custom_composer_filename}.json"
-    fi
-
     "${php_path}" "${composer_path}" validate --no-check-publish --no-check-lock --working-dir "${working_directory}"  > /dev/null 2>&1
 }
 
@@ -22,13 +18,11 @@ if ! test_composer; then
     exit 1
 fi
 
-composer_json="composer.json"
-composer_lock="composer.lock"
+composer_json="${composer_filename}.json"
+composer_lock="${composer_filename}.lock"
 
-if [ -n "${custom_composer_filename}" ]; then
-    composer_json="${custom_composer_filename}.json"
-    composer_lock="${custom_composer_filename}.lock"
-fi
+COMPOSER="${composer_json}"
+export COMPOSER
 
 if [ -n "${working_directory}" ]; then
     if [ ! -d "${working_directory}" ]; then

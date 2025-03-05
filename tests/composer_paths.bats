@@ -31,7 +31,7 @@ test_composer_paths() {
     assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
     assert_line "::debug::File composer.json found at './composer.json'"
     assert_line "::debug::File composer.lock path computed as './composer.lock'"
-    assert_line "::debug::The COMPOSER environment variable is ''"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --regexp "^composer_command=.*/composer$"
     assert_line --regexp "^cache-dir=.*$"
     assert_line 'json=./composer.json'
@@ -72,7 +72,7 @@ test_composer_paths() {
     assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
     assert_line --regexp "^::debug::File composer.json found at '.*/fixtures/no-lock-file/composer\.json'$"
     assert_line --regexp "^::debug::File composer\.lock path computed as ''$"
-    assert_line "::debug::The COMPOSER environment variable is ''"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --regexp '^composer_command=.*/composer$'
     assert_line --regexp '^cache-dir=.*$'
     assert_line --regexp '^json=.*/fixtures/no-lock-file/composer\.json$'
@@ -89,7 +89,7 @@ test_composer_paths() {
     assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
     assert_line --regexp "^::debug::File composer.json found at '.*/fixtures/with-lock-file/composer\.json'$"
     assert_line --regexp "^::debug::File composer.lock path computed as '.*/fixtures/with-lock-file/composer\.lock'$"
-    assert_line "::debug::The COMPOSER environment variable is ''"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --regexp "^composer_command=.*/composer$"
     assert_line --regexp "^cache-dir=.*$"
     assert_line --regexp '^json=.*/fixtures/with-lock-file/composer\.json$'
@@ -114,7 +114,7 @@ test_composer_paths() {
     assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
     assert_line --regexp "^::debug::File composer.json found at '.*/fixtures/out-of-sync-lock/composer\.json'$"
     assert_line --regexp "^::debug::File composer.lock path computed as '.*/fixtures/out-of-sync-lock/composer\.lock'$"
-    assert_line "::debug::The COMPOSER environment variable is ''"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --regexp "^composer_command=.*/composer$"
     assert_line --regexp "^cache-dir=.*$"
     assert_line --regexp '^json=.*/fixtures/out-of-sync-lock/composer\.json$'
@@ -130,7 +130,7 @@ test_composer_paths() {
     assert_line --regexp "^::debug::Composer cache directory found at '.*'$"
     assert_line "::debug::File composer.json found at './composer.json'"
     assert_line "::debug::File composer.lock path computed as './composer.lock'"
-    assert_line "::debug::The COMPOSER environment variable is ''"
+    assert_line "::debug::The COMPOSER environment variable is 'composer.json'"
     assert_line --regexp "^composer_command=.*/fixtures/composer\.phar$"
     assert_line --regexp "^cache-dir=.*$"
     assert_line 'json=./composer.json'

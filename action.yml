@@ -39,10 +39,13 @@ inputs:
       Require lock file for install command.
     required: false
     default: "false"
-  custom-composer-filename:
+  composer-filename:
     description: >-
-      The custom Composer filename to use (e.g. `composer-gh-actions`, `composer-staging`).
+      The Composer filename to use, without the extension (e.g. `composer`,
+      `composer-gh-actions`, `composer-staging`). Please note: this is not a
+      path. If you need to specify a different path, use `working-directory`.
     required: false
+    default: "composer"
 
 runs:
   using: "composite"
@@ -65,7 +68,7 @@ runs:
           "" \
           "${{ inputs.working-directory }}" \
           "${{ steps.php.outputs.path }}" \
-          "${{ inputs.custom-composer-filename }}"
+          "${{ inputs.composer-filename }}"
 
     - name: "Determine cache key"
       id: "cache-key"
@@ -77,7 +80,7 @@ runs:
           "${{ steps.php.outputs.version }}" \
           "${{ inputs.dependency-versions }}" \
           "${{ inputs.composer-options }}" \
-          "${{ hashFiles('**/${{ inputs.custom-composer-filename }}.json', '**/${{ inputs.custom-composer-filename }}.lock') }}" \
+          "${{ hashFiles('**/${{ inputs.composer-filename }}.json', '**/${{ inputs.composer-filename }}.lock') }}" \
           "${{ inputs.custom-cache-key }}" \
           "${{ inputs.custom-cache-suffix }}" \
           "${{ inputs.working-directory }}"
@@ -102,4 +105,4 @@ runs:
           "${{ steps.composer.outputs.composer_command }}" \
           "${{ steps.composer.outputs.lock }}" \
           "${{ inputs.require-lock-file }}" \
-          "${{ inputs.custom-composer-filename }}" \
+          "${{ inputs.composer-filename }}" \
