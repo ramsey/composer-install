@@ -1,8 +1,0 @@
-#!/usr/bin/env -S expect -f
-
-set timeout 3
-spawn ../../bin/composer_paths.sh "/foo/composer"
-match_max 100000
-
-expect "::error title=Composer Not Found::Unable to find Composer at '/foo/composer'"
-expect eof

@@ -81,7 +81,7 @@ When you do begin working on your feature, here are some guidelines to consider:
 * **Submit one feature per pull request.** If you have multiple features you
   wish to submit, please break them into separate pull requests.
 * **Write good commit messages.** This project follows the
-  [Conventional Commits][] specification and uses Git hooks to ensure all
+  [Conventional Commits][conv-commit] specification and uses Git hooks to ensure all
   commits follow this standard. Running `composer install` will set up the Git
   hooks, so when you run `git commit`, you'll be prompted to create a commit
   using the Conventional Commits rules.
@@ -89,40 +89,32 @@ When you do begin working on your feature, here are some guidelines to consider:
 ## Developing
 
 To develop this project, you will need [PHP](https://www.php.net),
-[Composer](https://getcomposer.org), [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)),
-and [Expect](https://en.wikipedia.org/wiki/Expect).
+[Composer](https://getcomposer.org), and [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)).
 
 ### Running Tests
 
-This project includes a suite of tests located in `tests/expect/`. These tests
-use the `expect` command to automate CLI interactions. The tests will run
-automatically as part of continuous integration, or you may run them locally with:
+This project includes a suite of tests located in `tests/`. These tests
+use [Bats](https://bats-core.readthedocs.io/en/stable/) to test command line
+interaction. The tests will run automatically as part of continuous integration,
+and you may also run them locally.
 
+To ensure Bats is set up properly in your local environment, after cloning the
+project, download the Git submodules:
+
+```bash
+cd composer-install/
+git submodule init
+git submodule update
 ```
+
+Then run:
+
+```bash
 composer test
 ```
-
-To run the tests, you must have an up-to-date version of coreutils (8.30 or
-later).
-
-To generate a new test:
-
-```
-cd tests/expect/
-autoexpect ../../bin/path-to-script-to-test.sh
-```
-
-`autoexpect` will save the test to `script.exp`. Rename it with a more
-descriptive name, and run it to ensure it does what you expect: `./script.exp`.
-You may need to edit the test file or add to it, according to your needs.
-
-Expect is an extension to the [Tcl](https://en.wikipedia.org/wiki/Tcl) scripting
-language, so it may be helpful to learn a little about Tcl as you write tests.
-
-When done, `cd ../..` and run `composer test`.
-Your new test should run along with the other tests.
 
 [github]: https://github.com/ramsey/composer-install
 [issues]: https://github.com/ramsey/composer-install/issues
 [pull requests]: https://github.com/ramsey/composer-install/pulls
 [gh-flow]: https://guides.github.com/introduction/flow/
+[conv-commit]: https://www.conventionalcommits.org/
