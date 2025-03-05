@@ -63,6 +63,7 @@ echo "::debug::${composer_version}"
 echo "::debug::Composer cache directory found at '${cache_dir}'"
 echo "::debug::File composer.json found at '${composer_json}'"
 echo "::debug::File composer.lock path computed as '${composer_lock}'"
+echo "::debug::The COMPOSER environment variable is '${COMPOSER}'"
 {
     echo "composer_command=${composer_path}"
     echo "cache-dir=${cache_dir}"

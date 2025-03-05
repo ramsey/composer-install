@@ -24,6 +24,7 @@ teardown() {
         ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi --working-dir .*/fixtures/with-lock-file'$"
+    assert_line "::debug::The COMPOSER environment variable is ''"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Verifying lock file contents can be installed on current platform'
     assert_line --partial 'Generating autoload files'
@@ -44,6 +45,7 @@ teardown() {
         ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --prefer-lowest --prefer-stable --working-dir .*/fixtures/with-lock-file'$"
+    assert_line "::debug::The COMPOSER environment variable is ''"
     assert_line --partial 'Updating dependencies'
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Generating autoload files'
@@ -64,6 +66,7 @@ teardown() {
         ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --working-dir .*/fixtures/with-lock-file'$"
+    assert_line "::debug::The COMPOSER environment variable is ''"
     assert_line --partial 'Updating dependencies'
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Generating autoload files'
@@ -84,6 +87,7 @@ teardown() {
         ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi --working-dir .*/fixtures/with-lock-file'$"
+    assert_line "::debug::The COMPOSER environment variable is ''"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Verifying lock file contents can be installed on current platform'
     assert_line --partial 'Generating autoload files'
@@ -104,6 +108,7 @@ teardown() {
         ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader --working-dir .*/fixtures/with-lock-file'$"
+    assert_line "::debug::The COMPOSER environment variable is ''"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Verifying lock file contents can be installed on current platform'
     assert_line --partial 'Generating optimized autoload files'
@@ -124,6 +129,7 @@ teardown() {
         ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --prefer-lowest --prefer-stable --ignore-platform-reqs --optimize-autoloader --working-dir .*/fixtures/with-lock-file'$"
+    assert_line "::debug::The COMPOSER environment variable is ''"
     assert_line --partial 'Updating dependencies'
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Generating optimized autoload files'
@@ -144,6 +150,7 @@ teardown() {
         ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader --working-dir .*/fixtures/with-lock-file'$"
+    assert_line "::debug::The COMPOSER environment variable is ''"
     assert_line --partial 'Updating dependencies'
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Generating optimized autoload files'
@@ -164,6 +171,7 @@ teardown() {
         ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader --working-dir .*/fixtures/with-lock-file'$"
+    assert_line "::debug::The COMPOSER environment variable is ''"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
     assert_line --partial 'Verifying lock file contents can be installed on current platform'
     assert_line --partial 'Generating optimized autoload files'

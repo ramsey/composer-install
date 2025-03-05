@@ -40,4 +40,5 @@ fi
 
 full_command="${php_path} ${composer_path} ${composer_command} ${composer_options[*]}"
 echo "::debug::Using the following Composer command: '${full_command}'"
+echo "::debug::The COMPOSER environment variable is '${COMPOSER}'"
 $full_command
