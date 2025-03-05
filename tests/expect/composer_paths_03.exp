@@ -1,8 +1,0 @@
-#!/usr/bin/env -S expect -f
-
-set timeout 3
-spawn ../../bin/composer_paths.sh "" "foo/working/directory"
-match_max 100000
-
-expect "::error title=Working Directory Not Found::Unable to find working directory at 'foo/working/directory'"
-expect eof

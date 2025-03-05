@@ -19,14 +19,14 @@ function make_key {
     tr "[:blank:]" "-" <<<"${non_empties[*]}"
 }
 
-runner_os="${1}"
-php_version="${2}"
-dependency_versions="${3:-locked}"
-composer_options="${4}"
-files_hash="${5}"
-custom_cache_key="${6}"
-custom_cache_suffix="${7}"
-working_directory="${8}"
+runner_os="${1:-}"
+php_version="${2:-}"
+dependency_versions="${3:-}"
+composer_options="${4:-}"
+files_hash="${5:-}"
+custom_cache_key="${6:-}"
+custom_cache_suffix="${7:-}"
+working_directory="${8:-}"
 
 key=()
 restore_key=()

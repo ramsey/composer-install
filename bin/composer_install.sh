@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-dependency_versions="${1:-locked}"
-additional_composer_options="${2}"
-working_directory="${3}"
+dependency_versions="${1:-}"
+additional_composer_options="${2:-}"
+working_directory="${3:-}"
 php_path="${4:-$(which php)}"
 composer_path="${5:-$(which composer)}"
-composer_lock="${6}"
-require_lock_file="${7}"
+composer_lock="${6:-}"
+require_lock_file="${7:-}"
 
 composer_command="update"
 composer_options=("--no-interaction" "--no-progress" "--ansi")

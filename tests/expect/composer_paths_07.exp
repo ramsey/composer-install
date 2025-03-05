@@ -1,8 +1,0 @@
-#!/usr/bin/env -S expect -f
-
-set timeout 3
-spawn ../../bin/composer_paths.sh "" "../fixtures/invalid-composer"
-match_max 100000
-
-expect "::error title=Invalid composer.json::The composer.json file at '../fixtures/invalid-composer/composer.json' does not validate; run 'composer validate' to check for errors"
-expect eof

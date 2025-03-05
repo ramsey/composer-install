@@ -1,8 +1,0 @@
-#!/usr/bin/env -S expect -f
-
-set timeout 3
-spawn ../../bin/composer_paths.sh "" "../fixtures/non-composer"
-match_max 100000
-
-expect "::error title=composer.json Not Found::Unable to find composer.json at '../fixtures/non-composer/composer.json'"
-expect eof

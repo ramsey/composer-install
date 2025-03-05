@@ -42,8 +42,8 @@ the [Setup PHP](https://github.com/shivammathur/setup-php) action as a step.
 - uses: "ramsey/composer-install@v3"
 ```
 
-:bulb: There is no need to set up a separate caching step since ramsey/composer-install
-handles this for you.
+> [!TIP]
+> There is no need to set up a separate caching step since ramsey/composer-install handles this for you.
 
 ### Input Parameters
 
@@ -174,7 +174,8 @@ even more specific, you can specify a suffix to be added to the cache key via th
     custom-cache-suffix: $(/bin/date -u --date='last Mon' "+%F")
 ```
 
-:warning: Note: specifying a `custom-cache-key` will take precedence over the `custom-cache-suffix`.
+> [!WARNING]
+> Specifying a `custom-cache-key` will take precedence over the `custom-cache-suffix`.
 
 
 #### require-lock-file
