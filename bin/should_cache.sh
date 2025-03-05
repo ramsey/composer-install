@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-ignore_cache="${1}"
-should_cache=1
+ignore_cache="${1:-}"
 will_cache="will cache"
 
 case "${ignore_cache}" in
-    1) should_cache=0 ;;
-    yes) should_cache=0 ;;
-    true) should_cache=0 ;;
+    1 | yes | Yes | y | Y | true | True) should_cache=0 ;;
+    *) should_cache=1 ;;
 esac
 
 if [ $should_cache -eq 0 ]; then

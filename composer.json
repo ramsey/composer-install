@@ -16,7 +16,6 @@
         "allow-plugins": false
     },
     "scripts": {
-        "clean-tests": "git clean -fX tests/",
-        "test": "./tests/bash-test.sh tests/tests.sh"
+        "test": "./tests/test_helper/bats/bin/bats tests/"
     }
 }
