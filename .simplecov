@@ -1,4 +1,5 @@
-require 'codecov'
 require 'simplecov'
+require 'simplecov-cobertura'
 
-SimpleCov.formatter = Codecov::SimpleCov::Formatter
+# Creates a `coverage/coverage.xml` file
+SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
