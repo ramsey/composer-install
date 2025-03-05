@@ -172,7 +172,8 @@ even more specific, you can specify a suffix to be added to the cache key via th
     custom-cache-suffix: $(/bin/date -u --date='last Mon' "+%F")
 ```
 
-:warning: Note: specifying a `custom-cache-key` will take precedence over the `custom-cache-suffix`.
+> [!WARNING]
+> Specifying a `custom-cache-key` will take precedence over the `custom-cache-suffix`.
 
 ### Fork and private repositories
 
