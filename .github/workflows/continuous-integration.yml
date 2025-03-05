@@ -61,19 +61,18 @@ jobs:
       - name: "Install Ruby dependencies"
         run: |
           gem install bashcov
-          gem install codecov
+          gem install simplecov-cobertura
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "latest"
-          tools: "composer:v2"
           coverage: "none"
       - name: "Run expect tests"
         run: "bashcov --root ./bin -- ./tests/test_helper/bats/bin/bats tests/"
       - name: "Publish coverage report to Codecov"
         uses: "codecov/codecov-action@v5"
         with:
-          files: "./bin/coverage/codecov-result.json"
+          files: "./bin/coverage/coverage.xml"
 
   static-analysis:
     name: "Static analysis"
