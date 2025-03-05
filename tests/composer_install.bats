@@ -24,7 +24,8 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi'$"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
@@ -43,7 +44,8 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --prefer-lowest --prefer-stable'$"
     assert_line --partial 'Updating dependencies'
@@ -62,7 +64,8 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi'$"
     assert_line --partial 'Updating dependencies'
@@ -81,7 +84,8 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi'$"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
@@ -100,7 +104,8 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi'$"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
@@ -119,7 +124,8 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader'$"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
@@ -138,7 +144,8 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --prefer-lowest --prefer-stable --ignore-platform-reqs --optimize-autoloader'$"
     assert_line --partial 'Updating dependencies'
@@ -157,7 +164,8 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader'$"
     assert_line --partial 'Updating dependencies'
@@ -176,7 +184,8 @@ teardown() {
         '' \
         '' \
         '' \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader'$"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
@@ -195,7 +204,8 @@ teardown() {
         '' \
         '' \
         "$PROJECT_ROOT/tests/fixtures/composer.phar" \
-        'composer.lock'
+        'composer.lock' \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer\.phar install --no-interaction --no-progress --ansi'$"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'

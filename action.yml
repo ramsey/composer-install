@@ -55,7 +55,6 @@ runs:
 
     - name: "Determine Composer paths"
       id: "composer"
-      if: steps.should-cache.outputs.do-cache == 1
       shell: "bash"
       run: |
         ${GITHUB_ACTION_PATH}/bin/composer_paths.sh \

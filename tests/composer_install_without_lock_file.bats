@@ -22,6 +22,7 @@ teardown() {
         "$PROJECT_ROOT/tests/fixtures/no-lock-file" \
         '' \
         '' \
+        '' \
         ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --working-dir .*/fixtures/no-lock-file'$"
@@ -36,3 +37,18 @@ teardown() {
     assert_file_exists "$PROJECT_ROOT/tests/fixtures/no-lock-file/composer.lock"
 }
 
+@test "results in an error when lock file isn't present and require-lock-file is 'true'" {
+    run ! composer_install.sh \
+        '' \
+        '' \
+        "$PROJECT_ROOT/tests/fixtures/no-lock-file" \
+        '' \
+        '' \
+        '' \
+        'true'
+
+    assert_line "::error title=Composer Lock File Not Found::Unable to find 'composer.lock'"
+
+    assert_dir_not_exists "$PROJECT_ROOT/tests/fixtures/no-lock-file/vendor"
+    assert_file_not_exists "$PROJECT_ROOT/tests/fixtures/no-lock-file/composer.lock"
+}

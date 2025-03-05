@@ -20,7 +20,8 @@ teardown() {
         "$PROJECT_ROOT/tests/fixtures/with-lock-file" \
         '' \
         '' \
-        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock"
+        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock" \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi --working-dir .*/fixtures/with-lock-file'$"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
@@ -39,7 +40,8 @@ teardown() {
         "$PROJECT_ROOT/tests/fixtures/with-lock-file" \
         '' \
         '' \
-        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock"
+        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock" \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --prefer-lowest --prefer-stable --working-dir .*/fixtures/with-lock-file'$"
     assert_line --partial 'Updating dependencies'
@@ -58,7 +60,8 @@ teardown() {
         "$PROJECT_ROOT/tests/fixtures/with-lock-file" \
         '' \
         '' \
-        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock"
+        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock" \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --working-dir .*/fixtures/with-lock-file'$"
     assert_line --partial 'Updating dependencies'
@@ -77,7 +80,8 @@ teardown() {
         "$PROJECT_ROOT/tests/fixtures/with-lock-file" \
         '' \
         '' \
-        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock"
+        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock" \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi --working-dir .*/fixtures/with-lock-file'$"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
@@ -96,7 +100,8 @@ teardown() {
         "$PROJECT_ROOT/tests/fixtures/with-lock-file" \
         '' \
         '' \
-        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock"
+        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock" \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader --working-dir .*/fixtures/with-lock-file'$"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'
@@ -115,7 +120,8 @@ teardown() {
         "$PROJECT_ROOT/tests/fixtures/with-lock-file" \
         '' \
         '' \
-        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock"
+        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock" \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --prefer-lowest --prefer-stable --ignore-platform-reqs --optimize-autoloader --working-dir .*/fixtures/with-lock-file'$"
     assert_line --partial 'Updating dependencies'
@@ -134,7 +140,8 @@ teardown() {
         "$PROJECT_ROOT/tests/fixtures/with-lock-file" \
         '' \
         '' \
-        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock"
+        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock" \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer update --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader --working-dir .*/fixtures/with-lock-file'$"
     assert_line --partial 'Updating dependencies'
@@ -153,7 +160,8 @@ teardown() {
         "$PROJECT_ROOT/tests/fixtures/with-lock-file" \
         '' \
         '' \
-        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock"
+        "$PROJECT_ROOT/tests/fixtures/with-lock-file/composer.lock" \
+        ''
 
     assert_line --index 0 --regexp "^::debug::Using the following Composer command: '.*/php .*/composer install --no-interaction --no-progress --ansi --ignore-platform-reqs --optimize-autoloader --working-dir .*/fixtures/with-lock-file'$"
     assert_line --partial 'Installing dependencies from lock file (including require-dev)'

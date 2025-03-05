@@ -120,6 +120,8 @@ For example:
 
 #### ignore-cache
 
+Normally, ramsey/composer-install preserves composer's cache between jobs
+so that subsequent identically-invoked jobs execute faster.
 If you have jobs for which you wish to completely ignore the caching step, you
 may use the `ignore-cache` input parameter. When present, ramsey/composer-install
 will neither read from nor write to the cache.
@@ -174,6 +176,17 @@ even more specific, you can specify a suffix to be added to the cache key via th
 
 > [!WARNING]
 > Specifying a `custom-cache-key` will take precedence over the `custom-cache-suffix`.
+
+
+#### require-lock-file
+
+By default, if no composer.lock file is found in the working directory 
+ramsey/composer-install will invoke `composer update` regardless of the value of
+`dependency-versions`.
+
+If this is set to a value of `true`, ramsey/composer-install will fail in its
+execution if it does not find a lock file.
+
 
 ### Fork and private repositories
 
