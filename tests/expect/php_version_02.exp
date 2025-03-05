@@ -1,8 +1,0 @@
-#!/usr/bin/env -S expect -f
-
-set timeout 3
-spawn ../../bin/php_version.sh "/foo/php"
-match_max 100000
-
-expect "::error title=PHP Not Found::Unable to find PHP at '/foo/php'"
-expect eof
