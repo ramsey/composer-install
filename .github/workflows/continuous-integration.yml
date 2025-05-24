@@ -81,7 +81,7 @@ jobs:
       - name: "Checkout repository"
         uses: "actions/checkout@v4"
       - name: "Run shellcheck"
-        run: "shellcheck --exclude=SC2230 bin/*.sh tests/*.bats"
+        run: "shellcheck bin/*.sh tests/*.bats"
 
   run:
     needs: test
