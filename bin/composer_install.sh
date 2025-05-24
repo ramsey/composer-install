@@ -7,7 +7,7 @@ php_path="${4:-$(which php)}"
 composer_path="${5:-$(which composer)}"
 composer_lock="${6:-}"
 require_lock_file="${7:-}"
-composer_filename="${8:-composer}"
+composer_filename="${8:-}"
 
 composer_command="update"
 composer_options=("--no-interaction" "--no-progress" "--ansi")
@@ -34,7 +34,11 @@ if [ -n "${working_directory}" ]; then
     composer_options+=("--working-dir" "${working_directory}")
 fi
 
-COMPOSER="${composer_filename}.json"
+if [ -n "${composer_filename}" ]; then
+    COMPOSER="${composer_filename}.json"
+elif [ -z "${COMPOSER}" ]; then
+    COMPOSER="composer.json"
+fi
 export COMPOSER
 
 full_command="${php_path} ${composer_path} ${composer_command} ${composer_options[*]}"
