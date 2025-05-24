@@ -67,7 +67,7 @@ jobs:
         with:
           php-version: "latest"
           coverage: "none"
-      - name: "Run expect tests"
+      - name: "Run tests"
         run: "bashcov --root ./bin -- ./tests/test_helper/bats/bin/bats tests/"
       - name: "Publish coverage report to Codecov"
         uses: "codecov/codecov-action@v5"

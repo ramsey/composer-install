@@ -36,7 +36,7 @@ fi
 
 if [ -n "${composer_filename}" ]; then
     COMPOSER="${composer_filename}.json"
-elif [ -z "${COMPOSER}" ]; then
+elif [ -z "${COMPOSER:-}" ]; then
     COMPOSER="composer.json"
 fi
 export COMPOSER

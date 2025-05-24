@@ -19,7 +19,7 @@ if ! test_composer; then
 fi
 
 if [ -z "${composer_filename}" ]; then
-    if [ -n "${COMPOSER}" ]; then
+    if [ -n "${COMPOSER:-}" ]; then
         composer_filename="${COMPOSER##*/}"
         composer_filename="${composer_filename%.*}"
     else
