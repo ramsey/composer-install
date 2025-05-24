@@ -3,7 +3,7 @@
 composer_path="${1:-$(which composer)}"
 working_directory="${2:-.}"
 php_path="${3:-$(which php)}"
-composer_filename="${4:-composer}"
+composer_filename="${4:-}"
 
 function test_composer {
     "${php_path}" "${composer_path}" --version > /dev/null 2>&1
@@ -19,6 +19,15 @@ function validate_composer {
 if ! test_composer; then
     echo "::error title=Composer Not Found::Unable to find Composer at '${composer_path}'"
     exit 1
+fi
+
+if [ -z "${composer_filename}" ]; then
+    if [ -n "${COMPOSER:-}" ]; then
+        composer_filename="${COMPOSER##*/}"
+        composer_filename="${composer_filename%.*}"
+    else
+        composer_filename="composer"
+    fi
 fi
 
 composer_json="${composer_filename}.json"

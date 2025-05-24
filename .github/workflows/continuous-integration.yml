@@ -20,7 +20,7 @@ jobs:
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: 8.1
+          php-version: "latest"
           tools: composer-normalize
           coverage: none
       - name: "Run Composer normalize"
@@ -67,7 +67,7 @@ jobs:
         with:
           php-version: "latest"
           coverage: "none"
-      - name: "Run expect tests"
+      - name: "Run tests"
         run: "bashcov --root ./bin -- ./tests/test_helper/bats/bin/bats tests/"
       - name: "Publish coverage report to Codecov"
         uses: "codecov/codecov-action@v5"
@@ -81,7 +81,7 @@ jobs:
       - name: "Checkout repository"
         uses: "actions/checkout@v4"
       - name: "Run shellcheck"
-        run: "shellcheck --exclude=SC2230 bin/*.sh tests/*.bats"
+        run: "shellcheck bin/*.sh tests/*.bats"
 
   run:
     needs: test
