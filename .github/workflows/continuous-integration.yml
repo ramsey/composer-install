@@ -16,7 +16,7 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
         with:
@@ -31,7 +31,7 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
         with:
           submodules: "recursive"
       - name: "Set up PHP"
@@ -51,7 +51,7 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
         with:
           submodules: "recursive"
       - name: "Set up Ruby"
@@ -79,7 +79,7 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
       - name: "Run shellcheck"
         run: "shellcheck bin/*.sh tests/*.bats"
 
@@ -103,7 +103,7 @@ jobs:
           - ""
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
         with:
@@ -230,7 +230,7 @@ jobs:
           - "windows-latest"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
       - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
         with:
