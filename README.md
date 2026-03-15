@@ -173,8 +173,8 @@ wish to update the cache.
 
 `ramsey/composer-install` will auto-generate a cache key which is composed of
 the following elements:
-* The OS image name, like `ubuntu-latest`.
-* The exact PHP version, like `8.1.11`.
+* The OS image name, like `Linux`, `Windows`, etc.
+* The exact PHP version, like `8.5.4`.
 * The options passed via `composer-options`.
 * The dependency version setting as per `dependency-versions`.
 * The working directory as per `working-directory`.
