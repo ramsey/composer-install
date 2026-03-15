@@ -39,7 +39,7 @@ the [Setup PHP](https://github.com/shivammathur/setup-php) action as a step.
 - uses: "shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f" # 2.37.0
   with:
     php-version: "latest"
-- uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+- uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
 ```
 
 > [!TIP]
@@ -66,7 +66,7 @@ Valid values are:
 For example:
 
 ```yaml
-- uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+- uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
   with:
     dependency-versions: "lowest"
 ```
@@ -80,7 +80,7 @@ options, you may use the `composer-options` input parameter.
 For example:
 
 ```yaml
-- uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+- uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
   with:
     composer-options: "--ignore-platform-reqs --optimize-autoloader"
 ```
@@ -99,7 +99,7 @@ which will use `composer.json` and `composer.lock` as the filenames.
 For example:
 
 ```yaml
-- uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+- uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
   with:
     composer-filename: "composer-gh-actions"
 ```
@@ -112,7 +112,7 @@ located in `packages/acme-foo/`, use `working-directory` to tell
 ramsey/composer-install where to run things.
 
 ```yaml
-- uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+- uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
   with:
     working-directory: "packages/acme-foo"
 ```
@@ -124,15 +124,15 @@ For example:
 
 ```yaml
 # Install dependencies using composer.json in the root.
-- uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+- uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
 
 # Install dependencies using composer.json in src/Component/Config/
-- uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+- uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
   with:
     working-directory: "src/Component/Config"
 
 # Install dependencies using composer.json in src/Component/Validator/
-- uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+- uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
   with:
     working-directory: "src/Component/Validator"
 ```
@@ -150,7 +150,7 @@ any other value, the action will use the default behavior, which is to read from
 and store to the cache.
 
 ```yaml
-- uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+- uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
   with:
     ignore-cache: "yes"
 ```
@@ -164,7 +164,7 @@ will not use the auto-generated cache key, so if your `composer.json` or
 wish to update the cache.
 
 ```yaml
-- uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+- uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
   with:
     custom-cache-key: "my-custom-cache-key"
 ```
@@ -188,7 +188,7 @@ even more specific, you can specify a suffix to be added to the cache key via th
 # Adds a suffix to the cache key which is equivalent to the full date-time
 # of "last Monday 00:00", which means that the cache will be force refreshed
 # via the first workflow which is run every Monday.
-- uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+- uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
   with:
     custom-cache-suffix: $(/bin/date -u --date='last Mon' "+%F")
 ```
@@ -222,7 +222,7 @@ job:
     repository-projects: read
   steps:
   # ...
-  - uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+  - uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
     env:
       COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{ secrets.GITHUB_TOKEN }}"}}'
 ```
@@ -240,7 +240,7 @@ job:
   # ...
   - run: composer config -- github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
     name: Register GitHub token for Composer
-  - uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+  - uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
 ```
 
 Note that this approach is only valid for public forks; if you need to access
@@ -286,7 +286,7 @@ steps:
   - uses: "shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f" # 2.37.0
     with:
       php-version: "${{ matrix.php }}"
-  - uses: "ramsey/composer-install@a35c6ebd3d08125aaf8852dff361e686a1a67947" # 3.2.0
+  - uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
     with:
       dependency-versions: "${{ matrix.dependencies }}"
       composer-options: "${{ matrix.composer-options }}"
