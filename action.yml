@@ -80,7 +80,7 @@ runs:
           "${{ steps.php.outputs.version }}" \
           "${{ inputs.dependency-versions }}" \
           "${{ inputs.composer-options }}" \
-          "${{ hashFiles('**/${{ inputs.composer-filename }}.json', '**/${{ inputs.composer-filename }}.lock') }}" \
+          "${{ hashFiles(format('**/{0}.json', inputs.composer-filename), format('**/{0}.lock', inputs.composer-filename)) }}" \
           "${{ inputs.custom-cache-key }}" \
           "${{ inputs.custom-cache-suffix }}" \
           "${{ inputs.working-directory }}"
