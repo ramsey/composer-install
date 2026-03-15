@@ -16,9 +16,9 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v6"
+        uses: "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd" # v6.0.2
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@v2"
+        uses: "shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f" # 2.37.0
         with:
           php-version: "latest"
           tools: composer-normalize
@@ -31,11 +31,11 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v6"
+        uses: "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd" # v6.0.2
         with:
           submodules: "recursive"
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@v2"
+        uses: "shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f" # 2.37.0
         with:
           php-version: "latest"
           coverage: "none"
@@ -51,11 +51,11 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v6"
+        uses: "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd" # v6.0.2
         with:
           submodules: "recursive"
       - name: "Set up Ruby"
-        uses: "ruby/setup-ruby@v1"
+        uses: "ruby/setup-ruby@dffb23f65a78bba8db45d387d5ea1bbd6be3ef18" # v1.293.0
         with:
           ruby-version: "3.2"
       - name: "Install Ruby dependencies"
@@ -63,14 +63,14 @@ jobs:
           gem install bashcov
           gem install simplecov-cobertura
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@v2"
+        uses: "shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f" # 2.37.0
         with:
           php-version: "latest"
           coverage: "none"
       - name: "Run tests"
         run: "bashcov --root ./bin -- ./tests/test_helper/bats/bin/bats tests/"
       - name: "Publish coverage report to Codecov"
-        uses: "codecov/codecov-action@v5"
+        uses: "codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de" # v5.5.2
         with:
           files: "./bin/coverage/coverage.xml"
 
@@ -79,7 +79,7 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v6"
+        uses: "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd" # v6.0.2
       - name: "Run shellcheck"
         run: "shellcheck bin/*.sh tests/*.bats"
 
@@ -103,9 +103,9 @@ jobs:
           - ""
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v6"
+        uses: "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd" # v6.0.2
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@v2"
+        uses: "shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f" # 2.37.0
         with:
           php-version: "latest"
           coverage: "none"
@@ -230,9 +230,9 @@ jobs:
           - "windows-latest"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v6"
+        uses: "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd" # v6.0.2
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@v2"
+        uses: "shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f" # 2.37.0
         with:
           php-version: "latest"
           coverage: "none"
