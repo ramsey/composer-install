@@ -10,7 +10,10 @@ function test_composer {
 }
 
 function validate_composer {
-    "${php_path}" "${composer_path}" validate --no-check-publish --no-check-lock --working-dir "${working_directory}"  > /dev/null 2>&1
+    validation_output=$("${php_path}" "${composer_path}" validate --no-check-publish --no-check-lock --working-dir "${working_directory}" 2>&1)
+    validation_status=$?
+    echo "${validation_output}"
+    return "${validation_status}"
 }
 
 if ! test_composer; then
@@ -48,8 +51,12 @@ if [ ! -f "${composer_json}" ]; then
     exit 1
 fi
 
-if ! validate_composer; then
-    echo "::error title=Invalid composer.json::The composer.json file at '${composer_json}' does not validate; run 'composer validate' to check for errors"
+validation_output="$(validate_composer)"
+validation_status=$?
+
+if [ "${validation_status}" -ne 0 ]; then
+    echo "::error title=Invalid composer.json::The composer.json file at '${composer_json}' does not validate. Output:"
+    echo "${validation_output}"
     exit 1
 fi
 
@@ -58,8 +65,8 @@ if [ ! -f "${composer_lock}" ]; then
     composer_lock=""
 fi
 
-composer_version="$($composer_path --version 2>/dev/null)"
-cache_dir="$($composer_path --working-dir="${working_directory}" config cache-dir)"
+composer_version="$(${composer_path} --version 2>/dev/null)"
+cache_dir="$(${composer_path} --working-dir="${working_directory}" config cache-dir)"
 
 echo "::debug::Composer path is '${composer_path}'"
 echo "::debug::${composer_version}"
@@ -67,6 +74,7 @@ echo "::debug::Composer cache directory found at '${cache_dir}'"
 echo "::debug::File composer.json found at '${composer_json}'"
 echo "::debug::File composer.lock path computed as '${composer_lock}'"
 echo "::debug::The COMPOSER environment variable is '${COMPOSER}'"
+
 {
     echo "composer_command=${composer_path}"
     echo "cache-dir=${cache_dir}"
