@@ -36,7 +36,7 @@ Use ramsey/composer-install as step within a job. This example also shows use of
 the [Setup PHP](https://github.com/shivammathur/setup-php) action as a step.
 
 ```yaml
-- uses: "shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f" # 2.37.0
+- uses: "shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240" # 2.37.2
   with:
     php-version: "latest"
 - uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
@@ -283,7 +283,7 @@ strategy:
 
 steps:
   - uses: "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd" # v6.0.2
-  - uses: "shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f" # 2.37.0
+  - uses: "shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240" # 2.37.2
     with:
       php-version: "${{ matrix.php }}"
   - uses: "ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda" # 4.0.0
