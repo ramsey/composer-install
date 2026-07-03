@@ -55,7 +55,7 @@ jobs:
         with:
           submodules: "recursive"
       - name: "Set up Ruby"
-        uses: "ruby/setup-ruby@12fd324f1d0b43274fdc8130f6980590a667c455" # v1.312.0
+        uses: "ruby/setup-ruby@d45b1a4e94b71acab930e56e79c6aa188764e7f9" # v1.316.0
         with:
           ruby-version: "3.2"
       - name: "Install Ruby dependencies"
